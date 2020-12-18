@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1300</width>
+    <height>569</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>1</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(202, 202, 202);
+background-color: rgb(227, 227, 227);</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>1281</width>
+      <height>491</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>7</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMaximumSize</enum>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_3">
+         <property name="text">
+          <string>&lt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButton_2">
+         <property name="text">
+          <string>&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tableWidget">
+       <property name="sizeIncrement">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+       </property>
+       <column>
+        <property name="text">
+         <string>Lunes</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Martes</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Miércoles</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Jueves</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Viernes</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Sábado</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Domingo</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1300</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: rgba(185, 0, 0, 180);</string>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="action_guardar"/>
+    <addaction name="action_imprimir"/>
+   </widget>
+   <widget class="QMenu" name="menuPersonal">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Personal</string>
+    </property>
+    <addaction name="action_alta_personal"/>
+    <addaction name="action_consultar_personal"/>
+   </widget>
+   <widget class="QMenu" name="menuEventos">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Eventos</string>
+    </property>
+    <addaction name="action_crear_evento"/>
+    <addaction name="action_consultar_evento"/>
+   </widget>
+   <widget class="QMenu" name="menuCrear_hojas">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Crear hojas</string>
+    </property>
+    <addaction name="action_crear_hoja_de_ruta"/>
+    <addaction name="action_crear_hoja_de_bolos"/>
+    <addaction name="action_crear_hoja_de_almac_n"/>
+    <addaction name="action_crear_hoja_de_transportes"/>
+   </widget>
+   <widget class="QMenu" name="menuProveedores">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Proveedores</string>
+    </property>
+    <addaction name="action_alta_proveedor"/>
+    <addaction name="action_consultar_proveedor"/>
+   </widget>
+   <widget class="QMenu" name="menuRecintos">
+    <property name="styleSheet">
+     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
+selection-color: rgb(0, 0, 0);
+background-color: rgb(185, 0, 0,180);
+</string>
+    </property>
+    <property name="title">
+     <string>Recintos</string>
+    </property>
+    <addaction name="action_alta_recinto"/>
+    <addaction name="action_consultar_recintos"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+   <addaction name="menuEventos"/>
+   <addaction name="menuPersonal"/>
+   <addaction name="menuProveedores"/>
+   <addaction name="menuRecintos"/>
+   <addaction name="menuCrear_hojas"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_crear_hoja_de_ruta">
+   <property name="text">
+    <string>Crear hoja de ruta</string>
+   </property>
+  </action>
+  <action name="action_crear_hoja_de_bolos">
+   <property name="text">
+    <string>Crear hoja de bolos</string>
+   </property>
+  </action>
+  <action name="action_crear_hoja_de_almac_n">
+   <property name="text">
+    <string>Crear hoja de almacén</string>
+   </property>
+  </action>
+  <action name="action_guardar">
+   <property name="text">
+    <string>Guardar</string>
+   </property>
+  </action>
+  <action name="action_imprimir">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
+  <action name="action_crear_hoja_de_transportes">
+   <property name="text">
+    <string>Crear hoja de transportes</string>
+   </property>
+  </action>
+  <action name="action_crear_evento">
+   <property name="text">
+    <string>Crear Evento</string>
+   </property>
+  </action>
+  <action name="action_consultar_evento">
+   <property name="text">
+    <string>Consultar Evento</string>
+   </property>
+  </action>
+  <action name="action_alta_personal">
+   <property name="text">
+    <string>Alta BBDD</string>
+   </property>
+  </action>
+  <action name="action_consultar_personal">
+   <property name="text">
+    <string>Consultar BBDD</string>
+   </property>
+  </action>
+  <action name="action_alta_proveedor">
+   <property name="text">
+    <string>Alta BBDD</string>
+   </property>
+  </action>
+  <action name="action_consultar_proveedor">
+   <property name="text">
+    <string>Consultar BBDD</string>
+   </property>
+  </action>
+  <action name="action_alta_recinto">
+   <property name="text">
+    <string>Alta BBDD</string>
+   </property>
+  </action>
+  <action name="action_consultar_recintos">
+   <property name="text">
+    <string>Consultar BBDD</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

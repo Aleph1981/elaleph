@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>999</width>
+    <width>800</width>
     <height>600</height>
    </rect>
   </property>
@@ -32,8 +32,8 @@
    <widget class="QDialogButtonBox" name="aceptcancel">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>400</y>
+      <x>150</x>
+      <y>540</y>
       <width>193</width>
       <height>28</height>
      </rect>
@@ -48,7 +48,7 @@
    <widget class="QLabel" name="anadirperso">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>80</x>
       <y>40</y>
       <width>231</width>
       <height>61</height>
@@ -64,271 +64,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>120</y>
-      <width>411</width>
-      <height>221</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QCheckBox" name="checkCC">
-       <property name="text">
-        <string>CC</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QCheckBox" name="checkOPL">
-       <property name="text">
-        <string>OPL</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QCheckBox" name="checkDIM">
-       <property name="text">
-        <string>DIM</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QCheckBox" name="checkTECL">
-       <property name="text">
-        <string>TECL</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="4">
-      <widget class="QCheckBox" name="checkRIG">
-       <property name="text">
-        <string>RIGGING</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLineEdit" name="tarifaCC">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="tarifaOPL">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="tarifaDIM">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QLineEdit" name="tarifaTECL">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QLineEdit" name="tarifaRIG">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QCheckBox" name="checkREGI">
-       <property name="text">
-        <string>REGI</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QCheckBox" name="checkOPS">
-       <property name="text">
-        <string>OPS</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QCheckBox" name="checkRF">
-       <property name="text">
-        <string>RF</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="checkTECS">
-       <property name="text">
-        <string>TECS</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QCheckBox" name="checkDECO">
-       <property name="text">
-        <string>DECO</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLineEdit" name="tarifaREGI">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="tarifaOPS">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="tarifaRF">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QLineEdit" name="tarifaTECS">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4">
-      <widget class="QLineEdit" name="tarifaDECO">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QCheckBox" name="checkCONT">
-       <property name="text">
-        <string>CONT</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QCheckBox" name="checkOPV">
-       <property name="text">
-        <string>OPV</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QCheckBox" name="checkLED">
-       <property name="text">
-        <string>LED</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <widget class="QCheckBox" name="checkTECV">
-       <property name="text">
-        <string>TECV</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLineEdit" name="tarifaCONT">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QLineEdit" name="tarifaOPV">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QLineEdit" name="tarifaLED">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="3">
-      <widget class="QLineEdit" name="tarifaTECV">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(188, 188, 188);</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>112</x>
+      <x>82</x>
       <y>125</y>
       <width>310</width>
       <height>305</height>
@@ -743,7 +479,7 @@ color: rgb(188, 188, 188);</string>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>80</x>
       <y>440</y>
       <width>311</width>
       <height>89</height>
@@ -783,6 +519,16 @@ color: rgb(188, 188, 188);</string>
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>120</y>
+      <width>261</width>
+      <height>451</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <tabstops>
@@ -797,34 +543,6 @@ color: rgb(188, 188, 188);</string>
   <tabstop>entryIBAN</tabstop>
   <tabstop>radioSI</tabstop>
   <tabstop>radioNO</tabstop>
-  <tabstop>checkCC</tabstop>
-  <tabstop>checkOPL</tabstop>
-  <tabstop>checkDIM</tabstop>
-  <tabstop>checkTECL</tabstop>
-  <tabstop>checkRIG</tabstop>
-  <tabstop>checkREGI</tabstop>
-  <tabstop>checkOPS</tabstop>
-  <tabstop>checkRF</tabstop>
-  <tabstop>checkTECS</tabstop>
-  <tabstop>checkDECO</tabstop>
-  <tabstop>checkCONT</tabstop>
-  <tabstop>checkOPV</tabstop>
-  <tabstop>checkLED</tabstop>
-  <tabstop>checkTECV</tabstop>
-  <tabstop>tarifaCC</tabstop>
-  <tabstop>tarifaOPL</tabstop>
-  <tabstop>tarifaDIM</tabstop>
-  <tabstop>tarifaTECL</tabstop>
-  <tabstop>tarifaRIG</tabstop>
-  <tabstop>tarifaREGI</tabstop>
-  <tabstop>tarifaOPS</tabstop>
-  <tabstop>tarifaRF</tabstop>
-  <tabstop>tarifaTECS</tabstop>
-  <tabstop>tarifaDECO</tabstop>
-  <tabstop>tarifaCONT</tabstop>
-  <tabstop>tarifaOPV</tabstop>
-  <tabstop>tarifaLED</tabstop>
-  <tabstop>tarifaTECV</tabstop>
   <tabstop>textNOTAS</tabstop>
  </tabstops>
  <resources/>

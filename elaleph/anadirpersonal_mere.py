@@ -1,16 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct 28 20:14:57 2020
+Created on Thu Dec 17 10:21:22 2020
 
+@author: aleja
+"""
+
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Oct 28 20:14:57 2020
 @author: Alejandro Pérez Pérez
 """
 
-from anadirpersonal_ui import *
-from error import *
-from PyQt5 import QtCore, QtGui, QtWidgets
+# mere cambiados imports
+from PyQt5.QtWidgets import QWidget, QLabel, QCheckBox, QApplication, QMainWindow, QDialog, QLineEdit
+from PyQt5 import QtCore, QtGui 
 import os
+from anadirpersonal_ui import *
 from bdstd import *
-from PyQt5.QtWidgets import QWidget, QLabel, QCheckBox, QApplication, QLineEdit
+
+
+
+
 #-------------------Clase de la ventana añadir personal-----------------------
 
 class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
@@ -23,7 +33,8 @@ class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
         
         self.aceptcancel.accepted.connect(self.aceptar)
         self.aceptcancel.rejected.connect(self.cancelar)
-        self.radioSI.setChecked(True)
+        
+        # ---> mere added
         #---------------- Crea un array con todos los datos de cargos y marca los que tiene 
         #                 activos la persona indicada. Se llama map_cargos porque no son los
         #                 controles checkbox sinó una estructura de datos que sirve de mapa
@@ -52,108 +63,78 @@ class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
             input_c.setGeometry(200, 10+(i*25), 80, 20)
             input_c.setStyleSheet("background-color: rgb(255, 255, 255);")
             input_c.setText(str(map_cargo['tarifa']))
-
-
-
-
+        # ---> end mere added
+                
 #------------------Aceptar y grabar datos--------------------------------------
            
     def aceptar(self):
         
+
         
-
-#----------generador de id------------------------------------------------------
-
-        id_personal = self.entryNOMBRE.text()[0:2]+self.entryAPELL.text()[0:2]+self.entryDNI.text()[0:2]
-        id_personal = id_personal.upper()
-        trans_table = id_personal.maketrans("Á,É,Í,Ó,Ú,À,È,Ì,Ò,Ù","A,E,I,O,U,A,E,I,O,U")
-        id_personal = id_personal.translate(trans_table)
-        self.id_personal=id_personal
-
-#-----------radio button de autonomo-------------------------------------------
-        autonomo=""
         if self.radioSI.isChecked():
             autonomo="Si"
         elif self.radioNO.isChecked():
             autonomo="No"
         
+        campos_personal=(self.entryID.text(),self.entryNOMBRE.text(),self.entryAPELL.text(),self.entryDNI.text(),\
+                self.entryTFN.text(),self.entryEMAIL.text(),autonomo,self.textNOTAS.toPlainText())
+        txtsql = "INSERT INTO personal (id_personal,nombre,apellidos,dni,telefono,email,autonomo,notas) VALUES\
+                (?,?,?,?,?,?,?,?);"
             
-#---------------FORMATO DE NOMBRE Y APELLIDOS----------------------------------
+        bd = BdStd()
+        bd.runsql(txtsql, campos_personal)
 
-        nombre = self.entryNOMBRE.text()
-        apellidos = self.entryAPELL.text()
-        nombre=nombre.split(" ")
-        apellidos= apellidos.split(" ")
-        nom=""
-        apell=""
-        for palabra in nombre:
-            palabra=palabra.capitalize()
-            nom+=palabra+" "
-        for palabra in apellidos:
-            palabra=palabra.capitalize()
-            apell+=palabra+" "
-
-
-
-#------------crea la tupla de campos y la inserta en la bbdd-------------------
-        try:
-            campos_personal=(id_personal,nom,apell,\
-                    self.entryDNI.text().upper(),self.entryTFN.text(),self.entryEMAIL.text().lower(),\
-                    autonomo,self.entryDIRECCION.text().capitalize(),self.entryCP.text(),\
-                    self.entryCIUDAD.text().capitalize(),self.entryIBAN.text().upper(),self.textNOTAS.toPlainText())
+#-----------------Chequeo de los checkboxes----------------------------------- 
+#
+# ---> mere added
+#
+        self.id_personal = self.entryID.text()
+        i = 0
+        for checkobj in self.widget.findChildren(QCheckBox):
             
-            bd=BdStd()
-            
+            if checkobj.checkState():
+                self.map_cargos[i]['checked'] = "1"
                 
-            bd.runsql("INSERT INTO personal (id_personal,nombre,apellidos,dni,\
-                           telefono,email,autonomo,direccion,cp,ciudad,iban,notas)\
-                           VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",campos_personal)
-    
-    #-----------------Chequeo de los checkboxes-----------------------------------        
-    
-            
-            i = 0
-            for checkobj in self.widget.findChildren(QCheckBox):
+            else: 
+                self.map_cargos[i]['checked'] = "0"
                 
-                if checkobj.checkState():
-                    self.map_cargos[i]['checked'] = "1"
-                    
-                else: 
-                    self.map_cargos[i]['checked'] = "0"
-                    
-                i+=1
-            
-            i = 0
-            for caja in self.widget.findChildren(QLineEdit):
-                
-                if caja.text() != "":
-                    self.map_cargos[i]['tarifa'] = int(caja.text())
-                i+=1   
-            
-            guardaTarifas(self.id_personal, self.map_cargos)
-                        
-#------Crea una carpeta con su id como nombre para guardar su documentación----
+            i+=1
         
-            os.mkdir(f"{id_personal}")        
+        i = 0
+        for caja in self.widget.findChildren(QLineEdit):
+            
+            if caja.text() != "":
+                self.map_cargos[i]['tarifa'] = int(caja.text())
+            i+=1   
+        
+        guardaTarifas(self.id_personal, self.map_cargos)
+#
+# ---> end mere added
+
+                    
+#------Crea una carpeta con su id como nombre para guardar su documentación----
+
+        carpeta = self.entryID.text()
+        os.mkdir(f"{carpeta}")        
 
 #---------------------------Tras chequearlos todos graba y cierra-------------                  
-
-            
-            self.setupUi(self)
-            self.close()
-        
-        except Exception as error:
-            self.window=Error(str(error))
-            self.window.show()
-            
-            
+#       mere commentado
+#        conexion.commit()
+#        conexion.close()
+        self.setupUi(self)
+        self.close()
           
 #------------- Funcion cancelar y cerrar ventana-------------------------------
     
     def cancelar(self):
         self.setupUi(self)
         self.close()    
-
+        
+#-------------------------------------------------------------------
+# mere añadidas funciones
+# LAS TRES FUNCIONES QUE CARGAN LOS CARGOS, TARIFAS DE LA BBDD Y 
+# LAS GUARDAN
+#------------------------------------------------------------------
 def getArrayCargos():
     # devuelve un array con los cargos de la base de datos
     #
@@ -165,6 +146,7 @@ def getArrayCargos():
         for row in bd.rows :
             dic = {'id' : row[0], 'nombre' : row[1],  'tarifa' : row[2], 'checked' : "0"}
             map_cargos.append(dic)
+    #print(map_cargos)
     return (map_cargos)
 
 
@@ -180,8 +162,7 @@ def guardaTarifas(id_personal, map_cargos):
     
         if item['checked'] == "1":
            
-           bd.runsql(txtsql.format(id_personal, item['id'], str(item['tarifa'])))     
-           print(txtsql.format(id_personal, item['id'], str(item['tarifa'])))
+           bd.runsql(txtsql,id_personal, item['id'], str(item['tarifa']))       
         
         
 if __name__ == "__main__":
