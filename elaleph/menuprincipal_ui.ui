@@ -194,6 +194,7 @@ background-color: rgb(185, 0, 0,180);
     </property>
     <addaction name="action_alta_personal"/>
     <addaction name="action_consultar_personal"/>
+    <addaction name="actionProject_Managers"/>
    </widget>
    <widget class="QMenu" name="menuEventos">
     <property name="styleSheet">
@@ -325,6 +326,11 @@ background-color: rgb(185, 0, 0,180);
   <action name="action_consultar_recintos">
    <property name="text">
     <string>Consultar BBDD</string>
+   </property>
+  </action>
+  <action name="actionProject_Managers">
+   <property name="text">
+    <string>Project Managers</string>
    </property>
   </action>
  </widget>

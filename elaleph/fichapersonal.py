@@ -97,7 +97,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
     
         #---------------Funciones para avanzar y retroceder mes---------------
     
-    def pre_month(self):
+    def pre_month(self, id_personal):
         if self.kale.mes == 1:
             self.kale.mes=12
             self.kale.anyo-=1
@@ -105,7 +105,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
             self.kale.mes-=1
         self.kale.crea_calendario(id_personal)
             
-    def next_month(self):
+    def next_month(self, id_personal):
         print("antes:", self.kale.mes)
         if self.kale.mes==12:
             self.kale.mes=1
@@ -155,7 +155,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
                     self.load_one(row)
                     
 
-    def load_one(self, data):            
+    def load_one(self, data):            #<------- en esta funcion he añadido 2 campos que faltaban
         self.ui.inputNombre.setText(data[0])
         self.ui.inputApellidos.setText(data[2])
         self.ui.inputDni.setText(data[3])
@@ -163,8 +163,10 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         self.ui.inputMail.setText(data[5])
         self.ui.inputAutonomo.setText(data[6])
         self.ui.inputDireccion.setText(data[7])
-        self.ui.inputIban.setText(data[8])
-        self.ui.inputNotas.setPlainText(data[9])
+        self.ui.inputCp.setText(data[8])
+        self.ui.inputCiudad.setText(data[9])
+        self.ui.inputIban.setText(data[10])
+        self.ui.inputNotas.setPlainText(data[11])
 
 #------------Función abrir documentos-----------------------------------------
 
@@ -175,8 +177,28 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         
     
     def guardar(self):
-        # Falta hacer Update de los datos cambiados de personal en ficha personal---------
-        #---------------------------- mere added guarda los checks
+        
+        # Puesto el Update de los datos cambiados de personal en ficha personal---------
+        nombre = self.ui.inputNombre.text()
+        apellidos   = self.ui.inputApellidos.text()
+        dni   = self.ui.inputDni.text()
+        telefono   = self.ui.inputTelefono.text()
+        email   = self.ui.inputMail.text()
+        direccion   = self.ui.inputDireccion.text()
+        cp   = self.ui.inputCp.text()
+        ciudad   = self.ui.inputCiudad.text()
+        autonomo   = self.ui.inputAutonomo.text()
+        iban   = self.ui.inputIban.text()
+        notas   = self.ui.inputNotas.toPlainText()
+               
+        txtsql = "UPDATE personal SET nombre = '{}', apellidos = '{}', dni = '{}'," \
+        "telefono = '{}', email = '{}', direccion = '{}'," \
+        "cp = '{}', ciudad = '{}', autonomo = '{}'," \
+        "iban = '{}', notas = '{}'  WHERE id_personal = '{}'"
+        txtsql = txtsql.format(nombre, apellidos, dni ,telefono  ,email, direccion , cp, ciudad, autonomo, iban , notas, self.id_personal)
+        bd = BdStd()
+        bd.runsql(txtsql)
+        
         i = 0
         for checkobj in self.ui.widget.findChildren(QtWidgets.QCheckBox):
             title = self.map_cargos[i]
@@ -195,6 +217,8 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
             i+=1   
         
         guardaTarifas(self.id_personal, self.map_cargos)
+        
+        
         
         
     

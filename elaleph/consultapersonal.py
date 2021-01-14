@@ -118,46 +118,46 @@ class ConsultaPersonal(QtWidgets.QDialog, ConsultaPersonal_Ui):
             self.sql = 'SELECT * FROM personal'
             
         if text == "Crew Chief":
-             sigue += ' AND tarifas.id_cargo = "cc"'
+             sigue += ' AND tarifas.id_cargo = "001"'
              self.model.setHeaderData(8, QtCore.Qt.Horizontal , "Cargo")
         if text == "Operador de Luces":
-             sigue += ' AND tarifas.id_cargo = "opl"'
+             sigue += ' AND tarifas.id_cargo = "002"'
              
         if text == "Dimmers":
-             sigue += ' AND tarifas.id_cargo = "dim"'
+             sigue += ' AND tarifas.id_cargo = "003"'
              
         if text == "Técnico Luces":
-             sigue += ' AND tarifas.id_cargo = "tecl"'
+             sigue += ' AND tarifas.id_cargo = "004"'
              
         if text == "Operador Sonido":
-             sigue += ' AND tarifas.id_cargo = "ops"'
+             sigue += ' AND tarifas.id_cargo = "006"'
              
         if text == "RF":
-             sigue += ' AND tarifas.id_cargo = "rf"'
+             sigue += ' AND tarifas.id_cargo = "007"'
              
         if text == "Técnico de Sonido":
-            sigue += ' AND tarifas.id_cargo = "tecs"'
+            sigue += ' AND tarifas.id_cargo = "008"'
         
         if text == "Operador de Video":
-            sigue += ' AND tarifas.id_cargo = "opv"'
+            sigue += ' AND tarifas.id_cargo = "010"'
             
         if text == "LED":
-            sigue += ' AND tarifas.id_cargo = "led"'
+            sigue += ' AND tarifas.id_cargo = "011"'
             
         if text == "Técnico de Video":
-            sigue += ' AND tarifas.id_cargo = "tecv"'
+            sigue += ' AND tarifas.id_cargo = "012"'
             
         if text == "Contenidos":
-            sigue += ' AND tarifas.id_cargo = "cont"'
+            sigue += ' AND tarifas.id_cargo = "013"'
             
         if text == "Regidor":
-            sigue += ' AND tarifas.id_cargo = "regi"'
+            sigue += ' AND tarifas.id_cargo = "009"'
         
         if text == "Rigger":
-            sigue += ' AND tarifas.id_cargo = "rigg"'
+            sigue += ' AND tarifas.id_cargo = "005"'
             
         if text == "Deco":
-            sigue += ' AND tarifas.id_cargo = "deco"'
+            sigue += ' AND tarifas.id_cargo = "014"'
             
             
         self.sql += sigue
@@ -168,8 +168,6 @@ class ConsultaPersonal(QtWidgets.QDialog, ConsultaPersonal_Ui):
          
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    if not createConnection():
-        sys.exit(1)
     consulta_personal= ConsultaPersonal(app)
     consulta_personal.showMaximized()
     sys.exit(app.exec_())
