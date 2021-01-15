@@ -8,6 +8,7 @@ Created on Tue Dec 29 12:50:51 2020
 from PyQt5 import QtSql, QtCore, QtGui, QtWidgets
 from projectmanagers_ui import *
 from bdstd import BdStd
+from cambios_ui import *
 
 class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
     
@@ -41,9 +42,9 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
         self.ui.tableManagers.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
         self.ui.tableManagers.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
         self.ui.tableManagers.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
-        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))
-        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[4]))
-        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[5]))
+        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[4]))
+        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[5]))
+        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[3]))
         self.ui.tableManagers.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))        
         
         
@@ -92,7 +93,34 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
         self.ui.inputNotas.setPlainText("")
 
     def guardar_cambios(self):
-        pass
+        # mere añadido el contenido de la función
+    
+        # lista de campos tal como figura en el grid
+        campos = ["id_manager", "nombre", "apellidos", "telefono", "email", "dni", "notas"]
+        bd = BdStd()
+        #
+        # se barre todo el grid de pantalla , busca el registro en la bbdd y compara todos
+        # los campos para ver si han cambiado, en caso que sí, actualiza el cambio en la bbdd
+        #
+        for tbrow in range(self.ui.tableManagers.rowCount()) :
+            clave = self.ui.tableManagers.item(tbrow,0).text()
+            print(clave)            
+            #---- busca el registro y compara los campos cambiados 
+            bd.runsql("SELECT * FROM managers WHERE id_manager = '" + clave + "'")      
+            for row in bd.rows :
+                sql = ""
+                for i in range(1, len(campos)) :
+                    if self.ui.tableManagers.item(tbrow,i) != None:
+                        if row[i] != self.ui.tableManagers.item(tbrow,i).text() :
+                            sql += campos [i] + "= '" + self.ui.tableManagers.item(tbrow,i).text() + "' ,"
+                            print ("<> (",row[i], ") (",self.ui.tableManagers.item(tbrow,i).text() , ")")
+            if sql != "" :
+                sql = "UPDATE managers SET " + sql[0:len(sql)-2]
+                sql += " WHERE id_manager = '" + clave + "'"
+                print("SQL->", sql)
+                bd.runsql(sql)
+        w = Cambios_Ui()
+        w.show()
     
     def eliminar(self):
         
@@ -100,7 +128,7 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
         clave = self.ui.tableManagers.item(row,0).text()
         print(clave)
         qm = QtWidgets.QMessageBox
-        ret = qm.question(self,'', "Quiere eliminar a " + clave  + "? ", qm.Yes | qm.No)
+        ret = qm.question(self,'', "Quiere eliminar a " + self.ui.tableManagers.item(row,1).text()  + "? ", qm.Yes | qm.No)
         
         if ret == qm.Yes:
             #-------------- Borrar el registro
