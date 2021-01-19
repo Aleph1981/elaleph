@@ -40,6 +40,7 @@ class BdStd():
             cur.execute(txtsql, campos)
         
         self.rows = cur.fetchall()
+        self.one = cur.fetchone()
         self.conex.commit()
         self.cierra()
 
