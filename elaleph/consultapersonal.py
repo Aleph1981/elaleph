@@ -26,7 +26,7 @@ class ConsultaPersonal(QtWidgets.QDialog, ConsultaPersonal_Ui):
         self.model.setQuery(self.sql)
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setSelectionBehavior(self.ui.tableView.SelectRows)
-        
+        self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableView.clicked.connect(self.clic_celda)
         self.ui.tableView.doubleClicked.connect(self.dobleclic_celda)   # <----- mere added
         self.ui.button_Borrar.setEnabled(False)

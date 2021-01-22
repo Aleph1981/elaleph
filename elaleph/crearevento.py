@@ -17,8 +17,6 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         QtWidgets.QDialog.__init__(self)
         self.ui = CrearEvento_Ui()
         self.ui.setupUi(self)
-        app.focusChanged.connect(self.checkFocus)
-        
 
 
 #------------------------------------------------------------------------------
@@ -57,120 +55,37 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
 #------------------------------------------------------------------------------
         
 #-------------------------Esconder y activar botones---------------------------
-        self.ui.buttonAddDate.clicked.connect(self.addDate)
+        
+        
         self.ui.fechas_table.hide()
         self.ui.frame.hide()
-        self.ui.fechas_table.setSelectionBehavior(self.ui.fechas_table.SelectRows)
-        self.ui.fechas_table.clicked.connect(self.activaDel)
         self.ui.combo_tarea.activated['QString'].connect(self.activaAdd)
-
-
-        
-#-----------Escribe la cabecera de la tabla de fechas--------------------------
-        
+        self.ui.buttonAddDate.clicked.connect(self.addDate)
+        self.ui.calendar.clicked.connect(self.showFrame)
         self.ui.fechas_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.model = QtSql.QSqlQueryModel(self)
-        self.model.setHeaderData(0, QtCore.Qt.Horizontal , "ID")
-        self.model.setHeaderData(1, QtCore.Qt.Horizontal , "Fecha")
-        self.model.setHeaderData(2, QtCore.Qt.Horizontal , "Hora prevista")
-        self.model.setHeaderData(3, QtCore.Qt.Horizontal , "Tarea")
-        self.ui.fechas_table.hideColumn(0)
-#-----------Carga el modelo en el table view-----------------------------------
+        self.ui.fechas_table.setSelectionBehavior(self.ui.fechas_table.SelectRows)
+        self.ui.fechas_table.hideColumn(3)
+        self.ui.fechas_table.clicked.connect(self.activaDel)
+       
         
+
         
-        self.sql = 'SELECT id_dias_evento, fecha, hora, tarea  FROM dias_evento;'
-        self.model.setQuery(self.sql)
-        self.ui.fechas_table.setModel(self.model)
+
         
 #-----------------------------------------------------------------------------
 #------------------------PÁGINA DE PERSONAL-----------------------------------
-#-----------------------------------------------------------------------------        
-        self.model = QtSql.QSqlQueryModel(self)
-        self.sql = 'SELECT personal.id_personal, personal.nombre, apellidos, dni, \
-               telefono, email, autonomo, notas FROM personal'
-        self.model.setQuery(self.sql)
-        self.ui.personal_table.setModel(self.model)
-        self.ui.personal_table.setSelectionBehavior(self.ui.personal_table.SelectRows)
-        
-#-------------Escribe la cabecera de la tabla----------------------------------
+#-----------------------------------------------------------------------------
 
-        self.model.setHeaderData(0, QtCore.Qt.Horizontal , "ID")
-        self.model.setHeaderData(1, QtCore.Qt.Horizontal , "Nombre")
-        self.model.setHeaderData(2, QtCore.Qt.Horizontal , "Apellidos")
-        self.model.setHeaderData(3, QtCore.Qt.Horizontal , "DNI")
-        self.model.setHeaderData(4, QtCore.Qt.Horizontal , "Teléfono")
-        self.model.setHeaderData(5, QtCore.Qt.Horizontal , "Email")
-        self.model.setHeaderData(6, QtCore.Qt.Horizontal , "Autónomo")
-        self.model.setHeaderData(7, QtCore.Qt.Horizontal , "Notas")
-        
-#-------Si el combobox se activa llama a la funcion de filtrado----------------
 
-        self.ui.combo_filtrar_cargos.activated[str].connect(self.filtro_checks)
 
-#------Función de filtrado----------------------------------------------------       
-    
-    def filtro_checks(self,text):
-        self.sql = 'SELECT personal.id_personal, nombre, apellidos, dni,telefono, email, \
-        autonomo, notas FROM personal,tarifas \
-        WHERE tarifas.id_personal=personal.id_personal'
         
-        sigue=''
-        if text == "ALL":
-            self.sql = 'SELECT * FROM personal'
-            
-        if text == "Crew Chief":
-             sigue += ' AND tarifas.id_cargo = "001"'
-             
-        if text == "Operador de Luces":
-             sigue += ' AND tarifas.id_cargo = "002"'
-             
-        if text == "Dimmers":
-             sigue += ' AND tarifas.id_cargo = "003"'
-             
-        if text == "Técnico Luces":
-             sigue += ' AND tarifas.id_cargo = "004"'
-             
-        if text == "Operador Sonido":
-             sigue += ' AND tarifas.id_cargo = "006"'
-             
-        if text == "RF":
-             sigue += ' AND tarifas.id_cargo = "007"'
-             
-        if text == "Técnico de Sonido":
-            sigue += ' AND tarifas.id_cargo = "008"'
         
-        if text == "Operador de Video":
-            sigue += ' AND tarifas.id_cargo = "010"'
-            
-        if text == "LED":
-            sigue += ' AND tarifas.id_cargo = "011"'
-            
-        if text == "Técnico de Video":
-            sigue += ' AND tarifas.id_cargo = "012"'
-            
-        if text == "Contenidos":
-            sigue += ' AND tarifas.id_cargo = "013"'
-            
-        if text == "Regidor":
-            sigue += ' AND tarifas.id_cargo = "009"'
-        
-        if text == "Rigger":
-            sigue += ' AND tarifas.id_cargo = "005"'
-            
-        if text == "Deco":
-            sigue += ' AND tarifas.id_cargo = "014"'
-            
-            
-        self.sql += sigue
-        self.model.setQuery(self.sql)
-        print(self.sql)
-        #self.model.setEditStrategy(QtSql.QSqlTableModel.OnManualSubmit)
-        self.ui.personal_table.setModel(self.model)
-#-------------------FUNCIONES GENERALES----------------------------------------
+#-----------------------------------------------------------------------------
+#------------------------PÁGINA DE PROVEEDORES--------------------------------
+#----------------------------------------------------------------------------- 
 
-    def checkFocus(self):
-        if self.isActiveWindow():
-            self.refresca_grid()
+
+
             
 #-------------------FUNCIONES PAGINA DATOS-------------------------------------
 
@@ -207,13 +122,18 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         bd.runsql("INSERT INTO evento (id_evento,nombre,cliente,contacto_onsite,\
                   telefono_onsite,email_onsite,id_recinto,id_manager,notas) VALUES\
                   (?,?,?,?,?,?,?,?,?);", campos_datos)
-
+        
+        self.ui.tabWidget.setCurrentIndex(1)
+        
 #-------------------FUNCIONES PAGINA FECHAS------------------------------------
 
-
-
+    def activaAdd(self):
+        self.ui.buttonAddDate.setEnabled(True)
+    def showFrame(self):
+        self.ui.frame.show()
         
     def addDate(self):
+        
         date = self.ui.calendar.selectedDate()
         date = date.toString("dd-MM-yyyy")
         time = self.ui.time.time()
@@ -228,20 +148,34 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         bd.runsql("""INSERT INTO dias_evento (id_dias_evento,id_evento,fecha,
                   hora,tarea) VALUES (?,?,?,?,?);""",campos_fecha)
         
-        #----------Genera el modelo para la tabla de fechas--------------------
+        #----------Muestra las fechas en la tabla------------------------------
         
-        self.model = QtSql.QSqlQueryModel(self)
-        self.sql = 'SELECT fecha, hora, tarea  FROM dias_evento;'
-        self.model.setQuery(self.sql)
-        self.ui.fechas_table.setModel(self.model)
-            
-    def activaAdd(self):
-        self.ui.buttonAddDate.setEnabled(True)
+        self.loadData(id_evento)
+        self.ui.fechas_table.show()
+       
+    def loadData(self,id_evento):
+        bd = BdStd()
+        bd.runsql(f"""SELECT fecha, hora, tarea, id_dias_evento FROM dias_evento
+                  WHERE id_evento = '{id_evento}'""")
+        if bd.rows != None :
+            for row in bd.rows :
+                self.load_one(row)
+                
+    def load_one(self, data):
+        rowPosition = self.ui.fechas_table.rowCount()
+        self.ui.fechas_table.insertRow(rowPosition)
+        self.ui.fechas_table.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
+        self.ui.fechas_table.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
+        self.ui.fechas_table.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
+        self.ui.fechas_table.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))
+        
         
     def activaDel(self):    
         self.ui.buttonDelDate.setEnabled(True)   
         
+#---------------FUNCIONES PÁGINA PERSONAL--------------------------------------
         
+    
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

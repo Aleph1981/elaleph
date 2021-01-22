@@ -28,6 +28,9 @@
      <height>821</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="tabShape">
     <enum>QTabWidget::Triangular</enum>
    </property>
@@ -258,7 +261,7 @@
       <rect>
        <x>670</x>
        <y>120</y>
-       <width>271</width>
+       <width>371</width>
        <height>291</height>
       </rect>
      </property>
@@ -276,9 +279,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QPushButton" name="buttonAddDate">
+          <property name="text">
+           <string>Añadir Fecha</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="button_fechas">
           <property name="text">
-           <string>AÑADIR FECHA</string>
+           <string>Eliminar Fecha</string>
           </property>
          </widget>
         </item>
@@ -321,10 +331,10 @@
       <string>Crear Evento</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>670</x>
+       <x>730</x>
        <y>590</y>
        <width>271</width>
        <height>41</height>
@@ -364,7 +374,7 @@
     <attribute name="title">
      <string>Personal</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -548,7 +558,11 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableView" name="personal_table"/>
+         <widget class="QTableView" name="personal_table">
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>184</number>
+          </attribute>
+         </widget>
         </item>
        </layout>
       </item>
@@ -584,7 +598,14 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="personal_added"/>
+       <widget class="QTableView" name="personal_added">
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>158</number>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -813,7 +834,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableView" name="prov_table_2"/>
+         <widget class="QTableWidget" name="prov_table_2"/>
         </item>
        </layout>
       </item>
@@ -849,7 +870,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="personal_added_2"/>
+       <widget class="QTableWidget" name="personal_added_2"/>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
@@ -935,22 +956,6 @@
     <hint type="destinationlabel">
      <x>855</x>
      <y>789</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>button_cancel_prov</sender>
-   <signal>clicked()</signal>
-   <receiver>personal_added_2</receiver>
-   <slot>clearSelection()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>1110</x>
-     <y>731</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>1085</x>
-     <y>665</y>
     </hint>
    </hints>
   </connection>

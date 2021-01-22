@@ -42,9 +42,9 @@ class Recintos(QtWidgets.QDialog, Recintos_Ui):
         self.ui.tableRecintos.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
         self.ui.tableRecintos.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
         self.ui.tableRecintos.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
-        self.ui.tableRecintos.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[4]))
-        self.ui.tableRecintos.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[5]))
-        self.ui.tableRecintos.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[3]))
+        self.ui.tableRecintos.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))
+        self.ui.tableRecintos.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[4]))
+        self.ui.tableRecintos.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[5]))
         self.ui.tableRecintos.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))        
         self.ui.tableRecintos.setItem(rowPosition , 7, QtWidgets.QTableWidgetItem(data[7]))
         self.ui.tableRecintos.setItem(rowPosition , 8, QtWidgets.QTableWidgetItem(data[8]))
@@ -112,7 +112,7 @@ class Recintos(QtWidgets.QDialog, Recintos_Ui):
             clave = self.ui.tableRecintos.item(tbrow,0).text()
             print(clave)            
             #---- busca el registro y compara los campos cambiados 
-            bd.runsql("SELECT * FROM recintos WHERE id_recintos = '" + clave + "'")      
+            bd.runsql("SELECT * FROM recintos WHERE id_recinto = '" + clave + "'")      
             for row in bd.rows :
                 sql = ""
                 for i in range(1, len(campos)) :
