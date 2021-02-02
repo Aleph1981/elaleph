@@ -126,9 +126,10 @@ class Recintos(QtWidgets.QDialog, Recintos_Ui):
                 print("SQL->", sql)
                 bd.runsql(sql)
         
-        ui = Cambios_Ui()
-        ui.setupUi(Dialog)
-        Dialog.show()
+#        ui = Cambios_Ui()
+#        ui.setupUi(Dialog)
+#        Dialog.show()
+                
     def eliminar(self):
         
         row=self.ui.tableRecintos.currentRow()

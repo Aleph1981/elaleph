@@ -41,8 +41,8 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(202, 202, 202);
-background-color: rgb(227, 227, 227);</string>
+   <string notr="true">background-color: rgb(0,0,0);
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -71,6 +71,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonPrev30">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string>&lt;&lt;&lt;</string>
           </property>
@@ -78,6 +82,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonPrev7">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string>&lt;&lt; </string>
           </property>
@@ -85,6 +93,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonPrev1">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string> &lt; </string>
           </property>
@@ -102,6 +114,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonNext1">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string> &gt; </string>
           </property>
@@ -109,6 +125,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonNext7">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string> &gt;&gt;</string>
           </property>
@@ -116,6 +136,10 @@ background-color: rgb(227, 227, 227);</string>
         </item>
         <item>
          <widget class="QToolButton" name="buttonNext30">
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(125, 125, 125);
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string>&gt;&gt;&gt;</string>
           </property>
@@ -154,15 +178,36 @@ background-color: rgb(227, 227, 227);</string>
          <property name="text">
           <string>Lunes</string>
          </property>
+         <property name="background">
+          <color>
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </property>
         </column>
         <column>
          <property name="text">
           <string>Martes</string>
          </property>
+         <property name="background">
+          <color>
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
+         </property>
         </column>
         <column>
          <property name="text">
           <string>Miércoles</string>
+         </property>
+         <property name="background">
+          <color>
+           <red>0</red>
+           <green>0</green>
+           <blue>0</blue>
+          </color>
          </property>
         </column>
         <column>

@@ -119,8 +119,8 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
                 sql += " WHERE id_manager = '" + clave + "'"
                 print("SQL->", sql)
                 bd.runsql(sql)
-        w = Cambios_Ui()
-        w.show()
+        #w = Cambios_Ui()  mere quitado
+        #w.show()
     
     def eliminar(self):
         

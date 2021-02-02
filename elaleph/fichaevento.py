@@ -15,19 +15,19 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
         QtWidgets.QDialog.__init__(self)
         self.ui = FichaEvento_Ui()
         self.ui.setupUi(self)
-        self.id_evento = id_evento
+        self.id_evento=id_evento
         self.loadDataDatos(id_evento)
         self.loadDataFechas(id_evento)
         self.ui.tableFechas.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableFechas.setSelectionBehavior(self.ui.tableFechas.SelectRows)
         self.ui.buttonEditar.clicked.connect(self.openEvento)
-
+        print(id_evento)
 #-----Abre la ventana de crear evento con los datos precargados para esa id----
       
-    def openEvento(self,id_evento):
-        self.w = CrearEvento()
+    def openEvento(self):        
+        self.w = CrearEvento(self.id_evento)
         self.w.show()
-        
+        print("ficha",id_evento)
 #---------Carga los datos para los inputs--------------------------------------        
     def loadDataDatos(self,id_evento):                 
     

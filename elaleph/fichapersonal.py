@@ -82,8 +82,8 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
             
         #---------Rellena calendario--------------------------------------------------
         
-        self.kale = Acalendar(self.ui)
-        self.kale.crea_calendario(id_personal)
+        self.kale = Acalendar(self.ui, self.id_personal)
+        self.kale.crea_calendario()
                            
           #--------------Conecto los botones para pasar de mes---------------
         self.ui.buttonPre.clicked.connect(self.pre_month)
@@ -97,15 +97,15 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
     
         #---------------Funciones para avanzar y retroceder mes---------------
     
-    def pre_month(self, id_personal):
+    def pre_month(self):
         if self.kale.mes == 1:
             self.kale.mes=12
             self.kale.anyo-=1
         else:
             self.kale.mes-=1
-        self.kale.crea_calendario(id_personal)
+        self.kale.crea_calendario()
             
-    def next_month(self, id_personal):
+    def next_month(self):
         print("antes:", self.kale.mes)
         if self.kale.mes==12:
             self.kale.mes=1
@@ -113,7 +113,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         else:
             self.kale.mes+=1
         print("despues:", self.kale.mes)
-        self.kale.crea_calendario(id_personal)   
+        self.kale.crea_calendario()   
         
         #---------------Funciones para ocupar y liberar fechas----------------
         
@@ -122,10 +122,11 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         column = self.ui.tableWidget.currentColumn()
         dd = self.ui.tableWidget.item(row, column).text()
         dd = dd.replace(" ","0")
-        yymmdd = "{:02d}{:02d}{}".format(self.kale.anyo - 2000,self.kale.mes,dd)
+        fecha=f"{dd}-{self.kale.mes:02d}-{self.kale.anyo}"
+        print(fecha)
         self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(255,0,0))
         bd = BdStd()
-        bd.runsql(f"INSERT INTO personal_ocupado (id_personal,yymmdd) VALUES ('{self.id_personal}','{yymmdd}');")
+        bd.runsql(f"INSERT INTO personal_ocupado (id_personal,fecha) VALUES ('{self.id_personal}','{fecha}');")
         
         
     def liberar(self):
@@ -133,10 +134,10 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         column = self.ui.tableWidget.currentColumn()
         dd = self.ui.tableWidget.item(row, column).text()
         dd = dd.replace(" ","0")
-        yymmdd = "{:02d}{:02d}{}".format(self.kale.anyo - 2000,self.kale.mes,dd)
+        fecha=f"{dd}-{self.kale.mes:02d}-{self.kale.anyo}"
         self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(255,255,255))
         bd = BdStd()
-        bd.runsql(f"DELETE FROM personal_ocupado WHERE id_personal = '{self.id_personal}' AND yymmdd = '{yymmdd}';")
+        bd.runsql(f"DELETE FROM personal_ocupado WHERE id_personal = '{self.id_personal}' AND fecha = '{fecha}';")
         
         
     #---------METODOS ------------------------------------------------------
@@ -171,9 +172,15 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
 #------------Función abrir documentos-----------------------------------------
 
     def documentos(self):
-        path = self.carpeta
-        path = os.path.realpath(path)
-        os.startfile(path)
+        # mere añadidoo try catch, porque fallaba
+        # se podria añadir un label a la pantalla para mostrar el mensaje
+        try :
+            path = self.carpeta
+            path = os.path.realpath(path)
+            os.startfile(path)
+        except :
+            import sys
+            print("Error:", sys.exc_info()[0])
         
     
     def guardar(self):
@@ -227,16 +234,17 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
  
 class Acalendar() :
  
-    def __init__(self, winui):
+    def __init__(self, winui, id_personal):
         
         #Instancia de TextCalendar
         self.cl = calendar.TextCalendar()
+        self.id_personal=id_personal
         hoy = date.today()
         self.mes = hoy.month
         self.anyo = hoy.year
         self.winui = winui
         
-    def crea_calendario(self, id_personal):
+    def crea_calendario(self):
     
   
         #Elegimos el formato del año y mes del calendario
@@ -271,8 +279,8 @@ class Acalendar() :
                 newcalendar.remove(newcalendar[0])
         #-----Monta el calendario de la persona----------------------------
         
-        self.dias_event = getEventCale(id_personal, "{:02d}{:02d}".format(self.anyo - 2000,self.mes))
-        self.dias_ocupado = getOcupadoCale(id_personal, "{:02d}{:02d}".format(self.anyo - 2000,self.mes))
+        self.dias_event = getEventCale(self.id_personal, "{:02d}-{:04d}".format(self.mes,self.anyo))
+        self.dias_ocupado = getOcupadoCale(self.id_personal, "{:02d}-{:04d}".format(self.mes,self.anyo))
         
         #------Rellena el calendario---------------------------------------
         
@@ -353,27 +361,27 @@ def guardaTarifas(id_personal, map_cargos):
            print(sql.format(id_personal, item['id'], str(item['tarifa'])))
            bd.runsql(sql.format(id_personal, item['id'], str(item['tarifa'])))
 
-def getEventCale(id_personal, yymm):
+def getEventCale(id_personal, mmyyyy):
     
     # devuelve un array con dias y sus eventos 
     bd = BdStd()
     dias_event =  ["" for x in range(31)]
-    txtsql = f"""SELECT yymmdd, id_evento  FROM personal_evento   WHERE id_personal = '{id_personal}'
-    AND  yymmdd BETWEEN '{yymm}01' AND '{yymm}31' ORDER BY id_personal, yymmdd"""    
+    txtsql = f"""SELECT fecha, id_evento  FROM personal_evento   WHERE id_personal = '{id_personal}'
+    AND  fecha BETWEEN '01-{mmyyyy}' AND '31-{mmyyyy}' ORDER BY id_personal, fecha"""    
     bd.runsql(txtsql) 
     if bd.rows != None :
         for row in bd.rows :
-            dia = int0(row[0][4:99])
+            dia = int0(row[0][0:2])
             dias_event[dia-1] = row[1]
     return (dias_event)
 
-def getOcupadoCale(id_personal, yymm):
+def getOcupadoCale(id_personal, mmyyyy):
     
     # devuelve un array con dias y sus eventos 
     bd = BdStd()
     dias_ocupado =  ["" for x in range(31)]
-    txtsql = f"""SELECT yymmdd, id_personal FROM personal_ocupado   WHERE id_personal = '{id_personal}'
-    AND  yymmdd BETWEEN '{yymm}01' AND '{yymm}31' ORDER BY id_personal, yymmdd"""
+    txtsql = f"""SELECT fecha, id_personal FROM personal_ocupado   WHERE id_personal = '{id_personal}'
+    AND  fecha BETWEEN '01-{mmyyyy}' AND '31-{mmyyyy}' ORDER BY id_personal, fecha"""
     
     print("getOcupadoCale: ", txtsql)
     
@@ -381,7 +389,7 @@ def getOcupadoCale(id_personal, yymm):
     print(bd.rows)
     if bd.rows != None :
         for row in bd.rows :
-            dia = int0(row[0][4:99])
+            dia = int0(row[0][0:2])
             dias_ocupado[dia-1] = row[1]
     return (dias_ocupado)
                         

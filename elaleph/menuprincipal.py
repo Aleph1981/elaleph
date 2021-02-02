@@ -15,9 +15,11 @@ from projectmanagers import *
 from recintos import *
 from consultaeventos import *
 from bdstd import *
+from fichaevento import *
 
 from datetime import timedelta, datetime
 import datetime
+
 
 #-------------------Clase del menu principal-----------------------
 
@@ -57,53 +59,56 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i), '%A %d-%m-%Y')}")
         
         self.tableWidget.insertRow(0)
         self.getSevenDays()
+    
+    #--------------DOBLE CLICK EN CELDA---------------------------------------
         
-    #--------------Suma y resta de días----------------------------------------
-       
+        self.tableWidget.cellDoubleClicked.connect(self.openEvento)
+        
+    #--------------Suma y resta de días------------------------------ mere cambiado hoy por self.hoy       
     def nextDay1(self):
         self.j += 1
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays()    
     
     def prevDay1(self):
         self.j -= 1
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays() 
         
     def nextDay7(self):
         self.j += 7
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays()
         
     def prevDay7(self):
         self.j -= 7
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays()
         
     def nextDay30(self):
         self.j += 30
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays()
         
     def prevDay30(self):
         self.j -= 30
         for i in range(0,7):
             item = self.tableWidget.horizontalHeaderItem(i)
-            item.setText(f"{date.strftime(hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
+            item.setText(f"{date.strftime(self.hoy+timedelta(days=i + self.j), '%A %d-%m-%Y')}")
         self.getSevenDays()
  
     #------Obtener los días mostrados en el calendario y cargar los datos------
@@ -152,8 +157,6 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.w = AnadirPersonal()
         self.w.show()
     def open_consultar_personal(self,checked):
-        if not createConnection():
-            sys.exit(1)
         self.w = ConsultaPersonal(app)
         self.w.show()
     def open_project_managers(self,checked):
@@ -176,9 +179,13 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     def open_consultar_evento(self,checked):
         self.w = ConsultaEventos()
         self.w.show()
-
-
-
+    
+    def openEvento(self,row,col):
+        id_evento = self.tableWidget.item(row,col).text()
+        id_evento = id_evento.split()
+        id_evento = id_evento[0]
+        self.w = FichaEvento(id_evento)
+        self.w.show()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
