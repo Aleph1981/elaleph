@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class MenuPrincipal_Ui(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1300, 569)
+        MainWindow.resize(1302, 666)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(1)
         sizePolicy.setVerticalStretch(1)
@@ -21,8 +21,7 @@ class MenuPrincipal_Ui(object):
         MainWindow.setSizeIncrement(QtCore.QSize(0, 0))
         MainWindow.setBaseSize(QtCore.QSize(0, 0))
         MainWindow.setAutoFillBackground(False)
-        MainWindow.setStyleSheet("background-color: rgb(202, 202, 202);\n"
-"background-color: rgb(227, 227, 227);")
+        MainWindow.setStyleSheet("")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -36,12 +35,18 @@ class MenuPrincipal_Ui(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.buttonPrev30 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonPrev30.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonPrev30.setObjectName("buttonPrev30")
         self.horizontalLayout.addWidget(self.buttonPrev30)
         self.buttonPrev7 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonPrev7.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonPrev7.setObjectName("buttonPrev7")
         self.horizontalLayout.addWidget(self.buttonPrev7)
         self.buttonPrev1 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonPrev1.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonPrev1.setObjectName("buttonPrev1")
         self.horizontalLayout.addWidget(self.buttonPrev1)
         self.labelVista = QtWidgets.QLabel(self.centralwidget)
@@ -49,12 +54,18 @@ class MenuPrincipal_Ui(object):
         self.labelVista.setObjectName("labelVista")
         self.horizontalLayout.addWidget(self.labelVista)
         self.buttonNext1 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonNext1.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonNext1.setObjectName("buttonNext1")
         self.horizontalLayout.addWidget(self.buttonNext1)
         self.buttonNext7 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonNext7.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonNext7.setObjectName("buttonNext7")
         self.horizontalLayout.addWidget(self.buttonNext7)
         self.buttonNext30 = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonNext30.setStyleSheet("background-color: rgb(125, 125, 125);\n"
+"color: rgb(255, 255, 255);")
         self.buttonNext30.setObjectName("buttonNext30")
         self.horizontalLayout.addWidget(self.buttonNext30)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -68,10 +79,13 @@ class MenuPrincipal_Ui(object):
         self.tableWidget.setColumnCount(7)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(0, 0, 0))
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(0, 0, 0))
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setBackground(QtGui.QColor(0, 0, 0))
         self.tableWidget.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(3, item)
@@ -83,52 +97,84 @@ class MenuPrincipal_Ui(object):
         self.tableWidget.setHorizontalHeaderItem(6, item)
         self.verticalLayout.addWidget(self.tableWidget)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setContentsMargins(0, -1, -1, -1)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem2)
+        self.buttonSinConf = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonSinConf.setStyleSheet("background-color: rgb(255, 0, 255);")
+        self.buttonSinConf.setText("")
+        self.buttonSinConf.setObjectName("buttonSinConf")
+        self.horizontalLayout_2.addWidget(self.buttonSinConf)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setObjectName("label")
+        self.horizontalLayout_2.addWidget(self.label)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
+        self.buttonPersonal = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonPersonal.setStyleSheet("background-color: rgb(255, 0, 0);")
+        self.buttonPersonal.setText("")
+        self.buttonPersonal.setObjectName("buttonPersonal")
+        self.horizontalLayout_2.addWidget(self.buttonPersonal)
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setObjectName("label_2")
+        self.horizontalLayout_2.addWidget(self.label_2)
+        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem4)
+        self.buttonProveedor = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonProveedor.setStyleSheet("background-color: rgb(0, 75, 255);")
+        self.buttonProveedor.setText("")
+        self.buttonProveedor.setObjectName("buttonProveedor")
+        self.horizontalLayout_2.addWidget(self.buttonProveedor)
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setObjectName("label_3")
+        self.horizontalLayout_2.addWidget(self.label_3)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem5)
+        self.buttonCerrado = QtWidgets.QToolButton(self.centralwidget)
+        self.buttonCerrado.setStyleSheet("background-color: rgb(74, 222, 0);")
+        self.buttonCerrado.setText("")
+        self.buttonCerrado.setObjectName("buttonCerrado")
+        self.horizontalLayout_2.addWidget(self.buttonCerrado)
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_2.addWidget(self.label_4)
+        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem6)
+        self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1300, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1302, 26))
         self.menubar.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
-"background-color: rgba(185, 0, 0, 180);")
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
+        self.menubar.setDefaultUp(False)
         self.menubar.setObjectName("menubar")
         self.menuArchivo = QtWidgets.QMenu(self.menubar)
-        self.menuArchivo.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuArchivo.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuArchivo.setObjectName("menuArchivo")
         self.menuPersonal = QtWidgets.QMenu(self.menubar)
-        self.menuPersonal.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuPersonal.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuPersonal.setObjectName("menuPersonal")
         self.menuEventos = QtWidgets.QMenu(self.menubar)
-        self.menuEventos.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuEventos.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuEventos.setObjectName("menuEventos")
         self.menuCrear_hojas = QtWidgets.QMenu(self.menubar)
-        self.menuCrear_hojas.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuCrear_hojas.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuCrear_hojas.setObjectName("menuCrear_hojas")
         self.menuProveedores = QtWidgets.QMenu(self.menubar)
-        self.menuProveedores.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuProveedores.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuProveedores.setObjectName("menuProveedores")
         self.menuRecintos = QtWidgets.QMenu(self.menubar)
-        self.menuRecintos.setStyleSheet("selection-background-color: rgba(200, 200, 200, 125);\n"
-"selection-color: rgb(0, 0, 0);\n"
-"background-color: rgb(185, 0, 0,180);\n"
-"")
+        self.menuRecintos.setStyleSheet("selection-background-color: rgba(225, 225, 225, 150);\n"
+"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));")
         self.menuRecintos.setObjectName("menuRecintos")
         MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
         self.action_crear_hoja_de_ruta = QtWidgets.QAction(MainWindow)
         self.action_crear_hoja_de_ruta.setObjectName("action_crear_hoja_de_ruta")
         self.action_crear_hoja_de_bolos = QtWidgets.QAction(MainWindow)
@@ -208,6 +254,13 @@ class MenuPrincipal_Ui(object):
         item.setText(_translate("MainWindow", "Sábado"))
         item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Domingo"))
+        self.label.setText(_translate("MainWindow", "Sin\n"
+"confirmar"))
+        self.label_2.setText(_translate("MainWindow", "Falta\n"
+"personal"))
+        self.label_3.setText(_translate("MainWindow", "Falta\n"
+"proveedor"))
+        self.label_4.setText(_translate("MainWindow", "Cerrado"))
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.menuPersonal.setTitle(_translate("MainWindow", "Personal"))
         self.menuEventos.setTitle(_translate("MainWindow", "Eventos"))

@@ -11,8 +11,7 @@ from bdstd import BdStd
 from projectmanagers import *
 from recintos import *
 from fichapersonal import *
-from personalevento import *            # mere 30-01-21 added
-from proveedorevento import *
+from personalevento import *            
 
 class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
     
@@ -20,9 +19,9 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         QtWidgets.QDialog.__init__(self)
         self.ui = CrearEvento_Ui()
         self.ui.setupUi(self)
+        self.setWindowTitle("Crear/Editar Evento")          # mere 03-02-2021
         self.id_evento = id_evento_parm
         self.fecha = ""       
-        self.setWindowTitle("Crear/Editar Evento")
         
 #------------------------------------------------------------------------------
 #-------------------------PÁGINA DE DATOS--------------------------------------
@@ -49,7 +48,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         if bd.rows != None :
               for nombre in bd.rows :
                  self.ui.combo_manager.addItem(f"{nombre[0]}{nombre[1]}")
-                 
+                 print (f"{nombre[0]} {nombre[1]}")
                  
         if self.id_evento == None :       # es un alta cambia el título del formulario
             print ("cambia el título del formulario: ES UN ALTA")
@@ -57,7 +56,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             self.load_evento(self.id_evento)
             self.showFrame()
             
-        self.ui.buttonDatosNext.clicked.connect(self.guardarDatos)  
+        self.ui.buttonDatosNext.clicked.connect(self.guardarDatos)
         self.ui.comboBox_2.currentIndexChanged['QString'].connect(self.updateCombo)
         self.ui.tabWidget.currentChanged.connect(self.cambia_pestanya)
         
@@ -68,19 +67,17 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
 #-------------------------Esconder y activar botones---------------------------
         
         if self.id_evento == None :       # es un alta cambia el título del formulario       
-            self.ui.fechas_table.hide()
-            #self.ui.frame.hide()
+            self.ui.frame.hide()          # mere 03-02-2021 he eliminado el hide del grid de fechas
         else: 
             self.load_dias_evento(self.id_evento)
         self.ui.combo_tarea.activated['QString'].connect(self.activaAdd)
         self.ui.buttonAddDate.clicked.connect(self.addDate)
-        self.ui.buttonDelDate.clicked.connect(self.delDate)   # merem 30-01-21 added
+        self.ui.buttonDelDate.clicked.connect(self.delDate)  
         self.ui.calendar.clicked.connect(self.showFrame)
         self.ui.fechas_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.fechas_table.setSelectionBehavior(self.ui.fechas_table.SelectRows)
         #self.ui.fechas_table.hideColumn(3)
         self.ui.fechas_table.clicked.connect(self.activaDel)
-        self.ui.buttonFechaNext.clicked.connect(self.pasa_pagina)  
 
 #-----------------------------------------------------------------------------
 #------------------------PÁGINA DE PERSONAL-----------------------------------
@@ -97,10 +94,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         self.ui.personal_table.itemSelectionChanged.connect(self.tabla1_select)
         self.ui.personal_table.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)  # mere
         self.ui.personal_table.setSelectionMode(QtWidgets.QTableWidget.SingleSelection)
-        #self.ui.buttonPersonalNext.clicked.connect(self.pasa_pagina)
-        # mere 30-01-21  comentado lo de abajo
-        #self.ui.personal_table.hideColumn(0)
-        
+
         self.loadcombo_cargos()
         self.ui.combo_filtrar_cargos.activated[str].connect(self.filtro_checks)
         self.filtro_checks("ALL")
@@ -111,69 +105,27 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         self.ui.buttonBuscarPers.clicked.connect(self.filtro_checks)
         self.ui.personal_table.cellDoubleClicked.connect(self.open_ficha_personal)
         
-        
-        
-        self.ui.personal_added.setColumnCount(10)
+        self.ui.personal_added.setColumnCount(11)
         self.ui.personal_added.setSortingEnabled(True)
-        self.ui.personal_added.setSelectionBehavior(self.ui.personal_table.SelectRows)
+        self.ui.personal_added.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)  # mere 03-02-2021
+        self.ui.personal_table.setSelectionMode(QtWidgets.QTableWidget.SingleSelection)
         self.ui.personal_added.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.ui.personal_added.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos",  
-                                  "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
+        # mere 03-02-2021 cambiada cabecera grid
+        self.ui.personal_added.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos", "Suplem.",  
+                                  "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
         #self.ui.personal_added.hideColumn(0)
-        self.ui.personal_added.cellDoubleClicked.connect(self.select_pev)       
+        
+        self.ui.personal_added.cellDoubleClicked.connect(self.select_pev)    # mere 03-02-2021 added
 #-----------------------------------------------------------------------------
 #------------------------PÁGINA DE PROVEEDORES--------------------------------
 #----------------------------------------------------------------------------- 
-        
-        self.id_proveedor = ""     # contendrá la persona seleccionada del grid de personas
-        self.nom_servicio = ""       # contendrá su cargo
-        self.ui.prov_table.setSortingEnabled(True)       
-        self.ui.prov_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.ui.prov_table.setColumnCount(14)   # Alejandro cambiado 25-1 lo saco de la función si no no etiqueta el header 
-        self.ui.prov_table.setHorizontalHeaderLabels(["ID","Empresa","Provincia",\
-            "Localidad","Dirección","Servicio/s","CIF","Teléfono","Email","Web",\
-            "Contacto","Teléfono Contacto","Email Contacto","Notas"])
-        self.ui.prov_table.itemSelectionChanged.connect(self.tabla_prov_select)
-        self.ui.prov_table.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)  # mere
-        self.ui.prov_table.setSelectionMode(QtWidgets.QTableWidget.SingleSelection)
-        # mere 30-01-21  comentado lo de abajo
-        #self.ui.prov_table.hideColumn(0)
-        
-        self.loadcombo_cargos()
-        self.ui.combo_filtrar_serv.activated[str].connect(self.filtro_prov_checks)
-        self.filtro_prov_checks("ALL")
-        self.loadcombo_dias()
-        self.ui.combo_dia_prov.activated[str].connect(self.filtro_prov_dia)
-        self.ui.button_add_prov.clicked.connect(self.anade_prov)
-        self.ui.button_remove_prov.clicked.connect(self.quita_prov)
-        self.ui.buttonBuscarProv.clicked.connect(self.filtro_prov_checks)
-       
-        
-        
-        
-        self.ui.prov_added.setColumnCount(11)
-        self.ui.prov_added.setSortingEnabled(True)
-        self.ui.prov_added.setSelectionBehavior(self.ui.prov_table.SelectRows)
-        self.ui.prov_added.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        self.ui.prov_added.setHorizontalHeaderLabels(["fecha","Servicio", "Empresa","Provincia",\
-            "Contacto","Teléfono Contacto","Email Contacto","Notas"])
-        #self.ui.prov_added.hideColumn(0)
 
-        self.ui.prov_added.cellDoubleClicked.connect(self.select_prov)       
 
-#------------------------------------------------------------------------------
-#-------------------FUNCIONES GENERALES---------------------------------------- 
-#------------------------------------------------------------------------------
-    def pasa_pagina(self):
-        i=self.ui.tabWidget.currentIndex()
-        self.ui.tabWidget.setCurrentIndex(i+1)
-        self.filtro_prov_checks("ALL")
-        self.loadcombo_dias()
-#------------------------------------------------------------------------------           
+
+            
 #-------------------FUNCIONES PAGINA DATOS-------------------------------------
-#------------------------------------------------------------------------------
-
     def cambia_pestanya (self):
+        print ("pestaña: ", self.ui.tabWidget.currentIndex())
         index = self.ui.tabWidget.currentIndex()
         if index == 1 :
             # refresca grids de fechas
@@ -183,11 +135,6 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             self.loadcombo_cargos()
             self.filtro_checks("ALL")
             self.loadcombo_dias()
-        if index == 3 :
-            # refresca grids personal
-            self.loadcombo_servicios()
-            self.filtro_prov_checks("ALL")
-            self.loadcombo_dias_prov()
         
 
     def addRecinto(self):
@@ -213,6 +160,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
 
 
         #-------------------------------------------------------
+        print("self.id_evento : ",self.id_evento)
         if self.id_evento == None :
             campos_datos = (my_evento, self.ui.entry_nombre.text()\
                         ,self.ui.entry_cliente.text().capitalize(), self.ui.entry_onsite.text()\
@@ -244,6 +192,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
                       nombre = '{self.ui.comboBox.currentText()}' AND 
                       ciudad = '{self.ui.comboBox_2.currentText()}'""")
             if bdaux.rows != None and len(bdaux.rows) > 0 :
+                print ("len(bd.rows)", len(bdaux.rows))
                 id_recinto = bdaux.rows[0][0]
         except:
             print("error extraer_recinto:", sys.exc_info())
@@ -254,6 +203,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         bd1 = BdStd()
         try :
             bd1.runsql(f"""SELECT nombre, ciudad FROM recintos WHERE id_recinto = '{id_recinto}'""") 
+            print ("posiciona_recinto:", id_recinto, "rows", len(bd1.rows) )
             if bd1.rows != None and len(bd1.rows) > 0 :
                 #--- primero coloca la ciudad  y luego re-carga el combo de recintos de la ciudad
                 index = self.ui.comboBox_2.findText(bd1.rows[0][1], QtCore.Qt.MatchFixedString)
@@ -281,6 +231,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             bdaux.runsql(f"""SELECT id_manager FROM managers WHERE nombre='{nombre_manager} '
                       AND apellidos = '{apellidos_manager} '""")
             if bdaux.rows != None and len(bdaux.rows) > 0 :
+                print ("len(bd.rows)", len(bdaux.rows))
                 id_manager = bdaux.rows[0][0]
         except:
             print("error extraer_manager:", sys.exc_info())
@@ -291,19 +242,19 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         bd1 = BdStd()
         try :
             bd1.runsql(f"""SELECT nombre, apellidos FROM managers WHERE id_manager = '{id_manager}'""") 
+            print ("posiciona_manager:", id_manager, "rows", len(bd1.rows) )
 
             if bd1.rows != None and len(bd1.rows) > 0 :
                 completo  = bd1.rows[0][0] +  bd1.rows[0][1]
+                print("busco: " +completo)
 
                 index = self.ui.combo_manager.findText(completo, QtCore.Qt.MatchFixedString)
+                print("index", index)
                 if index >= 0:
                      self.ui.combo_manager.setCurrentIndex(index)
         except:
             print("error posiciona_manager:", sys.exc_info())
-            
-#------------------------------------------------------------------------------           
 #-------------------FUNCIONES PAGINA FECHAS------------------------------------
-#------------------------------------------------------------------------------
 
     def activaAdd(self):
         self.ui.buttonAddDate.setEnabled(True)
@@ -356,6 +307,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         
         bd = BdStd()
         bd.runsql(f"""DELETE FROM dias_evento WHERE id_dias_evento = '{id_dias_evento}'""")
+        print (f"""DELETE FROM dias_evento WHERE id_dias_evento = '{id_dias_evento}'""")
         
         #----------Muestra las fechas en la tabla------------------------------
         
@@ -396,15 +348,29 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
     def activaDel(self):    
         self.ui.buttonDelDate.setEnabled(True)
 
-#------------------------------------------------------------------------------
+        
 #---------------FUNCIONES PÁGINA PERSONAL--------------------------------------
-#------------------------------------------------------------------------------
+#------Función de filtrado----------------------------------------------------       
+    
+    # def complet_nombre(self): #Nueva función 25-1 Alejandro
+    #     self.nombres=[]
+    #     self.nombre = self.ui.entry_nombre_personal.text()
+            
+    #     bdnom = BdStd()
+    #     bdnom.runsql(f"SELECT nombre FROM personal WHERE nombre LIKE '{self.nombre}%'" )
+    #     if bdnom.rows != None:
+    #         for row in bdnom.rows:
+    #             self.nombres.append(row[0])
+    #     self.completer = QtWidgets.QCompleter(self.nombres)
+    #     self.completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+    #     self.ui.entry_nombre_personal.setCompleter(self.completer)
         
         
         
     def tabla1_select(self):
         campos = self.ui.personal_table.selectedItems()
         if len(campos) > 0 :
+            print("Data:", len(campos), campos[0].text())
             self.id_personal = campos[0].text()
             self.nom_cargo = campos[3].text()
  
@@ -435,6 +401,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         bd=BdStd()
         bd.runsql(sql)
         self.ui.personal_table.setRowCount(0)
+        print ("load_personal rows ", len(bd.rows), sql)
         if bd.rows != None :
             for i, row_data in enumerate(bd.rows):
                 self.ui.personal_table.insertRow(i)
@@ -442,6 +409,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
                     self.ui.personal_table.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
                     
     def filtro_dia(self,text):
+        print ("filtro dia ", text)
         self.color_ocupado(text[0:10])
         self.load_personal_added()
 
@@ -451,6 +419,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             return
                     
         bd=BdStd()
+        # mere 03-02-2021 añadidos el resto de los campos a la select
         txtsql = f"""SELECT strftime('%d-%m-%Y',fecha), cargos.nombre, pev.id_personal, p.nombre, p.apellidos, 
                   suplemento, dni, telefono, email, autonomo, notas
                   FROM personal_evento as pev
@@ -461,22 +430,19 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
              txtsql += f"""AND strftime('%d-%m-%Y',fecha) = '{self.fecha}'"""
         txtsql += f"""ORDER BY fecha"""
 
+        print ("load_personal_added ", txtsql)
         bd.runsql(txtsql)
         
         if bd.rows != None :
             for i, row_data in enumerate(bd.rows):
                 self.ui.personal_added.insertRow(i)
-                
                 for j, data in enumerate(row_data):
-                    if j==0:
-                        self.ui.personal_added.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
-                    else:
-                        self.ui.personal_added.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
+                    self.ui.personal_added.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
 
     def loadcombo_cargos (self) :
         
         bd=BdStd()
-        bd.runsql("SELECT id_cargo, nombre FROM cargos ORDER BY id_cargo")
+        bd.runsql("SELECT id_cargo, nombre FROM cargos")
         self.ui.combo_filtrar_cargos.clear()
 
         self.dic_cargos = { "ALL": '000'}
@@ -486,7 +452,8 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             for i, row_data in enumerate(bd.rows):
                 self.dic_cargos[row_data[1]] = row_data[0]
                 self.ui.combo_filtrar_cargos.addItem(row_data[1])
-        
+            print (self.dic_cargos)
+
     def loadcombo_dias(self) :
 
         if self.id_evento == None :
@@ -501,11 +468,11 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         txtsql = f"""SELECT fecha, tarea FROM dias_evento WHERE id_evento = '{self.id_evento}'  
                      ORDER BY fecha"""
         bd.runsql(txtsql)
+        print("loadcombo_dias", self.id_evento, "rows:", bd.rows, txtsql)
         if bd.rows != None :
             for row_data in bd.rows:
                 self.map_fechas[row_data[0]] : row_data[1]
                 self.ui.combo_dia_personal.addItem(bd.gira_fecha(row_data[0]) + " " +row_data[1])
-                
 
         
     def color_ocupado(self, fecha):
@@ -524,6 +491,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
                 id_personal = ""
             id_color = self.calcular_color (self.id_evento, id_personal, fecha)
             
+            print(self.ui.personal_table.item(row,0).text(), id_color)
             
             if id_color == 1:
                self.ui.personal_table.item(row,0).setBackground(QtGui.QColor(120, 66, 245))
@@ -543,24 +511,28 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         txtsql += " id_personal = '{}'  AND strftime('%d-%m-%Y',fecha) = '{}'"
         txtsql = txtsql.format(id_evento, id_personal, self.fecha)
         bd.runsql(txtsql)
+        print (bd.rows, txtsql)
 
         if bd.rows != None and len(bd.rows) > 0:
             color = 1
+            print("esta ocupado en otro evento")
         #------------ mira si está ocupado
         txtsql = "SELECT * FROM personal_ocupado WHERE "
         txtsql += " id_personal = '{}'  AND strftime('%d-%m-%Y',fecha) = '{}'"
         txtsql = txtsql.format(id_personal, self.fecha)
         bd.runsql(txtsql)
+        print (bd.rows, txtsql)
 
         if bd.rows != None and len(bd.rows) > 0:
             color = 2
+            print("esta ocupado por terceros") 
         return (color)
 
     def select_pev(self):
         # Doble clic en el grid de personal seleccionado para el evento
         #print ("itenms selected: ", self.ui.personal_added.selectedItems())
-        self.open_detalle_pev() 
-        
+        self.open_detalle_pev()        
+
     def anade_persona (self):
         qm = QtWidgets.QMessageBox
         
@@ -570,14 +542,14 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         
         if  self.ui.combo_dia_personal.currentText() == "" :
             qm.warning(self, '', "Seleccione una fecha en la lista")
-            return           
+            return   
         self.open_detalle_pev(alta = True)
 
     def open_detalle_pev(self, alta = False) :     
         self.pev = PersonalEvento(self, alta)
         self.pev.show()
         
-    def quita_persona (self):     # mere 30-01-21 added 
+    def quita_persona (self):     
 
         qm = QtWidgets.QMessageBox
         
@@ -621,172 +593,6 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
         id_personal= self.ui.personal_table.item(row,0).text()
         self.w = FichaPersonal(id_personal)
         self.w.show()
-
-#-----------------------------------------------------------------------------
-#-----------------FUNCIONES PÁGINA PROVEEDORES--------------------------------
-#-----------------------------------------------------------------------------
-        
-    def tabla_prov_select(self):
-        campos = self.ui.prov_table.selectedItems()
-        if len(campos) > 0 :
-            self.id_proveedor = campos[0].text()
-            self.nom_servicio = campos[3].text()
-
-    def filtro_prov_checks(self,text):
-    
-        self.empresa=self.ui.entry_nombre_prov.text().upper()
-        self.serv_filtro = self.ui.combo_filtrar_serv.currentText()
-        sigue=''
-        if text == "ALL":
-            sql_base = f"""SELECT * FROM proveedores
-            WHERE empresa LIKE '{self.empresa}%'"""
-        else :
-            sql_base = 'SELECT * FROM proveedores'
-            sql_base += f' WHERE empresa LIKE "{self.empresa}%"'
-        
-        if self.serv_filtro == "ALL":
-            self.serv_filtro = ""
-        sigue+=f"AND servicio LIKE '%{self.serv_filtro}%'"
-        print(sql_base + sigue)
-    
-    
-        self.load_proveedores(sql_base + sigue)
-        self.load_prov_added()
-    
-    def load_proveedores(self, sql):
-                    
-        bd=BdStd()
-        bd.runsql(sql)
-        self.ui.prov_table.setRowCount(0)
-        if bd.rows != None :
-            for i, row_data in enumerate(bd.rows):
-                self.ui.prov_table.insertRow(i)
-                for j, data in enumerate(row_data):
-                    self.ui.prov_table.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
-                    
-    def filtro_prov_dia(self,text):
-        self.load_prov_added()
-    
-   
-    def load_prov_added(self):
-        
-        self.fecha_prov =  self.ui.combo_dia_prov.currentText()[0:10]
-        
-        self.ui.prov_added.setRowCount(0)
-        if self.id_evento == None :
-            return
-                    
-        bd=BdStd()
-        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha), pre.servicio, pre.id_proveedor,  \
-                  p.provincia, contacto_onsite, telefono_onsite, email_onsite, pre.notas \
-                  FROM proveedores_evento as pre \
-                  JOIN proveedores as p ON  p.id_proveedor = pre.id_proveedor AND pre.id_evento = '{self.id_evento}' """
-                  
-        if self.fecha_prov != "ALL" :
-              txtsql += f"""AND strftime('%d-%m-%Y',fecha) = '{self.fecha_prov}'"""
-        txtsql += f"""ORDER BY fecha"""
-    
-        bd.runsql(txtsql)
-
-        print("load_prov_added: ", self.fecha_prov, len (bd.rows), txtsql )        
-        if bd.rows != None :
-            
-            for i, row_data in enumerate(bd.rows):
-                self.ui.prov_added.insertRow(i)
-                
-                for j, data in enumerate(row_data):
-                    if j==0:
-                        self.ui.prov_added.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
-                    else:
-                        self.ui.prov_added.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
-    
-    def loadcombo_servicios (self) :
-        
-        bd=BdStd()
-        bd.runsql("SELECT * FROM servicios")
-        self.ui.combo_filtrar_serv.clear()
-    
-        self.ui.combo_filtrar_serv.addItem("ALL")
-        if bd.rows != None :
-            for i, row_data in enumerate(bd.rows):
-                self.ui.combo_filtrar_serv.addItem(row_data[0])
-        
-        
-    def loadcombo_dias_prov(self) :
-    
-        if self.id_evento == None :
-            return
-    
-        self.ui.combo_dia_prov.clear()
-        self.map_fechas =  {"": '-',"ALL": '000'}
-        self.ui.combo_dia_prov.addItem("")        
-        self.ui.combo_dia_prov.addItem("ALL")
-    
-        bd=BdStd()
-        txtsql = f"""SELECT fecha, tarea FROM dias_evento WHERE id_evento = '{self.id_evento}'  
-                     ORDER BY fecha"""
-        bd.runsql(txtsql)
-        if bd.rows != None :
-            for row_data in bd.rows:
-                self.map_fechas[row_data[0]] : row_data[1]
-                self.ui.combo_dia_prov.addItem(bd.gira_fecha(row_data[0]) + " " +row_data[1])
-    
-    def select_prov(self):
-        # Doble clic en el grid de proveedores seleccionado para el evento
-        self.open_detalle_prov()        
-    
-    
-    def anade_prov (self):
-        qm = QtWidgets.QMessageBox
-        
-        if len(self.ui.prov_table.selectedItems()) == 0:
-            qm.warning(self, '', "Seleccione un proveedor de la rejilla superior")
-            return
-        
-        if  self.ui.combo_dia_prov.currentText() == "" :
-            qm.warning(self, '', "Seleccione una fecha en la lista")
-            return           
-        self.open_detalle_prov(alta = True)
-
-    def open_detalle_prov(self, alta = False) :     
-        self.prov = ProveedorEvento(self, alta)
-        self.prov.show()        
-        
-    def quita_prov (self):     # mere 30-01-21 added 
-    
-        qm = QtWidgets.QMessageBox
-        
-        if len(self.ui.prov_added.selectedItems()) == 0:
-            qm.warning(self, '', "Seleccione un prov agregada al evento")
-            return
-    
-        ret = qm.question(self,'', "Quiere eliminar al proveedor seleccionado ? ", qm.Yes | qm.No)
-        
-        if ret == qm.No:
-            return
-        
-        #-------------- Borrar el proveedor del evento  
-        for i, item in enumerate(self.ui.prov_added.selectedItems()):
-            if i == 0 : 
-               date = item.text()
-            elif i == 1  : 
-                nom_servicio = item.text()
-            elif i == 2  : 
-                id_proveedor = item.text()
-        
-        
-        #id_dias_evento = f"{id_evento}{date}{tarea}"
-        #----------Guarda la fecha en la bbdd----------------------------------
-        
-        bd = BdStd()
-        bd.runsql(f"""DELETE FROM proveedores_evento WHERE id_evento = '{self.id_evento}' 
-                  AND strftime('%d-%m-%Y',fecha) = '{date}' 
-                  AND id_proveedor = '{id_proveedor}' AND servicio = '{nom_servicio}'""")
-    
-        
-        #----------Refresca Grid------------------------------
-        
-        self.load_prov_added()      
         
 if __name__ == "__main__":
     import sys

@@ -13,7 +13,7 @@ class PersonalEvento_Ui(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(368, 455)
         self.labelProject = QtWidgets.QLabel(Dialog)
-        self.labelProject.setGeometry(QtCore.QRect(40, 30, 181, 31))
+        self.labelProject.setGeometry(QtCore.QRect(30, 30, 181, 31))
         self.labelProject.setStyleSheet("font: 14pt \"MS Shell Dlg 2\";")
         self.labelProject.setObjectName("labelProject")
         self.layoutWidget = QtWidgets.QWidget(Dialog)
@@ -88,7 +88,11 @@ class PersonalEvento_Ui(object):
         self.buttonCancelar = QtWidgets.QPushButton(self.layoutWidget1)
         self.buttonCancelar.setObjectName("buttonCancelar")
         self.horizontalLayout.addWidget(self.buttonCancelar)
-        
+        self.inputEvento = QtWidgets.QLineEdit(Dialog)
+        self.inputEvento.setEnabled(False)
+        self.inputEvento.setGeometry(QtCore.QRect(210, 40, 124, 20))
+        self.inputEvento.setObjectName("inputEvento")
+
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         Dialog.setTabOrder(self.inputFecha, self.inputSuplem)

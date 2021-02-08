@@ -122,7 +122,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         column = self.ui.tableWidget.currentColumn()
         dd = self.ui.tableWidget.item(row, column).text()
         dd = dd.replace(" ","0")
-        fecha=f"{dd}-{self.kale.mes:02d}-{self.kale.anyo}"
+        fecha=f"{self.kale.anyo}-{self.kale.mes:02d}-{dd}"
         print(fecha)
         self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(255,0,0))
         bd = BdStd()
@@ -134,7 +134,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         column = self.ui.tableWidget.currentColumn()
         dd = self.ui.tableWidget.item(row, column).text()
         dd = dd.replace(" ","0")
-        fecha=f"{dd}-{self.kale.mes:02d}-{self.kale.anyo}"
+        fecha=f"{self.kale.anyo}-{self.kale.mes:02d}-{dd}"
         self.ui.tableWidget.item(row, column).setBackground(QtGui.QColor(255,255,255))
         bd = BdStd()
         bd.runsql(f"DELETE FROM personal_ocupado WHERE id_personal = '{self.id_personal}' AND fecha = '{fecha}';")
@@ -181,6 +181,9 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         except :
             import sys
             print("Error:", sys.exc_info()[0])
+            qm = QtWidgets.QMessageBox
+            qm.warning(self, '', "No hay documentos")
+            return
         
     
     def guardar(self):
@@ -279,8 +282,8 @@ class Acalendar() :
                 newcalendar.remove(newcalendar[0])
         #-----Monta el calendario de la persona----------------------------
         
-        self.dias_event = getEventCale(self.id_personal, "{:02d}-{:04d}".format(self.mes,self.anyo))
-        self.dias_ocupado = getOcupadoCale(self.id_personal, "{:02d}-{:04d}".format(self.mes,self.anyo))
+        self.dias_event = getEventCale(self.id_personal, "{:04d}-{:02d}".format(self.anyo,self.mes))
+        self.dias_ocupado = getOcupadoCale(self.id_personal, "{:04d}-{:02d}".format(self.anyo,self.mes))
         
         #------Rellena el calendario---------------------------------------
         
@@ -361,27 +364,27 @@ def guardaTarifas(id_personal, map_cargos):
            print(sql.format(id_personal, item['id'], str(item['tarifa'])))
            bd.runsql(sql.format(id_personal, item['id'], str(item['tarifa'])))
 
-def getEventCale(id_personal, mmyyyy):
+def getEventCale(id_personal, yyyymm):
     
     # devuelve un array con dias y sus eventos 
     bd = BdStd()
     dias_event =  ["" for x in range(31)]
     txtsql = f"""SELECT fecha, id_evento  FROM personal_evento   WHERE id_personal = '{id_personal}'
-    AND  fecha BETWEEN '01-{mmyyyy}' AND '31-{mmyyyy}' ORDER BY id_personal, fecha"""    
+    AND  fecha BETWEEN '{yyyymm}-01' AND '{yyyymm}-31' ORDER BY id_personal, fecha"""    
     bd.runsql(txtsql) 
     if bd.rows != None :
         for row in bd.rows :
-            dia = int0(row[0][0:2])
+            dia = int0(row[0][8:10])
             dias_event[dia-1] = row[1]
     return (dias_event)
 
-def getOcupadoCale(id_personal, mmyyyy):
+def getOcupadoCale(id_personal, yyyymm):
     
     # devuelve un array con dias y sus eventos 
     bd = BdStd()
     dias_ocupado =  ["" for x in range(31)]
     txtsql = f"""SELECT fecha, id_personal FROM personal_ocupado   WHERE id_personal = '{id_personal}'
-    AND  fecha BETWEEN '01-{mmyyyy}' AND '31-{mmyyyy}' ORDER BY id_personal, fecha"""
+    AND  fecha BETWEEN '{yyyymm}-01' AND '{yyyymm}-31' ORDER BY id_personal, fecha"""
     
     print("getOcupadoCale: ", txtsql)
     
@@ -389,7 +392,7 @@ def getOcupadoCale(id_personal, mmyyyy):
     print(bd.rows)
     if bd.rows != None :
         for row in bd.rows :
-            dia = int0(row[0][0:2])
+            dia = int0(row[0][8:10])
             dias_ocupado[dia-1] = row[1]
     return (dias_ocupado)
                         

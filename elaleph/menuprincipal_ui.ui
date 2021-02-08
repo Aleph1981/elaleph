@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>569</height>
+    <width>1302</width>
+    <height>666</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -41,8 +41,7 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(0,0,0);
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -234,6 +233,149 @@ color: rgb(255, 255, 255);</string>
       </item>
      </layout>
     </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="buttonSinConf">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 0, 255);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Sin
+confirmar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_5">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="buttonPersonal">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Falta
+personal</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_6">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="buttonProveedor">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(0, 75, 255);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Falta
+proveedor</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_7">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QToolButton" name="buttonCerrado">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(74, 222, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Cerrado</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -241,20 +383,21 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1300</width>
+     <width>1302</width>
      <height>26</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
-background-color: rgba(185, 0, 0, 180);</string>
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
+   </property>
+   <property name="defaultUp">
+    <bool>false</bool>
    </property>
    <widget class="QMenu" name="menuArchivo">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Archivo</string>
@@ -264,10 +407,8 @@ background-color: rgb(185, 0, 0,180);
    </widget>
    <widget class="QMenu" name="menuPersonal">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Personal</string>
@@ -278,10 +419,8 @@ background-color: rgb(185, 0, 0,180);
    </widget>
    <widget class="QMenu" name="menuEventos">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Eventos</string>
@@ -291,10 +430,8 @@ background-color: rgb(185, 0, 0,180);
    </widget>
    <widget class="QMenu" name="menuCrear_hojas">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Crear hojas</string>
@@ -306,10 +443,8 @@ background-color: rgb(185, 0, 0,180);
    </widget>
    <widget class="QMenu" name="menuProveedores">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Proveedores</string>
@@ -319,10 +454,8 @@ background-color: rgb(185, 0, 0,180);
    </widget>
    <widget class="QMenu" name="menuRecintos">
     <property name="styleSheet">
-     <string notr="true">selection-background-color: rgba(200, 200, 200, 125);
-selection-color: rgb(0, 0, 0);
-background-color: rgb(185, 0, 0,180);
-</string>
+     <string notr="true">selection-background-color: rgba(225, 225, 225, 150);
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.0149254 rgba(0, 170, 255, 178), stop:0.179104 rgba(0, 170, 255, 55), stop:0.343284 rgba(0, 170, 255, 156), stop:0.701493 rgba(0, 170, 255, 63), stop:0.840796 rgba(0, 170, 255, 179));</string>
     </property>
     <property name="title">
      <string>Recintos</string>
@@ -337,7 +470,6 @@ background-color: rgb(185, 0, 0,180);
    <addaction name="menuRecintos"/>
    <addaction name="menuCrear_hojas"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="action_crear_hoja_de_ruta">
    <property name="text">
     <string>Crear hoja de ruta</string>

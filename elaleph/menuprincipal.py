@@ -16,7 +16,7 @@ from recintos import *
 from consultaeventos import *
 from bdstd import *
 from fichaevento import *
-
+from hojadebolos import *
 from datetime import timedelta, datetime
 import datetime
 
@@ -33,6 +33,12 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
     
+    #-------------------Botones colorear---------------------------------------
+    
+        self.buttonSinConf.clicked.connect(self.set_reserva)
+        self.buttonPersonal.clicked.connect(self.set_personal)
+        self.buttonProveedor.clicked.connect(self.set_proveedor)
+        self.buttonCerrado.clicked.connect(self.set_cerrado)
     
     #-------------------Acciones del menu------------------------------------------
         
@@ -44,6 +50,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.action_alta_recinto.triggered.connect(self.open_alta_recinto)
         self.action_crear_evento.triggered.connect(self.open_crear_evento)
         self.action_consultar_evento.triggered.connect(self.open_consultar_evento)
+        self.action_crear_hoja_de_bolos.triggered.connect(self.open_crear_hoja_bolos)
         
         self.buttonNext1.clicked.connect(self.nextDay1)
         self.buttonPrev1.clicked.connect(self.prevDay1)
@@ -64,10 +71,10 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.tableWidget.insertRow(0)
         self.getSevenDays()
     
-    #--------------DOBLE CLICK EN CELDA---------------------------------------
+    #--------------CLICKS EN CELDA---------------------------------------
         
         self.tableWidget.cellDoubleClicked.connect(self.openEvento)
-        
+        self.tableWidget.cellClicked.connect(self.find_item)
     #--------------Suma y resta de días------------------------------ mere cambiado hoy por self.hoy       
     def nextDay1(self):
         self.j += 1
@@ -120,7 +127,6 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
             day=day.split()
             day = day[1]
             self.seven_days.append(day)
-        print(self.seven_days)
         self.loadData(self.seven_days)
         
     #-------Cargar los datos---------------------------------------------------
@@ -131,10 +137,11 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.tableWidget.insertRow(0)
         maxrow = 0
         columna = 0                             # mere columna del dia
-        for fecha in dias: 
+        for dia in dias: 
             # mere --------------- cambiado todo lo de abajo
+            fecha= bd.gira_fecha(dia)
             texto = ""
-            bd.runsql(f"""SELECT di.id_evento, nombre, tarea, fecha FROM dias_evento as di
+            bd.runsql(f"""SELECT di.id_evento, nombre, tarea, fecha, estado FROM dias_evento as di
                       JOIN evento as ev ON di.id_evento = ev.id_evento WHERE di.fecha='{fecha}';""")
             fila = 0
             #----------Mostrar los datos en la tabla-----------------------------------
@@ -143,14 +150,69 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
                     #------ crea una file nueva
                     self.tableWidget.insertRow(fila)       # mere crea linea para detalle
                     maxrow = fila
-                    
                 texto =  row[0] + " " +  row[1] +" " + row[2] + "\n"
                 self.tableWidget.setItem(fila, columna, QtWidgets.QTableWidgetItem(texto))
+                if row[4] == "reserva":
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 255,180))
+                elif row[4] == "personal":
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 0,180))
+                elif row[4] == "proveedor":
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(0, 75, 255,180))
+                elif row[4] == "cerrado":
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(74,222, 0,180))
                 fila+=1
             columna +=1
-                      
+            
         
-                
+    def find_item(self):
+        
+        bd=BdStd()
+        bd.runsql("SELECT tarea FROM dias_evento GROUP BY tarea")
+        tareas=[]
+        if bd.rows!= None:
+            for fila in bd.rows:
+                tareas.append(fila[0])
+        row=self.tableWidget.currentRow()
+        col=self.tableWidget.currentColumn()
+        if self.tableWidget.item(row,col):
+            evento=self.tableWidget.item(row,col).text()
+            dia = self.tableWidget.horizontalHeaderItem(col).text()
+            dia = dia.split()
+            dia=bd.gira_fecha(dia[1])
+            evento=evento.split()
+            tarea=""
+            for item in evento:
+                if item in tareas:
+                    tarea=item
+            print(evento)
+            self.id_dias_evento=evento[0]+dia+tarea
+            print("id_dias_evento = ",self.id_dias_evento )
+            return self.id_dias_evento  
+        
+    
+    def set_reserva(self):
+        bd1=BdStd()
+        bd1.runsql(f"UPDATE dias_evento SET estado = 'reserva' WHERE id_dias_evento = '{self.id_dias_evento}';")
+        self.getSevenDays()
+        print(f"reserva para id {self.id_dias_evento}")
+    def set_personal(self):
+        bd1=BdStd()
+        bd1.runsql(f"UPDATE dias_evento SET estado = 'personal' WHERE id_dias_evento = '{self.id_dias_evento}';")
+        self.getSevenDays()
+        print(f"reserva para id {self.id_dias_evento}")
+        
+    def set_proveedor(self):
+        bd1=BdStd()
+        bd1.runsql(f"UPDATE dias_evento SET estado = 'proveedor' WHERE id_dias_evento = '{self.id_dias_evento}';")
+        self.getSevenDays()
+        print(f"reserva para id {self.id_dias_evento}")
+        
+    def set_cerrado(self):
+        bd1=BdStd()
+        bd1.runsql(f"UPDATE dias_evento SET estado = 'cerrado' WHERE id_dias_evento = '{self.id_dias_evento}';")
+        self.getSevenDays()
+        print(f"reserva para id {self.id_dias_evento}")
+    
 #-------------------Funciones para abrir nuevas ventanas-----------------------
        
     def open_alta_personal(self, checked):
@@ -181,12 +243,15 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.w.show()
     
     def openEvento(self,row,col):
-        id_evento = self.tableWidget.item(row,col).text()
-        id_evento = id_evento.split()
-        id_evento = id_evento[0]
-        self.w = FichaEvento(id_evento)
+        if self.tableWidget.item(row,col):
+            id_evento = self.tableWidget.item(row,col).text()
+            id_evento = id_evento.split()
+            id_evento = id_evento[0]
+            self.w = FichaEvento(id_evento)
+            self.w.show()
+    def open_crear_hoja_bolos(self):
+        self.w = HojaBolos()
         self.w.show()
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MenuPrincipal()

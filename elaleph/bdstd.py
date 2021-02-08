@@ -43,6 +43,12 @@ class BdStd():
         self.one = cur.fetchone()
         self.conex.commit()
         self.cierra()
+        
+    def gira_fecha(self,fecha):
+        fecha=fecha.split("-")
+        fecha.reverse()
+        fecha = "-".join(fecha)
+        return fecha
 
 if __name__ == "__main__":
 	bd = BdStd()

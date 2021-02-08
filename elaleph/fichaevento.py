@@ -20,14 +20,28 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
         self.loadDataFechas(id_evento)
         self.ui.tableFechas.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableFechas.setSelectionBehavior(self.ui.tableFechas.SelectRows)
+        self.ui.tableFechas.setSortingEnabled(True)
+        self.ui.tablePersonal.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tablePersonal.setSelectionBehavior(self.ui.tableFechas.SelectRows)
+        self.ui.tablePersonal.setSortingEnabled(True)
+        self.ui.tablePersonal.setColumnCount(11)
+        self.ui.tablePersonal.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos",  
+                                  "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
+        self.ui.tableProveedores.setColumnCount(11)
+        self.ui.tableProveedores.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos",  
+                                  "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
+        self.ui.tableProveedores.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tableProveedores.setSelectionBehavior(self.ui.tableFechas.SelectRows)
+        self.ui.tableProveedores.setSortingEnabled(True)
         self.ui.buttonEditar.clicked.connect(self.openEvento)
-        print(id_evento)
+        self.load_personal()
+        self.load_proveedor()
 #-----Abre la ventana de crear evento con los datos precargados para esa id----
       
     def openEvento(self):        
         self.w = CrearEvento(self.id_evento)
         self.w.show()
-        print("ficha",id_evento)
+        #print("ficha",id_evento)
 #---------Carga los datos para los inputs--------------------------------------        
     def loadDataDatos(self,id_evento):                 
     
@@ -67,7 +81,8 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
             self.loadFechas(data)
         else :
             bd = BdStd()
-            bd.runsql(f"""SELECT fecha, hora, tarea FROM dias_evento WHERE id_evento = '{id_evento}';""")
+            bd.runsql(f"""SELECT strftime('%d-%m-%Y', fecha), hora, tarea FROM dias_evento 
+                      WHERE id_evento = '{id_evento}' ORDER BY fecha;""")
             if bd.rows != None :
                 for row in bd.rows :
                     self.loadFechas(row)
@@ -80,6 +95,49 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
      self.ui.tableFechas.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
      self.ui.tableFechas.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
    
+    def load_personal(self):
+        print(self.id_evento)
+        bd=BdStd()
+        bd.runsql(f"""SELECT strftime('%d-%m-%Y',fecha), cargos.nombre, pev.id_personal, p.nombre, p.apellidos, 
+                  suplemento, dni, telefono, email, autonomo, notas
+                  FROM personal_evento as pev
+                  JOIN personal as p ON p.id_personal = pev.id_personal
+                  JOIN cargos ON cargos.id_cargo = pev.id_cargo 
+                  WHERE id_evento = '{self.id_evento}' """)
+        self.ui.tablePersonal.setRowCount(0)
+        if bd.rows != None :
+            for i, row_data in enumerate(bd.rows):
+                self.ui.tablePersonal.insertRow(i)
+                for j, data in enumerate(row_data):
+                    self.ui.tablePersonal.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
+    
+    
+    
+    def load_proveedor(self):        
+        self.ui.tableProveedores.setRowCount(0)
+        if self.id_evento == None :
+            return
+                    
+        bd=BdStd()
+        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha), pre.servicio, pre.id_proveedor,  \
+                  p.provincia, contacto_onsite, telefono_onsite, email_onsite, pre.notas \
+                  FROM proveedores_evento as pre \
+                  JOIN proveedores as p ON  p.id_proveedor = pre.id_proveedor WHERE id_evento='{self.id_evento}' """
+
+    
+        bd.runsql(txtsql)
+    
+        if bd.rows != None :
+            
+            for i, row_data in enumerate(bd.rows):
+                self.ui.tableProveedores.insertRow(i)
+                
+                for j, data in enumerate(row_data):
+                    if j==0:
+                        self.ui.tableProveedores.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
+                    else:
+                        self.ui.tableProveedores.setItem(i, j, QtWidgets.QTableWidgetItem(str(data)))
+    
         
         
         
@@ -91,6 +149,6 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    ui = FichaEvento("JB1243")
+    ui = FichaEvento("JB-356-2021")
     ui.show()
     sys.exit(app.exec_())

@@ -91,15 +91,15 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>520</x>
        <y>600</y>
-       <width>271</width>
-       <height>41</height>
+       <width>195</width>
+       <height>30</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <widget class="QPushButton" name="button_guardar">
+       <widget class="QPushButton" name="buttonDatosNext">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -107,20 +107,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Guardar</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="button_cancelar">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Cancelar</string>
+         <string>Siguiente</string>
         </property>
        </widget>
       </item>
@@ -536,22 +523,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QPushButton" name="buttonDelDate">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>620</x>
-       <y>510</y>
-       <width>93</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Eliminar fecha</string>
-     </property>
-    </widget>
     <widget class="QFrame" name="frame">
      <property name="geometry">
       <rect>
@@ -659,21 +630,44 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="buttonAddDate">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>621</x>
-       <y>477</y>
-       <width>93</width>
-       <height>28</height>
+       <x>620</x>
+       <y>440</y>
+       <width>101</width>
+       <height>100</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Añadir fecha</string>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="buttonAddDate">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Añadir fecha</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonDelDate">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Eliminar fecha</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="buttonFechaNext">
+        <property name="text">
+         <string>Siguiente</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="pag_personal">
@@ -685,6 +679,9 @@
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="topMargin">
+          <number>20</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_25">
            <item>
@@ -945,9 +942,9 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QPushButton" name="button_guardar_personal">
+          <widget class="QPushButton" name="buttonPersonalNext">
            <property name="text">
-            <string>Guardar</string>
+            <string>Siguente</string>
            </property>
           </widget>
          </item>
@@ -964,13 +961,6 @@
            </property>
           </spacer>
          </item>
-         <item>
-          <widget class="QPushButton" name="button_cancelar_personal">
-           <property name="text">
-            <string>Cancelar</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
       </layout>
@@ -986,6 +976,9 @@
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
+         <property name="topMargin">
+          <number>20</number>
+         </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_26">
            <item>
@@ -1208,7 +1201,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="prov_table_2"/>
+          <widget class="QTableWidget" name="prov_table"/>
          </item>
         </layout>
        </item>
@@ -1244,14 +1237,14 @@
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="personal_added_2"/>
+        <widget class="QTableWidget" name="prov_added"/>
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QPushButton" name="button_guardar_prov">
+          <widget class="QPushButton" name="buttonProvOk">
            <property name="text">
-            <string>Guardar</string>
+            <string>OK</string>
            </property>
           </widget>
          </item>
@@ -1267,13 +1260,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button_cancel_prov">
-           <property name="text">
-            <string>Cancelar</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>
@@ -1294,8 +1280,6 @@
   <tabstop>entry_tfn_onsite</tabstop>
   <tabstop>entry_email_onsite</tabstop>
   <tabstop>entry_notas</tabstop>
-  <tabstop>button_guardar</tabstop>
-  <tabstop>button_cancelar</tabstop>
   <tabstop>buttonAddRecinto</tabstop>
   <tabstop>buttonAddManager</tabstop>
   <tabstop>calendar</tabstop>
@@ -1308,36 +1292,34 @@
   <tabstop>button_add_personal</tabstop>
   <tabstop>button_remove_personal</tabstop>
   <tabstop>personal_added</tabstop>
-  <tabstop>button_guardar_personal</tabstop>
-  <tabstop>button_cancelar_personal</tabstop>
+  <tabstop>buttonPersonalNext</tabstop>
   <tabstop>entry_nombre_prov</tabstop>
   <tabstop>combo_filtrar_serv</tabstop>
   <tabstop>combo_dia_prov</tabstop>
   <tabstop>button_add_prov</tabstop>
   <tabstop>button_remove_prov</tabstop>
-  <tabstop>button_guardar_prov</tabstop>
-  <tabstop>button_cancel_prov</tabstop>
+  <tabstop>buttonProvOk</tabstop>
   <tabstop>personal_table</tabstop>
-  <tabstop>personal_added_2</tabstop>
-  <tabstop>prov_table_2</tabstop>
+  <tabstop>prov_added</tabstop>
+  <tabstop>prov_table</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>fechas_table</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>button_cancelar</sender>
+   <sender>buttonProvOk</sender>
    <signal>clicked()</signal>
    <receiver>Dialog</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>672</x>
-     <y>647</y>
+     <x>107</x>
+     <y>822</y>
     </hint>
     <hint type="destinationlabel">
-     <x>855</x>
-     <y>706</y>
+     <x>-2</x>
+     <y>814</y>
     </hint>
    </hints>
   </connection>

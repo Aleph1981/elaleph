@@ -36,7 +36,7 @@ class ConsultaEventos(QtWidgets.QDialog, ConsultaEventos_Ui):
         
         if filtroYear == "Año" :
             bd = BdStd()
-            bd.runsql(f"""SELECT di.fecha,di.id_evento,ev.nombre,di.tarea, ev.cliente,
+            bd.runsql(f"""SELECT strftime('%d-%m-%Y', di.fecha),di.id_evento,ev.nombre,di.tarea, ev.cliente,
                       re.nombre,ma.nombre||''||ma.apellidos  FROM 
                       dias_evento as di, evento as ev, recintos as re, 
                       managers as ma WHERE ev.id_evento=di.id_evento AND 
@@ -49,12 +49,12 @@ class ConsultaEventos(QtWidgets.QDialog, ConsultaEventos_Ui):
             
         else :
             bd = BdStd()
-            bd.runsql(f"""SELECT di.fecha,di.id_evento,ev.nombre,di.tarea,ev.cliente,
+            bd.runsql(f"""SELECT strftime('%d-%m-%Y', di.fecha),di.id_evento,ev.nombre,di.tarea,ev.cliente,
                       re.nombre,ma.nombre||''||ma.apellidos  FROM
                       dias_evento as di, evento as ev, recintos as re, 
                       managers as ma WHERE ev.id_evento=di.id_evento AND 
                       re.id_recinto=ev.id_recinto AND ma.id_manager=ev.id_manager
-                      AND di.fecha LIKE '%{filtroYear}'""")
+                      AND di.fecha LIKE '{filtroYear}%'""")
             if bd.rows != None :
                 for row in bd.rows :
                     self.loadEventos(row)
