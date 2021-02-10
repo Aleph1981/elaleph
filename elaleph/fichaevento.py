@@ -9,10 +9,10 @@ from fichaevento_ui import *
 from bdstd import BdStd
 from crearevento import *
 
-class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
+class FichaEvento(QtWidgets.QWidget, FichaEvento_Ui):
     
     def __init__(self,id_evento):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = FichaEvento_Ui()
         self.ui.setupUi(self)
         self.id_evento=id_evento
@@ -21,18 +21,21 @@ class FichaEvento(QtWidgets.QDialog, FichaEvento_Ui):
         self.ui.tableFechas.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableFechas.setSelectionBehavior(self.ui.tableFechas.SelectRows)
         self.ui.tableFechas.setSortingEnabled(True)
+        self.ui.tableFechas.verticalHeader().hide()
         self.ui.tablePersonal.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tablePersonal.setSelectionBehavior(self.ui.tableFechas.SelectRows)
         self.ui.tablePersonal.setSortingEnabled(True)
         self.ui.tablePersonal.setColumnCount(11)
         self.ui.tablePersonal.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos",  
                                   "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
+        self.ui.tablePersonal.verticalHeader().hide()
         self.ui.tableProveedores.setColumnCount(11)
         self.ui.tableProveedores.setHorizontalHeaderLabels([ "Fecha", "Cargo", "ID","Nombre", "Apellidos",  
                                   "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
         self.ui.tableProveedores.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableProveedores.setSelectionBehavior(self.ui.tableFechas.SelectRows)
         self.ui.tableProveedores.setSortingEnabled(True)
+        self.ui.tableProveedores.verticalHeader().hide()
         self.ui.buttonEditar.clicked.connect(self.openEvento)
         self.load_personal()
         self.load_proveedor()

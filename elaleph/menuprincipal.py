@@ -32,7 +32,8 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     #------------------Ajuste de las columnas a la tabla-----------------------
     
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-    
+        self.tableWidget.verticalHeader().hide()
+
     #-------------------Botones colorear---------------------------------------
     
         self.buttonSinConf.clicked.connect(self.set_reserva)
@@ -153,13 +154,13 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
                 texto =  row[0] + " " +  row[1] +" " + row[2] + "\n"
                 self.tableWidget.setItem(fila, columna, QtWidgets.QTableWidgetItem(texto))
                 if row[4] == "reserva":
-                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 255,180))
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 255,150))
                 elif row[4] == "personal":
-                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 0,180))
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 0,150))
                 elif row[4] == "proveedor":
-                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(0, 75, 255,180))
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(0, 75, 255,150))
                 elif row[4] == "cerrado":
-                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(74,222, 0,180))
+                    self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(74,222, 0,150))
                 fila+=1
             columna +=1
             
@@ -228,7 +229,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.w = AnadirProveedor()
         self.w.show()
     def open_consultar_proveedor(self,checked):
-        self.w = ConsultaProveedor()
+        self.w = ConsultaProveedor(app)
         self.w.show()
     def open_alta_recinto(self,checked):
         self.w = Recintos()
@@ -255,5 +256,5 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MenuPrincipal()
-    window.show()
+    window.showMaximized()
     app.exec_()

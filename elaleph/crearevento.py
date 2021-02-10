@@ -14,15 +14,21 @@ from fichapersonal import *
 from personalevento import *            # mere 30-01-21 added
 from proveedorevento import *
 
-class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
+class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
     
     def __init__(self, id_evento_parm = None):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = CrearEvento_Ui()
         self.ui.setupUi(self)
         self.id_evento = id_evento_parm
         self.fecha = ""       
         self.setWindowTitle("Crear/Editar Evento")
+        #Escondo los vertical headers
+        self.ui.fechas_table.verticalHeader().hide()
+        self.ui.personal_table.verticalHeader().hide()
+        self.ui.personal_added.verticalHeader().hide()
+        self.ui.prov_table.verticalHeader().hide()
+        self.ui.prov_added.verticalHeader().hide()
         
 #------------------------------------------------------------------------------
 #-------------------------PÁGINA DE DATOS--------------------------------------
@@ -55,7 +61,7 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
             print ("cambia el título del formulario: ES UN ALTA")
         else:                            # carga datos evento
             self.load_evento(self.id_evento)
-            self.showFrame()
+            
             
         self.ui.buttonDatosNext.clicked.connect(self.guardarDatos)  
         self.ui.comboBox_2.currentIndexChanged['QString'].connect(self.updateCombo)
@@ -68,14 +74,14 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
 #-------------------------Esconder y activar botones---------------------------
         
         if self.id_evento == None :       # es un alta cambia el título del formulario       
-            self.ui.fechas_table.hide()
+            pass
+            #self.ui.fechas_table.hide()
             #self.ui.frame.hide()
         else: 
             self.load_dias_evento(self.id_evento)
         self.ui.combo_tarea.activated['QString'].connect(self.activaAdd)
         self.ui.buttonAddDate.clicked.connect(self.addDate)
         self.ui.buttonDelDate.clicked.connect(self.delDate)   # merem 30-01-21 added
-        self.ui.calendar.clicked.connect(self.showFrame)
         self.ui.fechas_table.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.fechas_table.setSelectionBehavior(self.ui.fechas_table.SelectRows)
         #self.ui.fechas_table.hideColumn(3)
@@ -307,8 +313,6 @@ class CrearEvento(QtWidgets.QDialog, CrearEvento_Ui):
 
     def activaAdd(self):
         self.ui.buttonAddDate.setEnabled(True)
-    def showFrame(self):
-        self.ui.frame.show()
         
     def addDate(self):
         

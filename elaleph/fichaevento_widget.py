@@ -8,44 +8,30 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class FichaEvento_Ui(object):
+class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1185, 600)
-        Form.setStyleSheet("QWidget{\n"
-"font: 75 10pt \"EmojiOne Color\";\n"
-"color: rgb(235, 235, 235);\n"
-"background-color: qradialgradient(spread:pad, cx:0.505, cy:0.505682, radius:0.973, fx:0.5, fy:0.506045, stop:0.59204 rgba(54, 54, 54, 255), stop:1 rgba(142, 0, 0, 255));}\n"
-"\n"
-"\n"
-"QLineEdit,QPlainTextEdit,QTableWidget {background-color: rgba(255, 255, 255, 200);\n"
-"color: rgb(0,0,0);border-radius: 4px}\n"
-"\n"
-"QLabel{ background-color: rgba(255, 255, 255, 0);}\n"
-"\n"
-"QHeaderView::section {background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border-radius:4px}\n"
-"\n"
-"QPushButton{background-color: rgba(255, 255, 255, 200);\n"
-"color: rgb(50,50,50); border-style: outset;border-radius: 4px;border-width: 2px;border-color: rgba(50,50,50,180)}\n"
-"\n"
-"QLabel#labelFicha{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));font: 15pt; border-radius:5px}\n"
-"QLabel#labelPersonal,QLabel#labelProveedores{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));font: 11pt;border-radius: 5px}\n"
-"")
+        Form.setStyleSheet("alternate-background-color: rgb(180, 180, 180,180);\n"
+"background-color: qradialgradient(spread:pad, cx:0.505, cy:0.505682, radius:0.973, fx:0.5, fy:0.506045, stop:0.0995025 rgba(54, 54, 54, 255), stop:0.81592 rgba(142, 0, 0, 255));")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout_3.setContentsMargins(20, 20, 20, 20)
         self.verticalLayout_3.setSpacing(15)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.labelFicha = QtWidgets.QLabel(Form)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        self.lablabelFicha = QtWidgets.QLabel(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.labelFicha.sizePolicy().hasHeightForWidth())
-        self.labelFicha.setSizePolicy(sizePolicy)
-        self.labelFicha.setMinimumSize(QtCore.QSize(0, 0))
-        self.labelFicha.setStyleSheet("\n"
+        sizePolicy.setHeightForWidth(self.lablabelFicha.sizePolicy().hasHeightForWidth())
+        self.lablabelFicha.setSizePolicy(sizePolicy)
+        self.lablabelFicha.setMinimumSize(QtCore.QSize(0, 0))
+        self.lablabelFicha.setStyleSheet("font: 75 15pt \"Consolas\";\n"
+"color: rgb(240, 240, 240);\n"
+"background-color: rgb(0, 0, 0,0);\n"
+"\n"
 "")
-        self.labelFicha.setObjectName("labelFicha")
-        self.verticalLayout_3.addWidget(self.labelFicha)
+        self.lablabelFicha.setObjectName("lablabelFicha")
+        self.verticalLayout_3.addWidget(self.lablabelFicha)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -221,7 +207,7 @@ class FichaEvento_Ui(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableFechas.sizePolicy().hasHeightForWidth())
         self.tableFechas.setSizePolicy(sizePolicy)
-        self.tableFechas.setStyleSheet("\n"
+        self.tableFechas.setStyleSheet("background-color: rgb(180,180,180,180);\n"
 "")
         self.tableFechas.setObjectName("tableFechas")
         self.tableFechas.setColumnCount(3)
@@ -248,12 +234,14 @@ class FichaEvento_Ui(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.labelPersonal = QtWidgets.QLabel(Form)
-        self.labelPersonal.setStyleSheet("")
+        self.labelPersonal.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";\n"
+"")
         self.labelPersonal.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.labelPersonal.setObjectName("labelPersonal")
         self.verticalLayout.addWidget(self.labelPersonal)
         self.tablePersonal = QtWidgets.QTableWidget(Form)
-        self.tablePersonal.setStyleSheet("")
+        self.tablePersonal.setStyleSheet("background-color: rgb(180, 180, 180,180);\n"
+"font: 9pt \"Consolas\";")
         self.tablePersonal.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.tablePersonal.setObjectName("tablePersonal")
         self.tablePersonal.setColumnCount(6)
@@ -275,12 +263,12 @@ class FichaEvento_Ui(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.labelProveedores = QtWidgets.QLabel(Form)
-        self.labelProveedores.setStyleSheet("")
+        self.labelProveedores.setStyleSheet("font: 10pt \"MS Shell Dlg 2\";")
         self.labelProveedores.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.labelProveedores.setObjectName("labelProveedores")
         self.verticalLayout_2.addWidget(self.labelProveedores)
         self.tableProveedores = QtWidgets.QTableWidget(Form)
-        self.tableProveedores.setStyleSheet("")
+        self.tableProveedores.setStyleSheet("background-color: rgb(180, 180, 180);")
         self.tableProveedores.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.tableProveedores.setObjectName("tableProveedores")
         self.tableProveedores.setColumnCount(4)
@@ -302,7 +290,7 @@ class FichaEvento_Ui(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.labelFicha.setText(_translate("Form", "Ficha de evento"))
+        self.lablabelFicha.setText(_translate("Form", "Ficha de evento"))
         self.labelId.setText(_translate("Form", "ID_Evento"))
         self.labelNombre.setText(_translate("Form", "Nombre"))
         self.labelCliente.setText(_translate("Form", "Cliente"))
@@ -347,7 +335,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = FichaEvento_Ui()
+    ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

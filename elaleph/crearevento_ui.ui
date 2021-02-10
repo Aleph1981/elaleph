@@ -29,7 +29,36 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QWidget{
+font:  10pt &quot;EmojiOne Color&quot;;
+color: rgb(235, 235, 235);
+background-color: qlineargradient(spread:pad, x1:0.497512, y1:0, x2:0.502, y2:1, stop:0 rgba(54, 54, 54, 255), stop:0.507463 rgba(102, 102, 102, 255), stop:0.970149 rgba(54, 54, 54, 255));}
+	
+
+
+QWidget#widgetCal{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 200), stop:1 rgba(180, 0, 0, 200));border-radius:4px}
+
+QMenuBar{background-color: rgba(54,54,54,255)}
+
+QMenu::item:selected,QMenuBar::item::selected{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 200), stop:1 rgba(180, 0, 0, 200));border-radius:4px}
+
+QLineEdit,QPlainTextEdit,QTableWidget {background-color: rgba(255, 255, 255, 200);
+color: rgb(0,0,0);border-radius: 4px}
+
+QLabel{ background-color: rgba(255, 255, 255, 0);}
+
+QHeaderView::section,QHeaderview{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border-radius:4px}
+
+QTableView QTableCornerButton::section{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));;border-top-radius: 4px}
+
+
+QPushButton,QToolButton{background-color: rgba(200,200,200, 255);
+color: rgb(50,50,50); border-style: outset;border-radius: 4px;border-width: 2px;border-color: rgba(50,50,50,200)}
+
+QLabel#labelVista{font: 12pt;}
+QLabel#label,QLabel#label_2,QLabel#label_3,QLabel#label_4{background-color: rgba(0, 0, 0, 0);font: 9pt;border-radius: 5px}
+QTabWidget{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border-radius:4px}
+</string>
    </property>
    <property name="tabShape">
     <enum>QTabWidget::Triangular</enum>
@@ -93,8 +122,8 @@
       <rect>
        <x>520</x>
        <y>600</y>
-       <width>195</width>
-       <height>30</height>
+       <width>74</width>
+       <height>27</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -113,351 +142,329 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QLabel" name="id">
      <property name="geometry">
       <rect>
-       <x>300</x>
-       <y>140</y>
-       <width>611</width>
-       <height>432</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="8" column="0">
-       <widget class="QSplitter" name="splitter_4">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <widget class="QLabel" name="notas">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>NOTAS</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-         </property>
-        </widget>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QComboBox" name="combo_manager">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <spacer name="horizontalSpacer_15">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="tfn_onsite">
-        <property name="text">
-         <string>TELEFONO ON-SITE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="2">
-       <widget class="QLineEdit" name="entry_tfn_onsite">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="email_onsite">
-        <property name="text">
-         <string>EMAIL ON-SITE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <spacer name="horizontalSpacer_17">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="7" column="2">
-       <widget class="QLineEdit" name="entry_email_onsite">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="2">
-       <widget class="QPlainTextEdit" name="entry_notas">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <spacer name="horizontalSpacer_16">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="cliente">
-        <property name="text">
-         <string>CLIENTE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="onsite">
-        <property name="text">
-         <string>CONTACTO ON-SITE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLineEdit" name="entry_nombre">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLineEdit" name="entry_cliente">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="recinto">
-        <property name="text">
-         <string>RECINTO</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="manager">
-        <property name="text">
-         <string>PROJECT MANAGER</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <spacer name="horizontalSpacer_14">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="2" column="1">
-       <spacer name="horizontalSpacer_12">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="1">
-       <widget class="QComboBox" name="comboBox_2">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QComboBox" name="comboBox">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QLineEdit" name="entry_onsite">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="id">
-        <property name="text">
-         <string>ID EVENTO</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="nombre">
-        <property name="text">
-         <string>NOMBRE</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <spacer name="horizontalSpacer_11">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="1">
-       <spacer name="horizontalSpacer_13">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLineEdit" name="entry_id">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QSplitter" name="splitter_5">
-     <property name="geometry">
-      <rect>
-       <x>920</x>
-       <y>230</y>
-       <width>41</width>
+       <x>301</x>
+       <y>141</y>
+       <width>86</width>
        <height>21</height>
       </rect>
      </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
+     <property name="text">
+      <string>ID EVENTO</string>
      </property>
     </widget>
-    <widget class="QSplitter" name="splitter_6">
+    <widget class="QLineEdit" name="entry_id">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>141</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nombre">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>169</y>
+       <width>67</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>NOMBRE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="entry_nombre">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>169</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="cliente">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>197</y>
+       <width>65</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CLIENTE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="entry_cliente">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>197</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QLabel" name="recinto">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>225</y>
+       <width>70</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>RECINTO</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_2">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>225</y>
+       <width>180</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>225</y>
+       <width>180</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonAddRecinto">
      <property name="geometry">
       <rect>
        <x>920</x>
        <y>227</y>
        <width>31</width>
-       <height>51</height>
+       <height>22</height>
       </rect>
      </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+     <property name="text">
+      <string>+</string>
      </property>
-     <widget class="QPushButton" name="buttonAddRecinto">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="buttonAddManager">
-      <property name="text">
-       <string>+</string>
-      </property>
-     </widget>
+    </widget>
+    <widget class="QLabel" name="manager">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>254</y>
+       <width>152</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PROJECT MANAGER</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="combo_manager">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>254</y>
+       <width>180</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="buttonAddManager">
+     <property name="geometry">
+      <rect>
+       <x>920</x>
+       <y>255</y>
+       <width>31</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="onsite">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>283</y>
+       <width>155</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>CONTACTO ON-SITE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="entry_onsite">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>283</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="tfn_onsite">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>311</y>
+       <width>151</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TELEFONO ON-SITE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="entry_tfn_onsite">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>311</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+    <widget class="QLabel" name="email_onsite">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>339</y>
+       <width>117</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>EMAIL ON-SITE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="entry_email_onsite">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>339</y>
+       <width>180</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="notas">
+     <property name="geometry">
+      <rect>
+       <x>301</x>
+       <y>367</y>
+       <width>53</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>NOTAS</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="entry_notas">
+     <property name="geometry">
+      <rect>
+       <x>654</x>
+       <y>367</y>
+       <width>180</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="pag_fechas">
@@ -635,7 +642,7 @@
       <rect>
        <x>620</x>
        <y>440</y>
-       <width>101</width>
+       <width>111</width>
        <height>100</height>
       </rect>
      </property>
@@ -1035,8 +1042,8 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
-               <height>0</height>
+               <width>65</width>
+               <height>30</height>
               </size>
              </property>
              <property name="text">
@@ -1209,6 +1216,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QPushButton" name="button_add_prov">
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Añadir</string>
            </property>
@@ -1229,6 +1242,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="button_remove_prov">
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>Quitar</string>
            </property>
@@ -1243,6 +1262,12 @@
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
           <widget class="QPushButton" name="buttonProvOk">
+           <property name="minimumSize">
+            <size>
+             <width>65</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="text">
             <string>OK</string>
            </property>
