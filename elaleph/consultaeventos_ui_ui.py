@@ -8,18 +8,17 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-class ConsultaEventos_Ui(object):
+class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(1201, 753)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
-        self.verticalLayout.setContentsMargins(20, 20, 20, 20)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.labelTitle = QtWidgets.QLabel(Form)
-        self.labelTitle.setStyleSheet("\n"
+        self.labelConsulta = QtWidgets.QLabel(Form)
+        self.labelConsulta.setStyleSheet("\n"
 "")
-        self.labelTitle.setObjectName("labelTitle")
-        self.verticalLayout.addWidget(self.labelTitle)
+        self.labelConsulta.setObjectName("labelConsulta")
+        self.verticalLayout.addWidget(self.labelConsulta)
         self.comboYear = QtWidgets.QComboBox(Form)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -56,7 +55,7 @@ class ConsultaEventos_Ui(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.labelTitle.setText(_translate("Form", "Consulta de Eventos"))
+        self.labelConsulta.setText(_translate("Form", "Consulta de Eventos"))
         self.comboYear.setItemText(0, _translate("Form", "Año"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Fecha"))
@@ -78,7 +77,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = ConsultaEventos_Ui()
+    ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

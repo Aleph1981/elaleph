@@ -41,69 +41,315 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-QWidget{
-font:  10pt &quot;EmojiOne Color&quot;;
-color: rgb(235, 235, 235);
-background-color: qlineargradient(spread:pad, x1:0.497512, y1:0, x2:0.502, y2:1, stop:0 rgba(54, 54, 54, 255), stop:0.507463 rgba(102, 102, 102, 255), stop:0.970149 rgba(54, 54, 54, 255));}
-
-
-QWidget#widgetCal{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 200), stop:1 rgba(180, 0, 0, 200));border-radius:4px}
-
-QMenuBar{background-color: rgba(54,54,54,255)}
-
-QMenu::item:selected,QMenuBar::item::selected{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 200), stop:1 rgba(180, 0, 0, 200));border-radius:4px}
-
-QLineEdit,QPlainTextEdit,QTableWidget {background-color: rgba(255, 255, 255, 200);
-color: rgb(0,0,0);border-radius: 4px}
-
-QLabel{ background-color: rgba(255, 255, 255, 0);}
-
-QHeaderView::section,QHeaderview{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border-radius:4px}
-
-QTableView QTableCornerButton::section{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));;border-top-radius: 4px}
-
-QComboBox QAbstractItemView {
-    border: 2px solid darkgray;
-    selection-background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));
-}
-
-
-QPushButton,QToolButton{background-color:qlineargradient(spread:pad, x1:0.497512, y1:0, x2:0.502, y2:1, stop:0.0298507 rgba(230, 230, 230, 255), stop:0.532338 rgba(210, 210, 210, 255), stop:1 rgba(230, 230, 230, 255));
-color: rgb(50,50,50); border-style: outset;border-radius: 4px;border-width: 2px;border-color: rgba(50,50,50,200);margin:5px;padding:2px}
-
-QPushButton:pressed{border-style: inset; }
-QPushButton:checked{background-color:rgba(0,125,255,80);border-style: inset; }
-
-QLabel#labelVista{font: 12pt;}
-QLabel#labelFechas{font: 12pt;}
-
-
-
-QTabBar::tab:selected {background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border:1px solid;border-color:rgb(255,255,255);border-radius:2px}
-QTabBar::tab:hover {background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 100), stop:1 rgba(180, 0, 0, 100))}
-QTabBar::tab:!selected {margin-top: 2px;}
-QTabWidget::tab-bar {left: 5px;}
-QTabBar::tab {min-width: 12ex;
-    padding: 10px; padding-top:5px;padding-bottom:5px;}
-QWidget#qt_calendar_calendarview {background-color: rgb(200,200,200);color:rgb(0,0,0);alternate-background-color: rgb(150,0,0);}
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <property name="leftMargin">
-     <number>20</number>
-    </property>
-    <property name="topMargin">
-     <number>20</number>
-    </property>
-    <property name="rightMargin">
-     <number>20</number>
-    </property>
-    <property name="bottomMargin">
-     <number>40</number>
-    </property>
-    <item row="4" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="logo">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Logo</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>84</width>
+          <height>17</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QWidget" name="widgetCal" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>526</width>
+          <height>56</height>
+         </size>
+        </property>
+        <widget class="QToolButton" name="buttonNext1">
+         <property name="geometry">
+          <rect>
+           <x>330</x>
+           <y>10</y>
+           <width>55</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+1</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="buttonNext30">
+         <property name="geometry">
+          <rect>
+           <x>450</x>
+           <y>10</y>
+           <width>63</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+30</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="buttonPrev7">
+         <property name="geometry">
+          <rect>
+           <x>70</x>
+           <y>10</y>
+           <width>55</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-7</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="buttonPrev1">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>10</y>
+           <width>55</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-1</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="labelVista">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>10</y>
+           <width>141</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12pt;</string>
+         </property>
+         <property name="text">
+          <string>Vista Semanal</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="buttonPrev30">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>57</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>-30</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="buttonNext7">
+         <property name="geometry">
+          <rect>
+           <x>390</x>
+           <y>10</y>
+           <width>55</width>
+           <height>34</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>55</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>+7</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>84</width>
+          <height>17</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="logo_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="sizeIncrement">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
+      </property>
+      <row>
+       <property name="text">
+        <string>Nueva fila</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>Lunes</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Martes</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Miércoles</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Jueves</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Viernes</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Sábado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Domingo</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="leftMargin">
        <number>0</number>
@@ -130,7 +376,7 @@ QWidget#qt_calendar_calendarview {background-color: rgb(200,200,200);color:rgb(0
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 0, 255,200);</string>
+         <string notr="true">background-color: qlineargradient(spread:pad, x1:0.562, y1:0, x2:0.522, y2:1, stop:0 rgba(255, 0, 255, 255), stop:1 rgba(180, 0, 180, 255));</string>
         </property>
         <property name="text">
          <string/>
@@ -167,7 +413,7 @@ confirmar</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(255, 0, 0,200);</string>
+         <string notr="true">background-color: qlineargradient(spread:pad, x1:0.562, y1:0, x2:0.522, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));</string>
         </property>
         <property name="text">
          <string/>
@@ -204,7 +450,7 @@ personal</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(0, 75, 255,200);</string>
+         <string notr="true">background-color: qlineargradient(spread:pad, x1:0.562, y1:0, x2:0.522, y2:1, stop:0 rgba(0, 0, 255, 255), stop:1 rgba(0, 0, 180, 255));</string>
         </property>
         <property name="text">
          <string/>
@@ -241,7 +487,7 @@ proveedor</string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgba(74, 222, 0,200);</string>
+         <string notr="true">background-color: qlineargradient(spread:pad, x1:0.562, y1:0, x2:0.522, y2:1, stop:0 rgba(0, 255, 0, 255), stop:1 rgba(0, 180, 0, 255));</string>
         </property>
         <property name="text">
          <string/>
@@ -270,261 +516,6 @@ proveedor</string>
       </item>
      </layout>
     </item>
-    <item row="3" column="0">
-     <spacer name="verticalSpacer">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>40</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="0">
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>7</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetMaximumSize</enum>
-      </property>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout"/>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="sizeIncrement">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustIgnored</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectItems</enum>
-        </property>
-        <row>
-         <property name="text">
-          <string>Nueva fila</string>
-         </property>
-        </row>
-        <column>
-         <property name="text">
-          <string>Lunes</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Martes</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Miércoles</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Jueves</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Viernes</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Sábado</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Domingo</string>
-         </property>
-        </column>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="0" column="0">
-     <widget class="QWidget" name="widgetCal" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>30</height>
-       </size>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <property name="leftMargin">
-        <number>5</number>
-       </property>
-       <property name="topMargin">
-        <number>5</number>
-       </property>
-       <property name="rightMargin">
-        <number>5</number>
-       </property>
-       <property name="bottomMargin">
-        <number>5</number>
-       </property>
-       <item row="0" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonPrev30">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>-30</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonPrev7">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>-7</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonPrev1">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>-1</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="labelVista">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Vista Semanal</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonNext1">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>+1</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonNext7">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>+7</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="buttonNext30">
-           <property name="minimumSize">
-            <size>
-             <width>55</width>
-             <height>35</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>+30</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <spacer name="verticalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-      <property name="sizeType">
-       <enum>QSizePolicy::Fixed</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -533,7 +524,7 @@ proveedor</string>
      <x>0</x>
      <y>0</y>
      <width>1302</width>
-     <height>27</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="defaultUp">
@@ -560,7 +551,6 @@ proveedor</string>
     </property>
     <addaction name="action_crear_hoja_de_ruta"/>
     <addaction name="action_crear_hoja_de_bolos"/>
-    <addaction name="action_crear_hoja_de_almac_n"/>
     <addaction name="action_crear_hoja_de_transportes"/>
    </widget>
    <widget class="QMenu" name="menuProveedores">
@@ -575,7 +565,6 @@ proveedor</string>
      <string>Recintos</string>
     </property>
     <addaction name="action_alta_recinto"/>
-    <addaction name="action_consultar_recintos"/>
    </widget>
    <addaction name="menuEventos"/>
    <addaction name="menuPersonal"/>

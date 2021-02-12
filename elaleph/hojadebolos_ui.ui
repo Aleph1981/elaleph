@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>529</width>
+    <width>713</width>
     <height>528</height>
    </rect>
   </property>
@@ -27,10 +27,22 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>80</y>
-     <width>55</width>
-     <height>16</height>
+     <y>70</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>Año</string>
@@ -110,10 +122,22 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>160</y>
-     <width>55</width>
-     <height>16</height>
+     <y>150</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>Mes</string>
@@ -122,10 +146,10 @@
   <widget class="QTableWidget" name="tablePersonal">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>250</x>
      <y>100</y>
-     <width>301</width>
-     <height>381</height>
+     <width>440</width>
+     <height>380</height>
     </rect>
    </property>
    <property name="sortingEnabled">
@@ -135,11 +159,23 @@
   <widget class="QLabel" name="labelPersonal">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>80</y>
-     <width>55</width>
-     <height>16</height>
+     <x>250</x>
+     <y>70</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>Personal</string>
@@ -154,18 +190,30 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="text">
     <string>Crear hoja</string>
    </property>
   </widget>
-  <widget class="QLabel" name="labelHoja">
+  <widget class="QLabel" name="labelTitle">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>131</width>
-     <height>31</height>
+     <width>180</width>
+     <height>35</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="styleSheet">
     <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
@@ -183,6 +231,12 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="text">
     <string>Crear hojas</string>
    </property>
@@ -191,10 +245,22 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>330</y>
-     <width>131</width>
-     <height>16</height>
+     <y>320</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>Crear hoja individual</string>
@@ -204,10 +270,22 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>420</y>
-     <width>131</width>
-     <height>16</height>
+     <y>410</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>180</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>Crear todas las hojas</string>

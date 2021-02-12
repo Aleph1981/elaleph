@@ -11,14 +11,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets, QtSql
 from bdstd import *
 
 
-class ConsultaProveedor(QtWidgets.QDialog, ConsultaProveedor_Ui):
+class ConsultaProveedor(QtWidgets.QWidget, ConsultaProveedor_Ui):
     
     def __init__(self, app):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = ConsultaProveedor_Ui()
         self.ui.setupUi(self)     
-        #self.ui.tableProveedor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tableProveedor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableProveedor.verticalHeader().setDefaultSectionSize(100)
+        self.ui.tableProveedor.verticalHeader().hide()
         self.ui.tableProveedor.setHorizontalHeaderLabels(["ID","Empresa","Provincia",\
             "Localidad","Dirección","Servicio/s","CIF","Teléfono","Email","Web",\
             "Contacto","Teléfono Contacto","Email Contacto","Notas"])

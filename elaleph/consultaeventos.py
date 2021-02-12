@@ -10,12 +10,12 @@ from consultaeventos_ui import *
 from bdstd import BdStd
 from fichaevento import *
 import datetime
+from hojadeestilos import *
 
-
-class ConsultaEventos(QtWidgets.QDialog, ConsultaEventos_Ui):
+class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
     
     def __init__(self):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = ConsultaEventos_Ui()
         self.ui.setupUi(self)
         self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -29,7 +29,7 @@ class ConsultaEventos(QtWidgets.QDialog, ConsultaEventos_Ui):
         self.ui.tableWidget.setSortingEnabled(True)
         self.ui.tableWidget.setSelectionBehavior(self.ui.tableWidget.SelectRows)
         self.ui.tableWidget.cellDoubleClicked.connect(self.openEvento)
-        
+        self.ui.tableWidget.verticalHeader().hide()
     def loadData(self):
         self.ui.tableWidget.setRowCount(0)
         filtroYear = self.ui.comboYear.currentText()

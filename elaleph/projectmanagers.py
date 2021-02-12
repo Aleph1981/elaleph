@@ -10,17 +10,17 @@ from projectmanagers_ui import *
 from bdstd import BdStd
 from cambios_ui import *
 
-class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
+class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
     
     def __init__(self):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = ProjectManagers_Ui()
         self.ui.setupUi(self)        
     
     #------------------Ajuste de las columnas a la tabla-----------------------
     
         self.ui.tableManagers.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-        
+        self.ui.tableManagers.verticalHeader().hide()
     #-----------------Conexion de los botones---------------------------------
         self.ui.buttonAnadir.clicked.connect(self.anadir)
         self.ui.buttonGuardar.clicked.connect(self.guardar_cambios)
@@ -30,6 +30,7 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
         self.loadData()
     
     def loadData(self):
+        self.ui.tableManagers.setRowCount(0)
         bd = BdStd()
         bd.runsql("SELECT * FROM managers")
         if bd.rows != None :
@@ -39,13 +40,13 @@ class ProjectManagers(QtWidgets.QDialog, ProjectManagers_Ui):
     def load_one(self, data):
         rowPosition = self.ui.tableManagers.rowCount()
         self.ui.tableManagers.insertRow(rowPosition)
-        self.ui.tableManagers.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
-        self.ui.tableManagers.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
-        self.ui.tableManagers.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
-        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[4]))
-        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[5]))
-        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[3]))
-        self.ui.tableManagers.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))        
+        self.ui.tableManagers.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[1]))
+        self.ui.tableManagers.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[2]))
+        self.ui.tableManagers.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[4]))
+        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[5]))
+        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[3]))
+        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[6]))
+        self.ui.tableManagers.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[0]))        
         
         
     def anadir(self):

@@ -32,6 +32,7 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
         self.ui.tablePersonal.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         self.ui.tablePersonal.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tablePersonal.setSelectionMode(QtWidgets.QTableWidget.SingleSelection)
+        self.ui.tablePersonal.verticalHeader.hide()
         self.ui.buttoCrearIndi.clicked.connect(self.crear_indi)
         self.ui.buttoCrearMulti.clicked.connect(self.crear_multi)
         

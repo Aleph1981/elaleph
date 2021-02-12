@@ -8,16 +8,16 @@ Created on Tue Nov  3 11:50:48 2020
 from anadirproveedor_ui import *
 from bdstd import *
 
-class AnadirProveedor(QtWidgets.QMainWindow, AnadirProveedor_Ui):
+class AnadirProveedor(QtWidgets.QWidget, AnadirProveedor_Ui):
     
     def __init__(self, id_proveedor = None, *args, **kwargs):
-        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+        QtWidgets.QWidget.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.opcion = "A"  # Alta
         self.id_proveedor = id_proveedor
         
         
-        self.aceptcancel.accepted.connect(self.aceptar)
+        self.buttonAceptar.clicked.connect(self.aceptar)
         
         if self.id_proveedor != None :
             self.loadData()

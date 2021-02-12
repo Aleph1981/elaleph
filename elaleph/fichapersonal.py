@@ -14,7 +14,7 @@ import calendar
 from datetime import date
         
 
-class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
+class FichaPersonal(QtWidgets.QWidget, FichaPersonal_Ui):
     
 
     def __init__(self, id_personal):
@@ -57,7 +57,7 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
             title = map_cargo['nombre']
             label_c = QtWidgets.QLabel(title, self.ui.widget)
             label_c.setObjectName("label_c"+str(i))
-            label_c.setGeometry(20, 10+(i*25), 80, 20) 
+            label_c.setGeometry(10, 10+(i*25), 180, 20) 
             
             
             checkBox_c = QtWidgets.QCheckBox(self.ui.widget)
@@ -94,7 +94,9 @@ class FichaPersonal(QtWidgets.QDialog, FichaPersonal_Ui):
         self.ui.buttonOcupar.clicked.connect(self.ocupar)
         self.ui.buttonLiberar.clicked.connect(self.liberar)
         
-    
+        self.ui.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tableWidget.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.ui.tableWidget.verticalHeader().hide()
         #---------------Funciones para avanzar y retroceder mes---------------
     
     def pre_month(self):

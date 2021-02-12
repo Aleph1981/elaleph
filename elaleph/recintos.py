@@ -10,10 +10,10 @@ from recintos_ui import *
 from bdstd import BdStd
 from cambios_ui import *
 
-class Recintos(QtWidgets.QDialog, Recintos_Ui):
+class Recintos(QtWidgets.QWidget, Recintos_Ui):
     
     def __init__(self):
-        QtWidgets.QDialog.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.ui = Recintos_Ui()
         self.ui.setupUi(self)        
     
@@ -25,7 +25,7 @@ class Recintos(QtWidgets.QDialog, Recintos_Ui):
         self.ui.buttonAnadir.clicked.connect(self.anadir)
         self.ui.buttonGuardar.clicked.connect(self.guardar_cambios)
         self.ui.buttonEliminar.clicked.connect(self.eliminar)
-        
+        self.ui.tableRecintos.verticalHeader().hide()
     #-----------------Relleno de la parrilla----------------------------------
         self.loadData()
     

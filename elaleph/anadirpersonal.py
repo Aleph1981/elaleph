@@ -13,16 +13,16 @@ from bdstd import *
 from PyQt5.QtWidgets import QWidget, QLabel, QCheckBox, QApplication, QLineEdit
 #-------------------Clase de la ventana añadir personal-----------------------
 
-class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
+class AnadirPersonal(QtWidgets.QWidget, AnadirPersonal_Ui):
     
     def __init__(self, *args, **kwargs):
-        QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
+        QtWidgets.QWidget.__init__(self, *args, **kwargs)
         self.setupUi(self)
 
 #-------------------Accion de los botones aceptar y cancelar------------------
         
-        self.aceptcancel.accepted.connect(self.aceptar)
-        self.aceptcancel.rejected.connect(self.cancelar)
+        self.buttonAceptar.clicked.connect(self.aceptar)
+        self.buttonCancelar.clicked.connect(self.cancelar)
         self.radioSI.setChecked(True)
         #---------------- Crea un array con todos los datos de cargos y marca los que tiene 
         #                 activos la persona indicada. Se llama map_cargos porque no son los
@@ -37,11 +37,11 @@ class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
             title = map_cargo['nombre']
             label_c = QtWidgets.QLabel(title,self.widget)
             label_c.setObjectName("label_c"+str(i))
-            label_c.setGeometry(20, 10+(i*25), 80, 20) 
+            label_c.setGeometry(20, 100+(i*25), 140, 20) 
             
             checkBox_c = QtWidgets.QCheckBox(self.widget)
             checkBox_c.setObjectName("checkBox_c"+str(i))
-            checkBox_c.setGeometry(120, 10+(i*25), 50, 20)
+            checkBox_c.setGeometry(130, 100+(i*25), 140, 20)
             if map_cargo['checked'] == "1" :
                 checkBox_c.setChecked(True)
             else:
@@ -49,7 +49,7 @@ class AnadirPersonal(QtWidgets.QMainWindow, AnadirPersonal_Ui):
             
             input_c = QtWidgets.QLineEdit(self.widget)
             input_c.setObjectName("input_c"+str(i))
-            input_c.setGeometry(200, 10+(i*25), 80, 20)
+            input_c.setGeometry(200, 100+(i*25), 80, 20)
             input_c.setStyleSheet("background-color: rgb(255, 255, 255);")
             input_c.setText(str(map_cargo['tarifa']))
 

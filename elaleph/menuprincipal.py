@@ -17,6 +17,8 @@ from consultaeventos import *
 from bdstd import *
 from fichaevento import *
 from hojadebolos import *
+from hojaderuta import *
+from hojadeestilos import *
 from datetime import timedelta, datetime
 import datetime
 
@@ -28,7 +30,9 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     def __init__(self, *args, **kwargs):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
-    
+        style=HojaEstilos()
+        self.estilo=style.red_gray
+        app.setStyleSheet(self.estilo)
     #------------------Ajuste de las columnas a la tabla-----------------------
     
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -52,6 +56,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.action_crear_evento.triggered.connect(self.open_crear_evento)
         self.action_consultar_evento.triggered.connect(self.open_consultar_evento)
         self.action_crear_hoja_de_bolos.triggered.connect(self.open_crear_hoja_bolos)
+        self.action_crear_hoja_de_ruta.triggered.connect(self.open_crear_hoja_ruta)
         
         self.buttonNext1.clicked.connect(self.nextDay1)
         self.buttonPrev1.clicked.connect(self.prevDay1)
@@ -59,7 +64,12 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.buttonPrev7.clicked.connect(self.prevDay7)
         self.buttonNext30.clicked.connect(self.nextDay30)
         self.buttonPrev30.clicked.connect(self.prevDay30)
-        
+        logoaleph = QtGui.QPixmap(r"C:\Users\aleja\Desktop\Alejandro\photoshop jobs\aleph\aleph logo negro_opt.png")
+        self.logo.setPixmap(logoaleph)
+        self.logo.setScaledContents(False)
+        logoaleph = QtGui.QPixmap(r"C:\Users\aleja\Desktop\Programacion\elaleph\logos\dushowidth200.png")
+        self.logo_2.setPixmap(logoaleph)
+        self.logo_2.setScaledContents(False)
     #---------------Calendario Semanal-----------------------------------------
         
         self.hoy = datetime.date.today()
@@ -253,6 +263,11 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     def open_crear_hoja_bolos(self):
         self.w = HojaBolos()
         self.w.show()
+        
+    def open_crear_hoja_ruta(self):
+        self.w = HojaDeRuta()
+        self.w.show()
+    
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     window = MenuPrincipal()

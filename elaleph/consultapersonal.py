@@ -14,7 +14,7 @@ import sys
 from bdstd import BdStd
 
 
-class ConsultaPersonal(QtWidgets.QDialog, ConsultaPersonal_Ui):
+class ConsultaPersonal(QtWidgets.QWidget, ConsultaPersonal_Ui):
     
     def __init__(self, app):
         QtWidgets.QWidget.__init__(self)
@@ -26,7 +26,7 @@ class ConsultaPersonal(QtWidgets.QDialog, ConsultaPersonal_Ui):
         self.model.setQuery(self.sql)
         self.ui.tableView.setModel(self.model)
         self.ui.tableView.setSelectionBehavior(self.ui.tableView.SelectRows)
-        
+        self.ui.tableView.verticalHeader().hide()
         # mere comentada tableWidget / añadido tableView
         #self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
