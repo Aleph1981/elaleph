@@ -823,6 +823,38 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>entry_empresa</tabstop>
+  <tabstop>entry_provincia</tabstop>
+  <tabstop>entry_localidad</tabstop>
+  <tabstop>entry_direccion</tabstop>
+  <tabstop>entry_cif</tabstop>
+  <tabstop>entryTFN</tabstop>
+  <tabstop>entry_email</tabstop>
+  <tabstop>entry_web</tabstop>
+  <tabstop>entry_contacto</tabstop>
+  <tabstop>entry_tfn_contacto</tabstop>
+  <tabstop>entry_email_contacto</tabstop>
+  <tabstop>textNOTAS</tabstop>
+  <tabstop>check_trailer</tabstop>
+  <tabstop>check_camion</tabstop>
+  <tabstop>check_furgo</tabstop>
+  <tabstop>check_runner</tabstop>
+  <tabstop>check_c_d</tabstop>
+  <tabstop>check_rigging</tabstop>
+  <tabstop>check_deco</tabstop>
+  <tabstop>check_generadores</tabstop>
+  <tabstop>check_tradu</tabstop>
+  <tabstop>check_catering</tabstop>
+  <tabstop>check_iluminacion</tabstop>
+  <tabstop>check_sonido</tabstop>
+  <tabstop>check_video</tabstop>
+  <tabstop>check_mobiliario</tabstop>
+  <tabstop>check_otros</tabstop>
+  <tabstop>entry_otros</tabstop>
+  <tabstop>buttonAceptar</tabstop>
+  <tabstop>buttonCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

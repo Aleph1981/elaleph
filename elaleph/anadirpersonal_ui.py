@@ -153,6 +153,11 @@ class AnadirPersonal_Ui(object):
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem6)
         self.buttonAceptar = QtWidgets.QPushButton(Form)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.buttonAceptar.sizePolicy().hasHeightForWidth())
+        self.buttonAceptar.setSizePolicy(sizePolicy)
         self.buttonAceptar.setObjectName("buttonAceptar")
         self.horizontalLayout_2.addWidget(self.buttonAceptar)
         self.buttonCancelar = QtWidgets.QPushButton(Form)
@@ -181,6 +186,19 @@ class AnadirPersonal_Ui(object):
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
+        Form.setTabOrder(self.entryNOMBRE, self.entryAPELL)
+        Form.setTabOrder(self.entryAPELL, self.entryDNI)
+        Form.setTabOrder(self.entryDNI, self.entryTFN)
+        Form.setTabOrder(self.entryTFN, self.entryEMAIL)
+        Form.setTabOrder(self.entryEMAIL, self.entryDIRECCION)
+        Form.setTabOrder(self.entryDIRECCION, self.entryCP)
+        Form.setTabOrder(self.entryCP, self.entryCIUDAD)
+        Form.setTabOrder(self.entryCIUDAD, self.entryIBAN)
+        Form.setTabOrder(self.entryIBAN, self.radioSI)
+        Form.setTabOrder(self.radioSI, self.radioNO)
+        Form.setTabOrder(self.radioNO, self.textNOTAS)
+        Form.setTabOrder(self.textNOTAS, self.buttonAceptar)
+        Form.setTabOrder(self.buttonAceptar, self.buttonCancelar)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate

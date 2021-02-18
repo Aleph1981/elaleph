@@ -210,7 +210,7 @@ class Ui_Form(object):
         self.tableFechas.setStyleSheet("background-color: rgb(180,180,180,180);\n"
 "")
         self.tableFechas.setObjectName("tableFechas")
-        self.tableFechas.setColumnCount(3)
+        self.tableFechas.setColumnCount(4)
         self.tableFechas.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.tableFechas.setHorizontalHeaderItem(0, item)

@@ -45,9 +45,11 @@ class PersonalEvento(QtWidgets.QDialog, PersonalEvento_Ui):
             self.id_personal = self.padre.id_personal
             self.nom_cargo = self.padre.nom_cargo
             self.fecha = self.padre.fecha
+            self.hora= self.padre.hora
+            print("alta"+self.fecha)
 
         self.ui.inputCodigo.setText(self.id_personal)
-        self.ui.inputFecha.setText (self.fecha)
+        self.ui.inputFecha.setText (self.fecha+" "+self.hora)
         
         self.load_datos_ficha_persona()
 
@@ -66,7 +68,10 @@ class PersonalEvento(QtWidgets.QDialog, PersonalEvento_Ui):
         # en la parrilla de crear evento el orden es : fecha, cargo, id_personal
         for i, item in enumerate(self.padre.ui.personal_added.selectedItems()) :
             if i== 0: 
-                self.fecha = item.text()
+                self.fecha_hora = item.text()
+                tmp=self.fecha_hora.split(" ")
+                self.fecha=tmp[0]
+                self.hora=tmp[1]
             if i== 1: 
                 self.nom_cargo = item.text()
             if i== 2: 
@@ -123,15 +128,15 @@ class PersonalEvento(QtWidgets.QDialog, PersonalEvento_Ui):
                 if (self.padre.fecha != ""):
                     if (self.padre.fecha == "ALL"):   # crea un registro por cada dia del evento
                         bd1=BdStd()        
-                        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha) FROM dias_evento WHERE id_evento = '{self.padre.id_evento}'"""
+                        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha),hora FROM dias_evento WHERE id_evento = '{self.padre.id_evento}'"""
                         bd1.runsql(txtsql) 
                         if bd1.rows != None :
                             for row_data in bd1.rows :
-                                self.crear_fecha(row_data[0], id_cargo)
+                                self.crear_fecha(row_data[0],row_data[1], id_cargo)
                                 
                     else :
                         # crea solo para el dia escogido
-                        self.crear_fecha( self.padre.fecha, id_cargo)
+                        self.crear_fecha( self.padre.fecha,self.hora, id_cargo)
                     
             else  :    # no es un alta, es un cambio
                 bd=BdStd()                
@@ -148,13 +153,14 @@ class PersonalEvento(QtWidgets.QDialog, PersonalEvento_Ui):
         self.close()
   
 
-    def crear_fecha(self, fecha, id_cargo):
+    def crear_fecha(self, fecha,hora, id_cargo):
+        
         bd=BdStd()
-        txtsql = "INSERT INTO personal_evento (id_personal, id_evento, fecha, id_cargo\
-                       , suplemento) VALUES ('{}','{}','{}','{}','{}');"
+        txtsql = "INSERT INTO personal_evento (id_personal, id_evento,fecha, id_cargo\
+                       , suplemento,hora) VALUES ('{}','{}','{}','{}','{}','{}');"
         txtsql= txtsql.format(self.id_personal, self.padre.id_evento,
                               bd.gira_fecha(fecha), 
-                              id_cargo, self.ui.inputSuplem.text())
+                              id_cargo, self.ui.inputSuplem.text(),hora)
         print(txtsql)
         bd.runsql(txtsql)
               

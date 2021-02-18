@@ -239,7 +239,7 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>180</width>
            <height>0</height>
           </size>
          </property>
@@ -437,7 +437,7 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>150</width>
+           <width>180</width>
            <height>0</height>
           </size>
          </property>
@@ -500,121 +500,237 @@
        <property name="bottomMargin">
         <number>20</number>
        </property>
-       <item row="2" column="0" rowspan="8">
-        <widget class="QCalendarWidget" name="calendar">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>1</horstretch>
-           <verstretch>1</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>535</width>
-           <height>424</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>1</width>
-           <height>1</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="verticalHeaderFormat">
-          <enum>QCalendarWidget::NoVerticalHeader</enum>
-         </property>
-         <property name="navigationBarVisible">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <spacer name="horizontalSpacer_11">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="10" column="2">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>100</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="2">
-        <widget class="QTimeEdit" name="time">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="displayFormat">
-          <string>HH:mm</string>
-         </property>
-        </widget>
-       </item>
        <item row="2" column="2">
-        <widget class="QLabel" name="labelHora">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="leftMargin">
+          <number>5</number>
          </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>30</height>
-          </size>
+         <property name="topMargin">
+          <number>5</number>
          </property>
-         <property name="text">
-          <string>Hora prevista</string>
+         <property name="rightMargin">
+          <number>5</number>
          </property>
-        </widget>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="labelHora">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Hora prevista</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTimeEdit" name="time">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="displayFormat">
+            <string>HH:mm</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelTarea">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Tarea</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="combo_tarea">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>30</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>Carga</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Montaje</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Pruebas</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Evento</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Desmontaje</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Descarga</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Produccion</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Viaje</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Almacén</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonAddDate">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Añadir fecha</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonModificar">
+           <property name="toolTip">
+            <string>Selecciona parametros y fila y pulse aquí</string>
+           </property>
+           <property name="text">
+            <string>Modificar fecha</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonDelDate">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Eliminar fecha</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonFechaNext">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>125</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>OK</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
-       <item row="2" column="3" rowspan="8">
+       <item row="2" column="3">
         <widget class="QTableWidget" name="fechas_table">
          <property name="enabled">
           <bool>true</bool>
          </property>
          <property name="sizePolicy">
-          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-           <horstretch>1</horstretch>
-           <verstretch>1</verstretch>
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>2</horstretch>
+           <verstretch>2</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>535</width>
+           <width>500</width>
            <height>424</height>
           </size>
          </property>
@@ -622,6 +738,12 @@
           <size>
            <width>1</width>
            <height>1</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="styleSheet">
@@ -649,89 +771,6 @@
          </column>
         </widget>
        </item>
-       <item row="8" column="2">
-        <widget class="QPushButton" name="buttonDelDate">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>Eliminar fecha</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QComboBox" name="combo_tarea">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>30</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>Carga</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Montaje</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Pruebas</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Evento</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Desmontaje</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Descarga</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Produccion</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Viaje</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Almacén</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="1" column="2">
         <spacer name="verticalSpacer_4">
          <property name="orientation">
@@ -747,38 +786,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="9" column="2">
-        <widget class="QPushButton" name="buttonFechaNext">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>OK</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QLabel" name="labelTarea">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Tarea</string>
-         </property>
-        </widget>
        </item>
        <item row="0" column="0">
         <widget class="QLabel" name="labelTitle3">
@@ -796,27 +803,64 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="2">
-        <widget class="QPushButton" name="buttonAddDate">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
+       <item row="2" column="0" colspan="2">
+        <widget class="QCalendarWidget" name="calendar">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>1</horstretch>
+           <verstretch>1</verstretch>
           </sizepolicy>
          </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
-           <height>30</height>
+           <width>500</width>
+           <height>400</height>
           </size>
          </property>
-         <property name="text">
-          <string>Añadir fecha</string>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>1</width>
+           <height>1</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>1</width>
+           <height>1</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="verticalHeaderFormat">
+          <enum>QCalendarWidget::NoVerticalHeader</enum>
+         </property>
+         <property name="navigationBarVisible">
+          <bool>true</bool>
          </property>
         </widget>
+       </item>
+       <item row="3" column="2">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>100</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -1463,6 +1507,47 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>entry_id</tabstop>
+  <tabstop>entry_nombre</tabstop>
+  <tabstop>entry_cliente</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>combo_manager</tabstop>
+  <tabstop>entry_onsite</tabstop>
+  <tabstop>entry_tfn_onsite</tabstop>
+  <tabstop>entry_email_onsite</tabstop>
+  <tabstop>entry_notas</tabstop>
+  <tabstop>buttonAddRecinto</tabstop>
+  <tabstop>buttonAddManager</tabstop>
+  <tabstop>buttonDatosNext</tabstop>
+  <tabstop>time</tabstop>
+  <tabstop>combo_tarea</tabstop>
+  <tabstop>calendar</tabstop>
+  <tabstop>buttonAddDate</tabstop>
+  <tabstop>buttonDelDate</tabstop>
+  <tabstop>buttonFechaNext</tabstop>
+  <tabstop>fechas_table</tabstop>
+  <tabstop>entry_nombre_personal</tabstop>
+  <tabstop>buttonBuscarPers</tabstop>
+  <tabstop>combo_filtrar_cargos</tabstop>
+  <tabstop>combo_dia_personal</tabstop>
+  <tabstop>personal_table</tabstop>
+  <tabstop>button_add_personal</tabstop>
+  <tabstop>button_remove_personal</tabstop>
+  <tabstop>personal_added</tabstop>
+  <tabstop>buttonPersonalNext</tabstop>
+  <tabstop>entry_nombre_prov</tabstop>
+  <tabstop>buttonBuscarProv</tabstop>
+  <tabstop>combo_filtrar_serv</tabstop>
+  <tabstop>combo_dia_prov</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>prov_table</tabstop>
+  <tabstop>button_add_prov</tabstop>
+  <tabstop>button_remove_prov</tabstop>
+  <tabstop>prov_added</tabstop>
+  <tabstop>buttonProvOk</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

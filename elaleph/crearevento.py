@@ -22,6 +22,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.ui.setupUi(self)
         self.id_evento = id_evento_parm
         self.fecha = ""       
+        self.hora = ""
         self.setWindowTitle("Crear/Editar Evento")
         #Escondo los vertical headers
         self.ui.fechas_table.verticalHeader().hide()
@@ -86,7 +87,8 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.ui.fechas_table.setSelectionBehavior(self.ui.fechas_table.SelectRows)
         #self.ui.fechas_table.hideColumn(3)
         self.ui.fechas_table.clicked.connect(self.activaDel)
-        self.ui.buttonFechaNext.clicked.connect(self.pasa_pagina)  
+        self.ui.buttonFechaNext.clicked.connect(self.pasa_pagina)
+        
 
 #-----------------------------------------------------------------------------
 #------------------------PÁGINA DE PERSONAL-----------------------------------
@@ -166,7 +168,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         #self.ui.prov_added.hideColumn(0)
 
         self.ui.prov_added.cellDoubleClicked.connect(self.select_prov)       
-
+        self.hora=""
 #------------------------------------------------------------------------------
 #-------------------FUNCIONES GENERALES---------------------------------------- 
 #------------------------------------------------------------------------------
@@ -322,7 +324,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         time = time.toString("hh:mm")
         tarea = self.ui.combo_tarea.currentText()
         id_evento = self.ui.entry_id.text().upper()
-        id_dias_evento = f"{id_evento}{date}{tarea}"
+        id_dias_evento = f"{id_evento}{date}{time}{tarea}"
         campos_fecha = (id_dias_evento,id_evento,date,time,tarea)
         #----------Guarda la fecha en la bbdd----------------------------------
         
@@ -447,6 +449,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
                     
     def filtro_dia(self,text):
         self.color_ocupado(text[0:10])
+        self.hora=(text[11:16])
         self.load_personal_added()
 
     def load_personal_added(self):
@@ -455,18 +458,18 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             return
                     
         bd=BdStd()
-        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha), cargos.nombre, pev.id_personal, p.nombre, p.apellidos, 
+        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha)||" "||hora, cargos.nombre, pev.id_personal, p.nombre, p.apellidos, 
                   suplemento, dni, telefono, email, autonomo, notas
                   FROM personal_evento as pev
                   JOIN personal as p ON p.id_personal = pev.id_personal
                   JOIN cargos ON cargos.id_cargo = pev.id_cargo 
                   WHERE id_evento = '{self.id_evento}' """
         if self.fecha != "ALL" :
-             txtsql += f"""AND strftime('%d-%m-%Y',fecha) = '{self.fecha}'"""
+             txtsql += f"""AND strftime('%d-%m-%Y',fecha) = '{self.fecha}' AND hora = '{self.hora}'"""
         txtsql += f"""ORDER BY fecha"""
 
         bd.runsql(txtsql)
-        
+        print(txtsql)
         if bd.rows != None :
             for i, row_data in enumerate(bd.rows):
                 self.ui.personal_added.insertRow(i)
@@ -502,13 +505,13 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.ui.combo_dia_personal.addItem("ALL")
 
         bd=BdStd()
-        txtsql = f"""SELECT fecha, tarea FROM dias_evento WHERE id_evento = '{self.id_evento}'  
+        txtsql = f"""SELECT fecha,hora,tarea FROM dias_evento WHERE id_evento = '{self.id_evento}'  
                      ORDER BY fecha"""
         bd.runsql(txtsql)
         if bd.rows != None :
             for row_data in bd.rows:
                 self.map_fechas[row_data[0]] : row_data[1]
-                self.ui.combo_dia_personal.addItem(bd.gira_fecha(row_data[0]) + " " +row_data[1])
+                self.ui.combo_dia_personal.addItem(bd.gira_fecha(row_data[0]) + " " +row_data[1] + " " + row_data[2])
                 
 
         
@@ -528,13 +531,13 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
                 id_personal = ""
             id_color = self.calcular_color (self.id_evento, id_personal, fecha)
             
-            
-            if id_color == 1:
-               self.ui.personal_table.item(row,0).setBackground(QtGui.QColor(120, 66, 245))
-            elif id_color == 2:
-                self.ui.personal_table.item(row,0).setBackground(QtGui.QColor(226, 39, 232))
-            else:
-                self.ui.personal_table.item(row,0).setBackground(QtGui.QColor(250, 250, 250))
+            for i in range(9):
+                if id_color == 1:
+                   self.ui.personal_table.item(row,i).setBackground(QtGui.QColor(226, 39, 232))
+                elif id_color == 2:
+                    self.ui.personal_table.item(row,i).setBackground(QtGui.QColor(255, 0, 0))
+                else:
+                    self.ui.personal_table.item(row,i).setBackground(QtGui.QColor(200, 200, 200))
                 
     def calcular_color (self, id_evento, id_personal, fecha):
         #-------------------------- convierte fecha dd-mm-aaaa  01-34-6789
@@ -547,7 +550,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         txtsql += " id_personal = '{}'  AND strftime('%d-%m-%Y',fecha) = '{}'"
         txtsql = txtsql.format(id_evento, id_personal, self.fecha)
         bd.runsql(txtsql)
-
+        print("calcular color"+txtsql)
         if bd.rows != None and len(bd.rows) > 0:
             color = 1
         #------------ mira si está ocupado
@@ -555,9 +558,10 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         txtsql += " id_personal = '{}'  AND strftime('%d-%m-%Y',fecha) = '{}'"
         txtsql = txtsql.format(id_personal, self.fecha)
         bd.runsql(txtsql)
-
+        print("calcular color"+txtsql)
         if bd.rows != None and len(bd.rows) > 0:
             color = 2
+        print(color)
         return (color)
 
     def select_pev(self):
@@ -598,6 +602,10 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         for i, item in enumerate(self.ui.personal_added.selectedItems()):
             if i == 0 : 
                date = item.text()
+               tmp=date.split(" ")
+               date=tmp[0]
+               hora=tmp[1]
+               print(f"dia {date} hora {hora}")
             elif i == 1  : 
                 nom_cargo = item.text()
             elif i == 2  : 
@@ -612,8 +620,12 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         
         bd = BdStd()
         bd.runsql(f"""DELETE FROM personal_evento WHERE id_evento = '{self.id_evento}' 
-                  AND strftime('%d-%m-%Y',fecha) = '{date}' 
+                  AND strftime('%d-%m-%Y',fecha) = '{date}' AND hora = '{hora}'
                   AND id_personal = '{id_personal}' AND id_cargo = '{id_cargo}' """)
+                  
+        print(f"""DELETE FROM personal_evento WHERE id_evento = '{self.id_evento}' 
+        AND strftime('%d-%m-%Y',fecha) = '{date}' 
+        AND id_personal = '{id_personal}' AND id_cargo = '{id_cargo}' """)
 
         
         #----------Refresca Grid------------------------------

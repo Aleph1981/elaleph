@@ -113,7 +113,7 @@ class ProveedorEvento(QtWidgets.QDialog, ProveedorEvento_Ui):
 
         #------------------ buscar el código de cargo a partir del nombre        
         nom_servicio = self.ui.comboServicio.currentText()
-
+        
         if self.padre != None: 
             print("pasa el if de padre")#-------------------------- inserta proveedor, evento, fecha en la base de datos
             if self.esalta == True :
@@ -156,10 +156,10 @@ class ProveedorEvento(QtWidgets.QDialog, ProveedorEvento_Ui):
         print("pasa por crearfecha")
         bd=BdStd()
         txtsql = "INSERT INTO proveedores_evento (id_proveedor, id_evento, servicio, fecha\
-                       , contacto_onsite, telefono_onsite,email_onsite, notas) \
-                    VALUES ('{}','{}','{}','{}','{}','{}','{}','{}');"
+                       ,hora, contacto_onsite, telefono_onsite,email_onsite, notas) \
+                    VALUES ('{}','{}','{}','{}','{}','{}','{}','{}','{}');"
         txtsql= txtsql.format(self.id_proveedor, self.padre.id_evento, nom_servicio,
-                              bd.gira_fecha(fecha), self.ui.inputContacto.text(),
+                              bd.gira_fecha(fecha),self.hora.time(), self.ui.inputContacto.text(),
                               self.ui.inputTelefono.text(),self.ui.inputEmail.text().lower(),
                               self.ui.inputNotas.toPlainText())
         print(txtsql)

@@ -152,7 +152,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
             # mere --------------- cambiado todo lo de abajo
             fecha= bd.gira_fecha(dia)
             texto = ""
-            bd.runsql(f"""SELECT di.id_evento, nombre, tarea, fecha, estado FROM dias_evento as di
+            bd.runsql(f"""SELECT di.id_evento,di.hora, tarea, fecha, estado FROM dias_evento as di
                       JOIN evento as ev ON di.id_evento = ev.id_evento WHERE di.fecha='{fecha}';""")
             fila = 0
             #----------Mostrar los datos en la tabla-----------------------------------
@@ -196,7 +196,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
                 if item in tareas:
                     tarea=item
             print(evento)
-            self.id_dias_evento=evento[0]+dia+tarea
+            self.id_dias_evento=evento[0]+dia+evento[1]+tarea
             print("id_dias_evento = ",self.id_dias_evento )
             return self.id_dias_evento  
         
@@ -267,6 +267,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     def open_crear_hoja_ruta(self):
         self.w = HojaDeRuta()
         self.w.show()
+
     
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

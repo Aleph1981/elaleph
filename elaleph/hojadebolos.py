@@ -12,6 +12,7 @@ from openpyxl import load_workbook
 from bdstd import *
 from datetime import timedelta, datetime
 import datetime
+from configctx import *
 
 class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
     
@@ -32,9 +33,12 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
         self.ui.tablePersonal.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         self.ui.tablePersonal.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tablePersonal.setSelectionMode(QtWidgets.QTableWidget.SingleSelection)
-        self.ui.tablePersonal.verticalHeader.hide()
+        self.ui.tablePersonal.verticalHeader().hide()
         self.ui.buttoCrearIndi.clicked.connect(self.crear_indi)
         self.ui.buttoCrearMulti.clicked.connect(self.crear_multi)
+        
+        ctx = ConfigCtx()
+        self.carpeta = ctx.readvar("RUTAS", "hojas_de_bolo")
         
     def load_tabla(self):
         self.ui.tablePersonal.setRowCount(0)
@@ -68,40 +72,47 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
             self.crear_hoja()
             
     def crear_hoja(self):
-        wb = load_workbook(filename = r"C:\Users\aleja\Desktop\Programacion\elaleph\hojadebolos.xlsx")
-        ws1 = wb.active
-        bd = BdStd()
-        
-        #self.id_personal="ALPE48"
-        #self.fecha="2021-02"
-        ws1.title = "Hoja de bolos"
-        
-        bd.runsql(f"""SELECT pe.id_personal, per.nombre, per.apellidos, pe.fecha, pe.id_evento, ev.nombre, ma.nombre, ma.apellidos, pe.id_cargo, ca.nombre, ta.tarifa, suplemento  
-        FROM personal_evento as pe JOIN evento as ev JOIN tarifas as ta JOIN personal as per JOIN managers as ma JOIN cargos as ca
-        WHERE pe.id_evento=ev.id_evento AND pe.id_cargo=ta.id_cargo AND pe.id_personal='{self.id_personal}' AND ta.id_personal=pe.id_personal 
-        AND ca.id_cargo=ta.id_cargo and ta.id_personal=pe.id_personal AND ma.id_manager=ev.id_manager AND per.id_personal=pe.id_personal
-        AND pe.fecha LIKE '{self.fecha}%';""")
-        
-        nombreapell=bd.rows[0][1]+bd.rows[0][2]
-        ws1["C5"]=nombreapell
-        ws1["C6"]=self.fecha
-        
-        if bd.rows != None:
-            i=0
-            for row in bd.rows:
-                
-                ws1[f"A{9+i}"]=row[3]
-                ws1[f"B{9+i}"]=row[4]
-                ws1[f"C{9+i}"]=row[5]
-                ws1[f"D{9+i}"]=row[6]+row[7]
-                ws1[f"E{9+i}"]=row[9]
-                ws1[f"F{9+i}"]=row[10]
-                ws1[f"G{9+i}"]=row[11]
-                i+=1
-                
-        
-        
-        wb.save(f"hojadebolos-{nombreapell}-{self.fecha}.xlsx")
+        try:
+            
+            wb = load_workbook(filename = self.carpeta + "hojadebolos.xlsx")
+            ws1 = wb.active
+            bd = BdStd()
+            
+            ws1.title = "Hoja de bolos"
+            
+            bd.runsql(f"""SELECT pe.id_personal, per.nombre, per.apellidos, pe.fecha, pe.id_evento, ev.nombre, ma.nombre, ma.apellidos, pe.id_cargo, ca.nombre, ta.tarifa, suplemento  
+            FROM personal_evento as pe JOIN evento as ev JOIN tarifas as ta JOIN personal as per JOIN managers as ma JOIN cargos as ca
+            WHERE pe.id_evento=ev.id_evento AND pe.id_cargo=ta.id_cargo AND pe.id_personal='{self.id_personal}' AND ta.id_personal=pe.id_personal 
+            AND ca.id_cargo=ta.id_cargo and ta.id_personal=pe.id_personal AND ma.id_manager=ev.id_manager AND per.id_personal=pe.id_personal
+            AND pe.fecha LIKE '{self.fecha}%';""")
+            
+            nombreapell=bd.rows[0][1]+bd.rows[0][2]
+            ws1["C5"]=nombreapell
+            ws1["C6"]=self.fecha
+            
+            if bd.rows != None:
+                i=0
+                for row in bd.rows:
+                    
+                    ws1[f"A{9+i}"]=row[3]
+                    ws1[f"B{9+i}"]=row[4]
+                    ws1[f"C{9+i}"]=row[5]
+                    ws1[f"D{9+i}"]=row[6]+row[7]
+                    ws1[f"E{9+i}"]=row[9]
+                    ws1[f"F{9+i}"]=row[10]
+                    ws1[f"G{9+i}"]=row[11]
+                    i+=1
+                    
+            
+            
+            fichero = self.carpeta +f"hojadebolos-{nombreapell}-{self.fecha}.xlsx"
+            wb.save(fichero)
+            qm = QtWidgets.QMessageBox
+            qm.warning(self, '', "Datos generados correctamente")
+            
+        except Exception as e:
+            qm = QtWidgets.QMessageBox
+            qm.warning(self, '', f"Error: {e}")
         
         
         

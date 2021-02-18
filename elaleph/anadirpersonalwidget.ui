@@ -568,6 +568,22 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>entryNOMBRE</tabstop>
+  <tabstop>entryAPELL</tabstop>
+  <tabstop>entryDNI</tabstop>
+  <tabstop>entryTFN</tabstop>
+  <tabstop>entryEMAIL</tabstop>
+  <tabstop>entryDIRECCION</tabstop>
+  <tabstop>entryCP</tabstop>
+  <tabstop>entryCIUDAD</tabstop>
+  <tabstop>entryIBAN</tabstop>
+  <tabstop>radioSI</tabstop>
+  <tabstop>radioNO</tabstop>
+  <tabstop>textNOTAS</tabstop>
+  <tabstop>buttonAceptar</tabstop>
+  <tabstop>buttonCancelar</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
