@@ -35,6 +35,8 @@ QLabel#labelSubtitle1,QLabel#labelSubtitle2,QLabel#labelSubtitle3,QLabel#labelSu
 
 QLabel#labelMes,QLabel#labelMes_2{font:12pt;}
 
+QLineEdit:read-only{background-color: rgb(150,150,150)}
+
 /*---------------------------------------------------Tablas---------------------------------------------------------------------------------*/
 
 QHeaderView::section,QHeaderview{background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 255), stop:1 rgba(180, 0, 0, 255));border-radius:4px;padding:2px}

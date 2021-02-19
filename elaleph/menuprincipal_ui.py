@@ -184,6 +184,8 @@ class MenuPrincipal_Ui(object):
         self.menuProveedores.setObjectName("menuProveedores")
         self.menuRecintos = QtWidgets.QMenu(self.menubar)
         self.menuRecintos.setObjectName("menuRecintos")
+        self.menuClientes = QtWidgets.QMenu(self.menubar)
+        self.menuClientes.setObjectName("menuClientes")
         MainWindow.setMenuBar(self.menubar)
         self.action_crear_hoja_de_ruta = QtWidgets.QAction(MainWindow)
         self.action_crear_hoja_de_ruta.setObjectName("action_crear_hoja_de_ruta")
@@ -215,9 +217,15 @@ class MenuPrincipal_Ui(object):
         self.action_consultar_recintos.setObjectName("action_consultar_recintos")
         self.actionProject_Managers = QtWidgets.QAction(MainWindow)
         self.actionProject_Managers.setObjectName("actionProject_Managers")
+        self.actionClientes = QtWidgets.QAction(MainWindow)
+        self.actionClientes.setObjectName("actionClientes")
+        self.actionPlantilla = QtWidgets.QAction(MainWindow)
+        self.actionPlantilla.setObjectName("actionPlantilla")
         self.menuPersonal.addAction(self.action_alta_personal)
         self.menuPersonal.addAction(self.action_consultar_personal)
+        self.menuPersonal.addSeparator()
         self.menuPersonal.addAction(self.actionProject_Managers)
+        self.menuPersonal.addAction(self.actionPlantilla)
         self.menuEventos.addAction(self.action_crear_evento)
         self.menuEventos.addAction(self.action_consultar_evento)
         self.menuCrear_hojas.addAction(self.action_crear_hoja_de_ruta)
@@ -226,9 +234,11 @@ class MenuPrincipal_Ui(object):
         self.menuProveedores.addAction(self.action_alta_proveedor)
         self.menuProveedores.addAction(self.action_consultar_proveedor)
         self.menuRecintos.addAction(self.action_alta_recinto)
+        self.menuClientes.addAction(self.actionClientes)
         self.menubar.addAction(self.menuEventos.menuAction())
         self.menubar.addAction(self.menuPersonal.menuAction())
         self.menubar.addAction(self.menuProveedores.menuAction())
+        self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuRecintos.menuAction())
         self.menubar.addAction(self.menuCrear_hojas.menuAction())
 
@@ -237,7 +247,7 @@ class MenuPrincipal_Ui(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "El Aleph"))
         self.logo.setText(_translate("MainWindow", "Logo"))
         self.buttonNext1.setText(_translate("MainWindow", "+1"))
         self.buttonNext30.setText(_translate("MainWindow", "+30"))
@@ -274,6 +284,7 @@ class MenuPrincipal_Ui(object):
         self.menuCrear_hojas.setTitle(_translate("MainWindow", "Crear hojas"))
         self.menuProveedores.setTitle(_translate("MainWindow", "Proveedores"))
         self.menuRecintos.setTitle(_translate("MainWindow", "Recintos"))
+        self.menuClientes.setTitle(_translate("MainWindow", "Clientes"))
         self.action_crear_hoja_de_ruta.setText(_translate("MainWindow", "Crear hoja de ruta"))
         self.action_crear_hoja_de_bolos.setText(_translate("MainWindow", "Crear hoja de bolos"))
         self.action_crear_hoja_de_almac_n.setText(_translate("MainWindow", "Crear hoja de almacén"))
@@ -286,9 +297,11 @@ class MenuPrincipal_Ui(object):
         self.action_consultar_personal.setText(_translate("MainWindow", "Consultar BBDD"))
         self.action_alta_proveedor.setText(_translate("MainWindow", "Alta BBDD"))
         self.action_consultar_proveedor.setText(_translate("MainWindow", "Consultar BBDD"))
-        self.action_alta_recinto.setText(_translate("MainWindow", "Alta BBDD"))
+        self.action_alta_recinto.setText(_translate("MainWindow", "Base de Datos"))
         self.action_consultar_recintos.setText(_translate("MainWindow", "Consultar BBDD"))
         self.actionProject_Managers.setText(_translate("MainWindow", "Project Managers"))
+        self.actionClientes.setText(_translate("MainWindow", "Base de Datos"))
+        self.actionPlantilla.setText(_translate("MainWindow", "Personal de plantilla"))
 
 
 if __name__ == "__main__":

@@ -35,7 +35,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>El Aleph</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -536,7 +536,9 @@ proveedor</string>
     </property>
     <addaction name="action_alta_personal"/>
     <addaction name="action_consultar_personal"/>
+    <addaction name="separator"/>
     <addaction name="actionProject_Managers"/>
+    <addaction name="actionPlantilla"/>
    </widget>
    <widget class="QMenu" name="menuEventos">
     <property name="title">
@@ -566,9 +568,16 @@ proveedor</string>
     </property>
     <addaction name="action_alta_recinto"/>
    </widget>
+   <widget class="QMenu" name="menuClientes">
+    <property name="title">
+     <string>Clientes</string>
+    </property>
+    <addaction name="actionClientes"/>
+   </widget>
    <addaction name="menuEventos"/>
    <addaction name="menuPersonal"/>
    <addaction name="menuProveedores"/>
+   <addaction name="menuClientes"/>
    <addaction name="menuRecintos"/>
    <addaction name="menuCrear_hojas"/>
   </widget>
@@ -634,7 +643,7 @@ proveedor</string>
   </action>
   <action name="action_alta_recinto">
    <property name="text">
-    <string>Alta BBDD</string>
+    <string>Base de Datos</string>
    </property>
   </action>
   <action name="action_consultar_recintos">
@@ -645,6 +654,16 @@ proveedor</string>
   <action name="actionProject_Managers">
    <property name="text">
     <string>Project Managers</string>
+   </property>
+  </action>
+  <action name="actionClientes">
+   <property name="text">
+    <string>Base de Datos</string>
+   </property>
+  </action>
+  <action name="actionPlantilla">
+   <property name="text">
+    <string>Personal de plantilla</string>
    </property>
   </action>
  </widget>

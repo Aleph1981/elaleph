@@ -13,6 +13,8 @@ from recintos import *
 from fichapersonal import *
 from personalevento import *            # mere 30-01-21 added
 from proveedorevento import *
+from selectcliente import *
+from clientes import *
 
 class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
     
@@ -30,12 +32,14 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.ui.personal_added.verticalHeader().hide()
         self.ui.prov_table.verticalHeader().hide()
         self.ui.prov_added.verticalHeader().hide()
-        
+        self.id_cliente=""
 #------------------------------------------------------------------------------
 #-------------------------PÁGINA DE DATOS--------------------------------------
 #------------------------------------------------------------------------------
         self.ui.buttonAddRecinto.clicked.connect(self.addRecinto)
         self.ui.buttonAddManager.clicked.connect(self.addManager)
+        self.ui.buttonAddCliente.clicked.connect(self.addCliente)
+        self.ui.buttonSelect.clicked.connect(self.selectCliente)
         self.ui.comboBox_2.addItem("Ciudad")
         bd = BdStd()
         bd.runsql("SELECT ciudad FROM recintos GROUP BY ciudad ORDER BY ciudad;")  # mere 03-02-2021
@@ -63,7 +67,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         else:                            # carga datos evento
             self.load_evento(self.id_evento)
             
-            
+        
         self.ui.buttonDatosNext.clicked.connect(self.guardarDatos)  
         self.ui.comboBox_2.currentIndexChanged['QString'].connect(self.updateCombo)
         self.ui.tabWidget.currentChanged.connect(self.cambia_pestanya)
@@ -196,14 +200,25 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             self.loadcombo_servicios()
             self.filtro_prov_checks("ALL")
             self.loadcombo_dias_prov()
+    def addCliente(self):
+        self.w = Clientes()
+        self.w.show()
         
-
+    def selectCliente(self):
+        self.w = SelectCliente(self)
+        self.w.show()
+        
+    def set_cliente(self,nombre):
+        self.ui.entry_cliente.setText(nombre)
+        print(nombre)
     def addRecinto(self):
         self.w = Recintos()
         self.w.show()
+        
     def addManager(self):
         self.w = ProjectManagers()
         self.w.show()
+        
     def updateCombo(self):
         self.ui.comboBox.clear()
         bd = BdStd()
@@ -223,7 +238,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         #-------------------------------------------------------
         if self.id_evento == None :
             campos_datos = (my_evento, self.ui.entry_nombre.text()\
-                        ,self.ui.entry_cliente.text().capitalize(), self.ui.entry_onsite.text()\
+                        ,self.ui.entry_cliente.text(), self.ui.entry_onsite.text()\
                         ,self.ui.entry_tfn_onsite.text(),self.ui.entry_email_onsite.text().lower()\
                         , id_recinto, id_manager, self.ui.entry_notas.toPlainText())
             bd.runsql("INSERT INTO evento (id_evento,nombre,cliente,contacto_onsite,\
@@ -693,7 +708,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             return
                     
         bd=BdStd()
-        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha), pre.servicio, pre.id_proveedor,  \
+        txtsql = f"""SELECT strftime('%d-%m-%Y',fecha)||" "||hora, pre.servicio, pre.id_proveedor,  \
                   p.provincia, contacto_onsite, telefono_onsite, email_onsite, pre.notas \
                   FROM proveedores_evento as pre \
                   JOIN proveedores as p ON  p.id_proveedor = pre.id_proveedor AND pre.id_evento = '{self.id_evento}' """

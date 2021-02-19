@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1316</width>
+    <height>753</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Clientes</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="labelTitle">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;MS Shell Dlg 2&quot;;</string>
+     </property>
+     <property name="text">
+      <string>Clientes</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>30</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QTableWidget" name="tableClientes">
+       <column>
+        <property name="text">
+         <string>Id Cliente</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Nombre</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Pais</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Provincia</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Localidad</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Dirección</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>CIF</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Teléfono</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Email</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Web</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Contacto</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Tfn Contacto</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Email Contacto</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Notas</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Preferred</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="inputNombre">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="inputPais">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="3">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="5">
+        <widget class="QLineEdit" name="inputWeb">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelLocalidad">
+         <property name="text">
+          <string>Localidad</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="inputLocalidad">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <spacer name="horizontalSpacer_5">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="3" column="4">
+        <widget class="QLabel" name="labelContacto">
+         <property name="text">
+          <string>Contacto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QLabel" name="labelEmail">
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="2">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="labelNombre">
+         <property name="text">
+          <string>Nombre</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="labelTelefono">
+         <property name="text">
+          <string>Teléfono</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLineEdit" name="inputTelefono">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <spacer name="horizontalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" colspan="2">
+        <widget class="QLabel" name="labelPais">
+         <property name="text">
+          <string>País</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLineEdit" name="inputEmail">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="labelProvincia">
+         <property name="text">
+          <string>Provincia</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="inputProvincia">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4">
+        <widget class="QLabel" name="labelWeb">
+         <property name="text">
+          <string>Web</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5">
+        <widget class="QLineEdit" name="inputContacto">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4">
+        <widget class="QLabel" name="labelTfnCont">
+         <property name="text">
+          <string>Teléfono de contacto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5">
+        <widget class="QLineEdit" name="inputTfnCont">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="inputDireccion">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelCif">
+         <property name="text">
+          <string>CIF</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLineEdit" name="inputCif">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelNotas">
+         <property name="text">
+          <string>Notas</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="4">
+        <widget class="QLabel" name="labelEmailCont">
+         <property name="text">
+          <string>Email de contacto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelDireccion">
+         <property name="text">
+          <string>Dirección</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2" rowspan="2" colspan="4">
+        <widget class="QPlainTextEdit" name="inputNotas">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="plainText">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Preferred</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="9" column="2">
+        <layout class="QHBoxLayout" name="horizontalLayout"/>
+       </item>
+       <item row="5" column="5">
+        <widget class="QLineEdit" name="inputEmailCont">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>190</width>
+           <height>0</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="2">
+        <widget class="QPushButton" name="buttonAnadir">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>100</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Añadir</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="buttonGuardar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Guardar cambios</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonEliminar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Eliminar</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>inputNombre</tabstop>
+  <tabstop>inputPais</tabstop>
+  <tabstop>inputProvincia</tabstop>
+  <tabstop>inputLocalidad</tabstop>
+  <tabstop>inputDireccion</tabstop>
+  <tabstop>inputCif</tabstop>
+  <tabstop>inputTelefono</tabstop>
+  <tabstop>inputEmail</tabstop>
+  <tabstop>inputWeb</tabstop>
+  <tabstop>inputContacto</tabstop>
+  <tabstop>inputTfnCont</tabstop>
+  <tabstop>inputEmailCont</tabstop>
+  <tabstop>inputNotas</tabstop>
+  <tabstop>buttonAnadir</tabstop>
+  <tabstop>buttonGuardar</tabstop>
+  <tabstop>buttonEliminar</tabstop>
+  <tabstop>tableClientes</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

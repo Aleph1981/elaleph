@@ -19,6 +19,7 @@ from fichaevento import *
 from hojadebolos import *
 from hojaderuta import *
 from hojadeestilos import *
+from clientes import *
 from datetime import timedelta, datetime
 import datetime
 
@@ -37,6 +38,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
     
         self.tableWidget.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.tableWidget.verticalHeader().hide()
+        
 
     #-------------------Botones colorear---------------------------------------
     
@@ -55,6 +57,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         self.action_alta_recinto.triggered.connect(self.open_alta_recinto)
         self.action_crear_evento.triggered.connect(self.open_crear_evento)
         self.action_consultar_evento.triggered.connect(self.open_consultar_evento)
+        self.actionClientes.triggered.connect(self.open_clientes)
         self.action_crear_hoja_de_bolos.triggered.connect(self.open_crear_hoja_bolos)
         self.action_crear_hoja_de_ruta.triggered.connect(self.open_crear_hoja_ruta)
         
@@ -70,6 +73,8 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
         logoaleph = QtGui.QPixmap(r"C:\Users\aleja\Desktop\Programacion\elaleph\logos\dushowidth200.png")
         self.logo_2.setPixmap(logoaleph)
         self.logo_2.setScaledContents(False)
+        
+        
     #---------------Calendario Semanal-----------------------------------------
         
         self.hoy = datetime.date.today()
@@ -152,7 +157,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
             # mere --------------- cambiado todo lo de abajo
             fecha= bd.gira_fecha(dia)
             texto = ""
-            bd.runsql(f"""SELECT di.id_evento,di.hora, tarea, fecha, estado FROM dias_evento as di
+            bd.runsql(f"""SELECT di.id_evento,di.hora, tarea, fecha, estado, nombre FROM dias_evento as di
                       JOIN evento as ev ON di.id_evento = ev.id_evento WHERE di.fecha='{fecha}';""")
             fila = 0
             #----------Mostrar los datos en la tabla-----------------------------------
@@ -163,6 +168,7 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
                     maxrow = fila
                 texto =  row[0] + " " +  row[1] +" " + row[2] + "\n"
                 self.tableWidget.setItem(fila, columna, QtWidgets.QTableWidgetItem(texto))
+                self.tableWidget.item(fila,columna).setToolTip(row[5])
                 if row[4] == "reserva":
                     self.tableWidget.item(fila,columna).setBackground(QtGui.QColor(255, 0, 255,150))
                 elif row[4] == "personal":
@@ -260,6 +266,11 @@ class MenuPrincipal(QtWidgets.QMainWindow, MenuPrincipal_Ui):
             id_evento = id_evento[0]
             self.w = FichaEvento(id_evento)
             self.w.show()
+            
+    def open_clientes(self):
+        self.w=Clientes()
+        self.w.show()
+        
     def open_crear_hoja_bolos(self):
         self.w = HojaBolos()
         self.w.show()
