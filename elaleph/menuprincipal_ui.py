@@ -225,7 +225,6 @@ class MenuPrincipal_Ui(object):
         self.menuPersonal.addAction(self.action_consultar_personal)
         self.menuPersonal.addSeparator()
         self.menuPersonal.addAction(self.actionProject_Managers)
-        self.menuPersonal.addAction(self.actionPlantilla)
         self.menuEventos.addAction(self.action_crear_evento)
         self.menuEventos.addAction(self.action_consultar_evento)
         self.menuCrear_hojas.addAction(self.action_crear_hoja_de_ruta)

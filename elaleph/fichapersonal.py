@@ -37,7 +37,7 @@ class FichaPersonal(QtWidgets.QWidget, FichaPersonal_Ui):
 
         self.ui.buttonDocumentos.clicked.connect(self.documentos)
         self.ui.buttonGuardar.clicked.connect(self.guardar)
-              
+        self.ui.buttonCerrar.clicked.connect(self.close)
         #-----------Poner foto--------------------------------------------------------
         
         
@@ -230,6 +230,11 @@ class FichaPersonal(QtWidgets.QWidget, FichaPersonal_Ui):
         
         guardaTarifas(self.id_personal, self.map_cargos)
         
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.setIcon(msgBox.Information)
+        msgBox.setText("Cambios guardados correctamente")
+        msgBox.setWindowTitle("Aleph")
+        msgBox.exec_()
         
         
         
@@ -365,7 +370,9 @@ def guardaTarifas(id_personal, map_cargos):
         if item['checked'] == "1":
            print(sql.format(id_personal, item['id'], str(item['tarifa'])))
            bd.runsql(sql.format(id_personal, item['id'], str(item['tarifa'])))
-
+    
+    
+    
 def getEventCale(id_personal, yyyymm):
     
     # devuelve un array con dias y sus eventos 

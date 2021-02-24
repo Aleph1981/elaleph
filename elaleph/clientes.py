@@ -150,8 +150,11 @@ class Clientes(QtWidgets.QWidget, Clientes_Ui):
                 sql += " WHERE id_cliente = '" + clave + "'"
                 print("SQL->", sql)
                 bd.runsql(sql)
-        #w = Cambios_Ui()  mere quitado
-        #w.show()
+                
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.information(self, "Aleph", "Cambios guardados correctamente")
+            
+        
     
     def eliminar(self):
         

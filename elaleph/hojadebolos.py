@@ -103,16 +103,19 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
                     ws1[f"G{9+i}"]=row[11]
                     i+=1
                     
-            
+           #--------------------Graba la hoja en la ruta especificada---------- 
             
             fichero = self.carpeta +f"hojadebolos-{nombreapell}-{self.fecha}.xlsx"
             wb.save(fichero)
-            qm = QtWidgets.QMessageBox
-            qm.warning(self, '', "Datos generados correctamente")
+            
+            #-------------------Mensaje de confirmación------------------------     
+            
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.information(self, "Aleph", "Datos generados correctamente")
             
         except Exception as e:
             qm = QtWidgets.QMessageBox
-            qm.warning(self, '', f"Error: {e}")
+            qm.warning(self, 'Aleph', f"Error: {str(e)}")
         
         
         

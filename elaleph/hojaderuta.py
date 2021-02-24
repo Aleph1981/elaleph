@@ -87,8 +87,7 @@ class HojaDeRuta(QtWidgets.QDialog, HojaDeRuta_Ui):
             ws1 = wb.active
             bd = BdStd()
             
-            #self.id_personal="ALPE48"
-            #self.fecha="2021-02"
+            
             ws1.title = "Hoja de ruta"
             
             bd.runsql(f"""SELECT ev.id_evento,ev.nombre,re.nombre,re.direccion||' '|| re.ciudad,cliente,
@@ -297,7 +296,7 @@ class HojaDeRuta(QtWidgets.QDialog, HojaDeRuta_Ui):
             fichero = self.carpeta + f"hojaderuta-{self.id_evento}.xlsx"
             wb.save(fichero)
             qm = QtWidgets.QMessageBox
-            qm.warning(self, '', "Hoja de ruta creada correctamente")
+            qm.information(self, 'Aleph', "Hoja de ruta creada correctamente")
             
         except Exception as e:
             qm = QtWidgets.QMessageBox

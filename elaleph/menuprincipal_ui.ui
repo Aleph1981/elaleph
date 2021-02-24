@@ -538,7 +538,6 @@ proveedor</string>
     <addaction name="action_consultar_personal"/>
     <addaction name="separator"/>
     <addaction name="actionProject_Managers"/>
-    <addaction name="actionPlantilla"/>
    </widget>
    <widget class="QMenu" name="menuEventos">
     <property name="title">

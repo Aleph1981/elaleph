@@ -29,9 +29,9 @@ QLabel{ background-color: rgba(255, 255, 255, 0);}
 
 /*----------------------------------------------------title labels----------------------------------------------------------------------------*/
 
-QLabel#labelTitle,QLabel#labelTitle2,QLabel#labelTitle3,QLabel#labelTitle4,QLabel#labelTitle5 {font: 14pt;background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 180), stop:1 rgba(180, 0, 0, 180));border-radius:4px;padding: 4px;}
+QLabel#labelTitle,QLabel#labelTitle2,QLabel#labelTitle3,QLabel#labelTitle4,QLabel#labelTitle5,QLabel#labelTitle6 {font: 14pt;background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 180), stop:1 rgba(180, 0, 0, 180));border-radius:4px;padding: 4px;}
 
-QLabel#labelSubtitle1,QLabel#labelSubtitle2,QLabel#labelSubtitle3,QLabel#labelSubtitle4,QLabel#labelSubtitle5 {font: 12pt;background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 180), stop:1 rgba(180, 0, 0, 180));border-radius:4px;padding: 4px;}
+QLabel#labelSubtitle1,QLabel#labelSubtitle2,QLabel#labelSubtitle3,QLabel#labelSubtitle4,QLabel#labelSubtitle5,QLabel#labelSubtitle6 {font: 12pt;background-color: qlineargradient(spread:pad, x1:0.522, y1:0.932, x2:0.518, y2:0, stop:0.318408 rgba(120, 0, 0, 180), stop:1 rgba(180, 0, 0, 180));border-radius:4px;padding: 4px;}
 
 QLabel#labelMes,QLabel#labelMes_2{font:12pt;}
 
@@ -60,6 +60,7 @@ color: rgb(50,50,50); border-style: outset;border-radius: 6px;border-width: 2px;
 
 QPushButton:pressed,QToolButton:pressed{border-style: inset; }
 QPushButton:selected,QToolButton:selected{background-color:rgba(0,125,255,80);border-style: inset; }
+QPushButton#buttonCopyR,QPushButton#buttonCopyE {padding:0px;}
 
 /*-------------------------------------------------------Botones-----------------------------------------------*/
 

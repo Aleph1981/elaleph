@@ -15,6 +15,7 @@ from personalevento import *            # mere 30-01-21 added
 from proveedorevento import *
 from selectcliente import *
 from clientes import *
+import pyperclip
 
 class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
     
@@ -72,6 +73,11 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.ui.comboBox_2.currentIndexChanged['QString'].connect(self.updateCombo)
         self.ui.tabWidget.currentChanged.connect(self.cambia_pestanya)
         
+        
+        
+        
+        
+        
 #------------------------------------------------------------------------------
 #-------------------------PÁGINA DE FECHAS-------------------------------------
 #------------------------------------------------------------------------------
@@ -92,6 +98,9 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         #self.ui.fechas_table.hideColumn(3)
         self.ui.fechas_table.clicked.connect(self.activaDel)
         self.ui.buttonFechaNext.clicked.connect(self.pasa_pagina)
+        
+        
+        
         
 
 #-----------------------------------------------------------------------------
@@ -133,6 +142,41 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
                                   "Suplemento", "DNI",  "Teléfono",  "Email",  "Autónomo",  "Notas"])
         #self.ui.personal_added.hideColumn(0)
         self.ui.personal_added.cellDoubleClicked.connect(self.select_pev)       
+        
+        
+        
+        
+        
+        
+        
+#-----------------------------------------------------------------------------
+#------------------------PÁGINA DE TRANSPORTES--------------------------------
+#-----------------------------------------------------------------------------
+
+        self.load_comboEmpresa()
+        self.load_comboPaises()
+        self.load_fechasTrans()
+        self.paisR = ""
+        self.paisE = ""
+        self.provinciaR = ""
+        self.provinciaE = ""
+        self.ui.comboPaisR.activated.connect(self.check_paisR)
+        self.ui.comboPaisE.activated.connect(self.check_paisE)
+        self.ui.buttonEventoR.clicked.connect(self.load_recintoEventoR)
+        self.ui.buttonEventoE.clicked.connect(self.load_recintoEventoE)
+        self.ui.buttonAlmacenR.clicked.connect(self.load_almacenR)
+        self.ui.buttonAlmacenE.clicked.connect(self.load_almacenE)
+        self.ui.buttonOtroR.clicked.connect(self.load_otroR)
+        self.ui.buttonOtroE.clicked.connect(self.load_otroE)
+        self.ui.buttonCopyR.clicked.connect(self.copyR)
+        self.ui.buttonCopyE.clicked.connect(self.copyE)
+        
+
+
+        
+        
+        
+        
 #-----------------------------------------------------------------------------
 #------------------------PÁGINA DE PROVEEDORES--------------------------------
 #----------------------------------------------------------------------------- 
@@ -653,6 +697,221 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.w = FichaPersonal(id_personal)
         self.w.show()
 
+
+
+
+
+
+#-----------------------------------------------------------------------------
+#------------------------FUNCIONES DE TRANSPORTES-----------------------------
+#-----------------------------------------------------------------------------
+
+    def load_comboEmpresa(self):
+        bdemp=BdStd()
+        bdemp.runsql("""SELECT empresa FROM proveedores WHERE servicio LIKE '%Trailer%'
+                  or servicio LIKE '%Camión%' or servicio LIKE '%Furgoneta%'""")
+        if bdemp.rows != None:
+            for empresa in bdemp.rows:
+                self.ui.comboEmpresa.addItem(empresa[0])
+    
+    def load_comboPaises(self):
+        
+        self.ui.comboPaisR.addItem("")
+        self.ui.comboPaisE.addItem("")
+        
+        bdpais=BdStd()
+        bdpais.runsql("SELECT nombre FROM paises")
+        
+        if bdpais.rows != None:
+            for pais in bdpais.rows:
+                self.ui.comboPaisR.addItem(pais[0])
+                self.ui.comboPaisE.addItem(pais[0])
+                
+        
+    def check_paisR(self):
+        
+        self.paisR = self.ui.comboPaisR.currentText()
+        
+        if self.paisR == "España":
+            self.ui.comboProvinciaR.setEnabled(True)
+            self.load_comboProvinciasR()
+            
+        else:
+            self.ui.comboProvinciaR.clear()
+            self.ui.comboProvinciaR.setEnabled(False)
+            
+    def check_paisE(self):
+        
+        self.paisE = self.ui.comboPaisE.currentText()
+        
+        if self.paisE == "España":
+            self.ui.comboProvinciaE.setEnabled(True)
+            self.load_comboProvinciasE()
+        else:
+            self.ui.comboProvinciaE.clear()
+            self.ui.comboProvinciaE.setEnabled(False)
+            
+    def load_comboProvinciasR(self):
+        
+        bdprovi = BdStd()
+        bdprovi.runsql("SELECT nombre FROM provincias_es")
+        
+        if bdprovi.rows != None:
+            for provincia in bdprovi.rows:
+                self.ui.comboProvinciaR.addItem(provincia[0])
+        
+        
+    def load_comboProvinciasE(self):
+        bdprovi = BdStd()
+        bdprovi.runsql("SELECT nombre FROM provincias_es")
+        
+        if bdprovi.rows != None:
+            for provincia in bdprovi.rows:
+                self.ui.comboProvinciaE.addItem(provincia[0])
+
+    
+    def load_fechasTrans(self):
+        bd=BdStd()
+        bd.runsql(f"SELECT fecha, tarea FROM dias_evento WHERE id_evento='{self.id_evento}' GROUP BY fecha")
+        
+        if bd.rows != None:
+            for fecha in bd.rows:
+                self.ui.comboFechaR.addItem(bd.gira_fecha(fecha[0]) +" "+fecha[1])
+                self.ui.comboFechaE.addItem(bd.gira_fecha(fecha[0]) +" "+fecha[1])
+        
+
+    def load_recintoEventoR(self):
+        
+        id_recinto = self.extraer_recinto()
+        bd = BdStd()
+        bd.runsql(f"""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE id_recinto = '{id_recinto}'""")
+        if bd.rows != None:
+            camposrecinto=bd.rows[0]
+        
+        #----------busca el indice del pais-----------------------------------
+        
+        bd.runsql(f"SELECT orden FROM paises WHERE nombre = '{camposrecinto[1]}'")
+        if bd.rows!=None:
+            ordenpais=bd.rows[0][0]
+        
+        #----------
+        if camposrecinto[1] == "España":
+            self.load_comboProvinciasR()            
+            bd.runsql(f"SELECT orden FROM provincias_es WHERE nombre = '{camposrecinto[2]}'")
+            if bd.rows != None:
+                ordenprovincia=bd.rows[0][0]
+                self.ui.comboProvinciaR.setCurrentIndex(int(ordenprovincia)-1)
+                
+        
+        if bd.rows != None:
+            self.ui.inputRecintoR.setText(camposrecinto[0])
+            self.ui.comboPaisR.setCurrentIndex(int(ordenpais))
+            self.ui.inputLocalidadR.setText(camposrecinto[3])
+            self.ui.inputDireccionR.setText(camposrecinto[4])
+            self.ui.inputIndicacionesR.setText(camposrecinto[5])
+            self.ui.inputCoordenadasR.setText(camposrecinto[6])
+            
+            
+        
+        
+        
+    def load_recintoEventoE(self):
+        id_recinto = self.extraer_recinto()
+        bd = BdStd()
+        bd.runsql(f"""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE id_recinto = '{id_recinto}'""")
+        camposrecinto=bd.rows[0]
+        
+        #----------busca el indice del pais-----------------------------------
+        
+        bd.runsql(f"SELECT orden FROM paises WHERE nombre = '{camposrecinto[1]}'")
+        if bd.rows!=None:
+            ordenpais=bd.rows[0][0]
+        
+        #----------
+        if camposrecinto[1] == "España":
+            self.load_comboProvinciasE()            
+            bd.runsql(f"SELECT orden FROM provincias_es WHERE nombre = '{camposrecinto[2]}'")
+            if bd.rows != None:
+                ordenprovincia=bd.rows[0][0]
+                self.ui.comboProvinciaE.setCurrentIndex(int(ordenprovincia)-1)
+                
+        
+        if bd.rows != None:
+            self.ui.inputRecintoE.setText(camposrecinto[0])
+            self.ui.comboPaisE.setCurrentIndex(int(ordenpais))
+            self.ui.inputLocalidadE.setText(camposrecinto[3])
+            self.ui.inputDireccionE.setText(camposrecinto[4])
+            self.ui.inputIndicacionesE.setText(camposrecinto[5])
+            self.ui.inputCoordenadasE.setText(camposrecinto[6])
+    
+    def load_almacenR(self):
+        bd = BdStd()
+        bd.runsql("""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE nombre='Almacén '""")
+        camposrecinto=bd.rows[0]
+        
+        #----------busca el indice del pais-----------------------------------
+        
+        bd.runsql(f"SELECT orden FROM paises WHERE nombre = '{camposrecinto[1]}'")
+        if bd.rows!=None:
+            ordenpais=bd.rows[0][0]
+        
+        #----------
+        if camposrecinto[1] == "España":
+            self.load_comboProvinciasR()            
+            bd.runsql(f"SELECT orden FROM provincias_es WHERE nombre = '{camposrecinto[2]}'")
+            if bd.rows != None:
+                ordenprovincia=bd.rows[0][0]
+                self.ui.comboProvinciaE.setCurrentIndex(int(ordenprovincia)-1)
+                
+        
+        if bd.rows != None:
+            self.ui.inputRecintoR.setText(camposrecinto[0])
+            self.ui.comboPaisR.setCurrentIndex(int(ordenpais))
+            self.ui.inputLocalidadR.setText(camposrecinto[3])
+            self.ui.inputDireccionR.setText(camposrecinto[4])
+            self.ui.inputIndicacionesR.setText(camposrecinto[5])
+            self.ui.inputCoordenadasR.setText(camposrecinto[6])
+    
+    def load_almacenE(self):
+        bd = BdStd()
+        bd.runsql(f"""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE nombre='Almacén '""")
+        camposrecinto=bd.rows[0]
+        
+        #----------busca el indice del pais-----------------------------------
+        
+        bd.runsql(f"SELECT orden FROM paises WHERE nombre = '{camposrecinto[1]}'")
+        if bd.rows!=None:
+            ordenpais=bd.rows[0][0]
+        
+        #----------
+        if camposrecinto[1] == "España":
+            self.load_comboProvinciasE()            
+            bd.runsql(f"SELECT orden FROM provincias_es WHERE nombre = '{camposrecinto[2]}'")
+            if bd.rows != None:
+                ordenprovincia=bd.rows[0][0]
+                self.ui.comboProvinciaE.setCurrentIndex(int(ordenprovincia)-1)
+                
+        
+        if bd.rows != None:
+            self.ui.inputRecintoE.setText(camposrecinto[0])
+            self.ui.comboPaisE.setCurrentIndex(int(ordenpais))
+            self.ui.inputLocalidadE.setText(camposrecinto[3])
+            self.ui.inputDireccionE.setText(camposrecinto[4])
+            self.ui.inputIndicacionesE.setText(camposrecinto[5])
+            self.ui.inputCoordenadasE.setText(camposrecinto[6])
+    
+    def load_otroR(self):
+        pass
+    
+    def load_otroE(self):
+        pass
+
+    def copyR(self):
+        pyperclip.copy(self.ui.inputCoordenadasR.text())
+    def copyE(self):
+        pyperclip.copy(self.ui.inputCoordenadasE.text())
+
+
 #-----------------------------------------------------------------------------
 #-----------------FUNCIONES PÁGINA PROVEEDORES--------------------------------
 #-----------------------------------------------------------------------------
@@ -822,6 +1081,6 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    ui = CrearEvento('JB-1239-2021')
+    ui = CrearEvento('JB0001')
     ui.show()
     sys.exit(app.exec_())

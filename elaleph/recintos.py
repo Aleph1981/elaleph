@@ -19,15 +19,49 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
     
     #------------------Ajuste de las columnas a la tabla-----------------------
     
-        self.ui.tableRecintos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        #self.ui.tableRecintos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         
     #-----------------Conexion de los botones---------------------------------
         self.ui.buttonAnadir.clicked.connect(self.anadir)
         self.ui.buttonGuardar.clicked.connect(self.guardar_cambios)
         self.ui.buttonEliminar.clicked.connect(self.eliminar)
         self.ui.tableRecintos.verticalHeader().hide()
+        
+        
+    #-----------------cargar combos-------------------------------------------
+        self.load_comboPais()
+        self.ui.comboPais.activated.connect(self.check_pais)
+    
     #-----------------Relleno de la parrilla----------------------------------
         self.loadData()
+        
+    def load_comboPais(self):    
+        
+        self.ui.comboPais.addItem("")
+        bdpais=BdStd()
+        bdpais.runsql("SELECT nombre FROM paises")
+        
+        if bdpais.rows != None:
+            for pais in bdpais.rows:
+                self.ui.comboPais.addItem(pais[0])
+                
+    def check_pais(self):
+        
+        self.pais = self.ui.comboPais.currentText()
+        if self.pais=="España":
+            self.load_comboProvincias()
+    
+    def load_comboProvincias(self):
+        bdprovi = BdStd()
+        bdprovi.runsql("SELECT nombre FROM provincias_es")
+        
+        if bdprovi.rows != None:
+            for provincia in bdprovi.rows:
+                self.ui.comboProvincia.addItem(provincia[0])
+        
+        
+    
+    
     
     def loadData(self):
         bd = BdStd()
@@ -48,6 +82,11 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         self.ui.tableRecintos.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))        
         self.ui.tableRecintos.setItem(rowPosition , 7, QtWidgets.QTableWidgetItem(data[7]))
         self.ui.tableRecintos.setItem(rowPosition , 8, QtWidgets.QTableWidgetItem(data[8]))
+        self.ui.tableRecintos.setItem(rowPosition , 9, QtWidgets.QTableWidgetItem(data[9]))
+        self.ui.tableRecintos.setItem(rowPosition , 10, QtWidgets.QTableWidgetItem(data[10]))
+        self.ui.tableRecintos.setItem(rowPosition , 11, QtWidgets.QTableWidgetItem(data[11]))
+        self.ui.tableRecintos.setItem(rowPosition , 12, QtWidgets.QTableWidgetItem(data[12]))
+        
         
     def anadir(self):
         
@@ -73,13 +112,16 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
             palabra=palabra.capitalize()
             cont+=palabra+" "
         
-        campos_recintos = (id_recinto,nom,self.ui.inputDireccion.text(),\
-                    self.ui.inputCiudad.text().capitalize(), cont, self.ui.inputTelefono.text(),\
+        provincia= self.ui.comboProvincia.currentText()
+        
+        campos_recintos = (id_recinto,nom,self.pais,provincia,self.ui.inputCiudad.text().capitalize(),\
+                    self.ui.inputDireccion.text(),self.ui.labelIndicaciones.text(),self.ui.inputCoordenadas.text(),cont, self.ui.inputTelefono.text(),\
                     self.ui.inputEmail.text().lower(), self.ui.inputWeb.text().lower(),\
                     self.ui.inputNotas.toPlainText())
         bd = BdStd()
-        bd.runsql("INSERT INTO recintos (id_recinto, nombre, direccion, ciudad, \
-                  contacto, telefono, email, web, notas) VALUES (?,?,?,?,?,?,?,?,?);",\
+        bd.runsql("""INSERT INTO recintos (id_recinto, nombre, pais, provincia, ciudad,
+                  direccion, indicaciones, coordenadas, contacto, telefono, email, web,
+                  notas) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);""",\
                   campos_recintos)
         
         #----------------Carga los datos en la tabla---------------------------
@@ -126,9 +168,8 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
                 print("SQL->", sql)
                 bd.runsql(sql)
         
-#        ui = Cambios_Ui()
-#        ui.setupUi(Dialog)
-#        Dialog.show()
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.information(self, "Aleph", "Cambios guardados correctamente")
                 
     def eliminar(self):
         
