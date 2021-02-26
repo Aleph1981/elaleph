@@ -12,11 +12,11 @@ from cambios_ui import *
 
 class Recintos(QtWidgets.QWidget, Recintos_Ui):
     
-    def __init__(self):
+    def __init__(self,padre=None):
         QtWidgets.QWidget.__init__(self)
         self.ui = Recintos_Ui()
         self.ui.setupUi(self)        
-    
+        self.padre = padre
     #------------------Ajuste de las columnas a la tabla-----------------------
     
         #self.ui.tableRecintos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
@@ -91,10 +91,11 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
     def anadir(self):
         
         #--------------------------generador de ID
-        id_recinto = self.ui.inputCiudad.text()[0:3]+self.ui.inputNombre.text()[0:3]
+        id_recinto = self.ui.inputCiudad.text()[0:3]+self.ui.inputNombre.text()[0:12]
         id_recinto = id_recinto.upper()
         trans_table = id_recinto.maketrans("Á,É,Í,Ó,Ú,À,È,Ì,Ò,Ù","A,E,I,O,U,A,E,I,O,U")
         id_recinto = id_recinto.translate(trans_table)
+        id_recinto = id_recinto.replace(" ","")
         self.id_recinto = id_recinto
         
         #---------------FORMATO DE LOS INPUTS----------------------------------
@@ -138,6 +139,12 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         self.ui.inputEmail.setText("")
         self.ui.inputWeb.setText("")
         self.ui.inputNotas.setPlainText("")
+        
+        if self.padre != None:
+            
+            self.padre.loadData()
+            self.close()
+        
 
     def guardar_cambios(self):
         # mere añadido el contenido de la función
@@ -170,7 +177,13 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         
         msgBox = QtWidgets.QMessageBox()
         msgBox.information(self, "Aleph", "Cambios guardados correctamente")
-                
+        
+        if self.padre != None:
+            
+            self.padre.loadData()
+            self.close()
+        
+            
     def eliminar(self):
         
         row=self.ui.tableRecintos.currentRow()

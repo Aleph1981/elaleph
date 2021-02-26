@@ -4,6 +4,7 @@ Created on Thu Dec  3 10:41:43 2020
 @author: aleja
 """
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QDate, Qt
 import sqlite3
 from sqlite3 import Error
 import sys
@@ -51,7 +52,16 @@ class BdStd():
         fecha.reverse()
         fecha = "-".join(fecha)
         return fecha
-
+    
+    def itemFecha(self,fecha):
+        fecha=fecha.split("-")
+        for i in range (len(fecha)):
+            fecha[i]=int(fecha[i])
+        print(fecha)
+        fechaitem= QDate(fecha[0],fecha[1],fecha[2])
+        print(str(fechaitem))
+        return fechaitem
+        
 if __name__ == "__main__":
 	bd = BdStd()
 	bd.runsql("SELECT * FROM PERSONAL")

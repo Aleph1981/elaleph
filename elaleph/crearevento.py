@@ -15,6 +15,7 @@ from personalevento import *            # mere 30-01-21 added
 from proveedorevento import *
 from selectcliente import *
 from clientes import *
+from selectrecinto import *
 import pyperclip
 
 class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
@@ -98,7 +99,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         #self.ui.fechas_table.hideColumn(3)
         self.ui.fechas_table.clicked.connect(self.activaDel)
         self.ui.buttonFechaNext.clicked.connect(self.pasa_pagina)
-        
+        self.ui.buttonModificar.clicked.connect(self.chgDate)
         
         
         
@@ -162,16 +163,27 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         self.provinciaE = ""
         self.ui.comboPaisR.activated.connect(self.check_paisR)
         self.ui.comboPaisE.activated.connect(self.check_paisE)
-        self.ui.buttonEventoR.clicked.connect(self.load_recintoEventoR)
-        self.ui.buttonEventoE.clicked.connect(self.load_recintoEventoE)
+        self.ui.buttonEventoR.clicked.connect(self.load_recintoR)
+        self.ui.buttonEventoE.clicked.connect(self.load_recintoE)
         self.ui.buttonAlmacenR.clicked.connect(self.load_almacenR)
         self.ui.buttonAlmacenE.clicked.connect(self.load_almacenE)
         self.ui.buttonOtroR.clicked.connect(self.load_otroR)
         self.ui.buttonOtroE.clicked.connect(self.load_otroE)
         self.ui.buttonCopyR.clicked.connect(self.copyR)
         self.ui.buttonCopyE.clicked.connect(self.copyE)
-        
-
+        self.ui.buttonOtroR.clicked.connect(self.load_otroR)
+        self.ui.buttonOtroE.clicked.connect(self.load_otroE)
+        self.ui.buttonAddTrans.clicked.connect(self.addTrans)
+        self.ui.buttonDelTrans.clicked.connect(self.delTrans)
+        self.ui.buttonNextTrans.clicked.connect(self.nextTrans)
+        self.ui.tableTransportes.setColumnCount(15)
+        self.ui.tableTransportes.setHorizontalHeaderLabels(["Orden","Evento","Empresa","Conductor","Teléfono",\
+                    "Email","Vehículo","Matrícula","Notas","Recogida","Fecha","Hora","Entrega","Fecha","Hora"])
+        self.ui.tableTransportes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        self.ui.tableTransportes.verticalHeader().hide()
+        self.ui.tableTransportes.hideColumn(0)
+        if self.id_evento != None:
+            self.loadTrans()
 
         
         
@@ -424,7 +436,91 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         
         #----------Muestra las fechas en la tabla------------------------------
         
-        self.load_dias_evento(evento)       
+        self.load_dias_evento(evento)  
+        
+    def chgDate(self):
+        # mere 17-02-21
+        bd = BdStd()
+
+
+        qm = QtWidgets.QMessageBox
+
+        # 1.- Obtener nueva fecha del calendario y hora y cargo de los combos
+        #-----------------------------------------------------
+        
+        newdate = self.ui.calendar.selectedDate()
+        newdate = newdate.toString("yyyy-MM-dd")
+        newtime = self.ui.time.time()
+        newtime = newtime.toString("hh:mm")
+        newtarea = self.ui.combo_tarea.currentText()
+        newdatebonita = bd.gira_fecha(newdate)
+        
+        # 2.- Obtener del grid, el registro seleccionado para cambiar : fecha, hora, tarea, id_fecha
+        #-----------------------------------------------------
+        row=self.ui.fechas_table.currentRow()
+        if row < 0 :
+            texto = f"""Seleccione una fecha de la cuadrícula derecha"""
+            qm.warning(self, '',texto)
+            return
+
+        fechabonita = self.ui.fechas_table.item(row,0).text()
+        fecha = bd.gira_fecha(fechabonita)
+        hora = self.ui.fechas_table.item(row,1).text()
+        tarea = self.ui.fechas_table.item(row,2).text()        
+        id_dias_evento = self.ui.fechas_table.item(row,3).text()
+        id_evento = self.ui.entry_id.text().upper()
+
+        texto = f"""Quiere cambiar {fechabonita} {hora} {tarea} por {newdatebonita} {newtime} {newtarea} ?"""
+        ret = qm.question(self,'', texto, qm.Yes | qm.No)
+        
+        if ret == qm.No :
+            return
+        
+        # 3.- Detecta si hay hijos con los datos nuevos
+        #-----------------------------------------------------
+        if self.fecha_existe(id_evento, newdate, newtime) == True:
+            texto = f""" Ya existe en ese evento la fecha / hora. Desea continuar ?"""
+            ret = qm.question(self,'', texto, qm.Yes | qm.No)
+        
+            if ret == qm.No:
+                return
+            
+        # 4.- Si no hay hijos nuevos -> cambia los hijos
+            # 4.1. cambia el personal asociado al dia
+            # 4.2. cambia los proveedores asociado al dia
+            
+        self.cambia_hijos(id_evento, fecha, hora, newdate, newtime)            
+            
+        # 5.- Si no hijos nuevos -> cambia el padre
+
+        bd.runsql(f"""DELETE FROM dias_evento WHERE id_dias_evento = '{id_dias_evento}'""")
+        id_dias_evento = f"{id_evento}{newdate}{newtime}{newtarea}"
+        campos_fecha = (id_dias_evento,id_evento,newdate,newtime,newtarea)
+        bd.runsql("""INSERT INTO dias_evento (id_dias_evento,id_evento,fecha,
+                  hora,tarea) VALUES (?,?,?,?,?);""",campos_fecha)
+
+ 
+
+        #----------Muestra las fechas en la tabla------------------------------
+        
+        self.load_dias_evento(id_evento)
+        self.ui.fechas_table.show()    
+        
+    def fecha_existe(self, id_evento, newdate, newtime) :
+        bd = BdStd()
+        bd.runsql(f"""SELECT * FROM dias_evento  WHERE id_evento = '{id_evento}'
+                  AND fecha = '{newdate}' AND hora = '{newtime}'""")
+        if bd.rows != None  and len(bd.rows) > 0 :
+            return (True)
+        return(False)
+
+    def cambia_hijos(self, id_evento, fecha, hora, newdate, newtime) :
+        bd = BdStd()
+        txtsql = f"""UPDATE personal_evento SET fecha = '{newdate}', hora = '{newtime}'
+            WHERE id_evento = '{id_evento}' AND fecha = '{fecha}' AND hora = '{hora}'"""
+
+        bd.runsql(txtsql)
+        print("uuuuupdate : ", txtsql)
      
     def load_dias_evento(self,id_evento):
 
@@ -780,11 +876,17 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
                 self.ui.comboFechaE.addItem(bd.gira_fecha(fecha[0]) +" "+fecha[1])
         
 
-    def load_recintoEventoR(self):
-        
-        id_recinto = self.extraer_recinto()
+    def load_recintoR(self, recinto=0):
+        if recinto == 0:                     #Chequea si viene del hijo o no
+            print("entra por None")
+            id_recinto = self.extraer_recinto()
+        else:
+            print("entra por el else")
+            id_recinto = recinto
+            
         bd = BdStd()
         bd.runsql(f"""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE id_recinto = '{id_recinto}'""")
+        print(bd.rows)
         if bd.rows != None:
             camposrecinto=bd.rows[0]
         
@@ -811,12 +913,94 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             self.ui.inputIndicacionesR.setText(camposrecinto[5])
             self.ui.inputCoordenadasR.setText(camposrecinto[6])
             
-            
+    def addTrans(self):
+        bd=BdStd()
+        bd.runsql(f"""SELECT id_proveedor FROM proveedores WHERE empresa = '{self.ui.comboEmpresa.currentText()}'""")
+        id_proveedor=bd.rows[0][0]
+        fechaR = self.ui.comboFechaR.currentText()
+        fechaR=fechaR.split()
+        fechaR = bd.gira_fecha(fechaR[0])
+        horaR = self.ui.horaR.time()
+        horaR = horaR.toString("hh:mm")
+        fechaE = self.ui.comboFechaE.currentText()
+        fechaE = fechaE.split()
+        fechaE = bd.gira_fecha(fechaE[0])
+        horaE = self.ui.horaE.time()
+        horaE = horaE.toString("hh:mm")
+       
+        campos_transporte=(self.id_evento, id_proveedor, self.ui.inputConductor.text(),self.ui.inputTfnConductor.text(),\
+        self.ui.inputEmailConductor.text(),self.ui.inputTipo.text(),self.ui.inputMatricula.text(),self.ui.inputNotas.toPlainText(),\
+        self.ui.inputRecintoR.text(),self.ui.comboPaisR.currentText(),self.ui.comboProvinciaR.currentText(),self.ui.inputLocalidadR.text(),\
+        self.ui.inputDireccionR.text(),self.ui.inputIndicacionesR.text(),self.ui.inputCoordenadasR.text(),fechaR,horaR,\
+        self.ui.inputRecintoE.text(),self.ui.comboPaisE.currentText(),\
+        self.ui.comboProvinciaE.currentText(),self.ui.inputLocalidadE.text(),self.ui.inputDireccionE.text(),\
+        self.ui.inputIndicacionesE.text(),self.ui.inputCoordenadasE.text(),fechaE,horaE)
         
         
         
-    def load_recintoEventoE(self):
-        id_recinto = self.extraer_recinto()
+        bd.runsql("""INSERT INTO transporte_evento (id_evento, id_proveedor, conductor, conductor_telefono, conductor_email,
+                  tipo_vehiculo ,matricula, notas, recogida_lugar, recogida_pais, recogida_provincia,recogida_localidad, recogida_direc,
+                  recogida_indicaciones, recogida_coordenadas, recogida_fecha, recogida_hora,entrega_lugar,entrega_pais,
+                  entrega_provincia,entrega_localidad,entrega_direc,entrega_indicaciones,entrega_coordenadas,entrega_fecha,
+                  entrega_hora)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);""",campos_transporte)
+        
+        self.loadTrans()
+        
+    def loadTrans(self):
+       
+        self.ui.tableTransportes.setRowCount(0)
+        bd = BdStd()
+        bd.runsql("""SELECT orden, id_evento, prov.empresa, conductor, conductor_telefono, conductor_email, tipo_vehiculo,matricula,
+                  te.notas,recogida_lugar,strftime('%d-%m-%Y',recogida_fecha),recogida_hora,entrega_lugar,strftime('%d-%m-%Y',entrega_fecha),entrega_hora FROM 
+                  transporte_evento as te, proveedores as prov WHERE te.id_proveedor = prov.id_proveedor""")
+                  
+        if bd.rows != None :
+            for row in bd.rows :
+                self.load_one(row)
+                
+    def load_one(self, data):
+        rowPosition = self.ui.tableTransportes.rowCount()
+        self.ui.tableTransportes.insertRow(rowPosition)
+        self.ui.tableTransportes.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(str(data[0])))
+        self.ui.tableTransportes.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
+        self.ui.tableTransportes.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
+        self.ui.tableTransportes.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))
+        self.ui.tableTransportes.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[4]))
+        self.ui.tableTransportes.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[5]))
+        self.ui.tableTransportes.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))
+        self.ui.tableTransportes.setItem(rowPosition , 7, QtWidgets.QTableWidgetItem(data[7]))
+        self.ui.tableTransportes.setItem(rowPosition , 8, QtWidgets.QTableWidgetItem(data[8]))
+        self.ui.tableTransportes.setItem(rowPosition , 9, QtWidgets.QTableWidgetItem(data[9]))
+        self.ui.tableTransportes.setItem(rowPosition , 10, QtWidgets.QTableWidgetItem(data[10]))
+        self.ui.tableTransportes.setItem(rowPosition , 11, QtWidgets.QTableWidgetItem(data[11]))
+        self.ui.tableTransportes.setItem(rowPosition , 12, QtWidgets.QTableWidgetItem(data[12]))
+        self.ui.tableTransportes.setItem(rowPosition , 13, QtWidgets.QTableWidgetItem(data[13]))
+        self.ui.tableTransportes.setItem(rowPosition , 14, QtWidgets.QTableWidgetItem(data[14]))
+        
+        
+        
+        
+    def delTrans(self):
+        row = self.ui.tableTransportes.currentRow()
+        orden=self.ui.tableTransportes.item(row,0).text()
+        bd=BdStd()
+        bd.runsql(f"""DELETE FROM transporte_evento WHERE orden = '{orden}'""")
+        self.loadTrans()
+        
+    def nextTrans(self):
+        i = self.ui.tabWidget.currentIndex() 
+        self.ui.tabWidget.setCurrentIndex(i+1)
+        
+        
+        
+    def load_recintoE(self, recinto=0):
+        
+        if recinto == 0:                     #Chequea si viene del hijo o no
+            id_recinto = self.extraer_recinto()
+        else:
+            id_recinto = recinto
+        
+        
         bd = BdStd()
         bd.runsql(f"""SELECT nombre,pais,provincia,ciudad,direccion,indicaciones,coordenadas FROM recintos WHERE id_recinto = '{id_recinto}'""")
         camposrecinto=bd.rows[0]
@@ -901,10 +1085,14 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             self.ui.inputCoordenadasE.setText(camposrecinto[6])
     
     def load_otroR(self):
-        pass
-    
+        self.sel_rec_r = SelectRecinto(self)
+        self.sel_rec_r.show()
+        self.r_e="r"  #-----------chequea si el padre viene de recogida o entrega
+        
     def load_otroE(self):
-        pass
+        self.sel_rec_e = SelectRecinto(self)
+        self.sel_rec_e.show()
+        self.r_e="e"  #-----------chequea si el padre viene de recogida o entrega
 
     def copyR(self):
         pyperclip.copy(self.ui.inputCoordenadasR.text())

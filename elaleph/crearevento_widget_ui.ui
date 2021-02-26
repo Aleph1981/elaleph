@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1338</width>
-    <height>879</height>
+    <height>882</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -2639,7 +2639,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="buttonNext">
+              <widget class="QPushButton" name="buttonNextTrans">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
