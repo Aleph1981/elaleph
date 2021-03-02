@@ -21,6 +21,9 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
     
         self.ui.tableManagers.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableManagers.verticalHeader().hide()
+        self.ui.tableManagers.setColumnCount(7)
+        self.ui.tableManagers.setHorizontalHeaderLabels(["Id","Nombre","Apellidos","DNI","Teléfono","Email","Notas"])
+        
     #-----------------Conexion de los botones---------------------------------
         self.ui.buttonAnadir.clicked.connect(self.anadir)
         self.ui.buttonGuardar.clicked.connect(self.guardar_cambios)
@@ -40,13 +43,14 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
     def load_one(self, data):
         rowPosition = self.ui.tableManagers.rowCount()
         self.ui.tableManagers.insertRow(rowPosition)
-        self.ui.tableManagers.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[1]))
-        self.ui.tableManagers.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[2]))
-        self.ui.tableManagers.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[4]))
-        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[5]))
-        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[3]))
-        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[6]))
-        self.ui.tableManagers.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[0]))        
+        print(data)
+        self.ui.tableManagers.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
+        self.ui.tableManagers.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
+        self.ui.tableManagers.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
+        self.ui.tableManagers.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))
+        self.ui.tableManagers.setItem(rowPosition , 4, QtWidgets.QTableWidgetItem(data[4]))
+        self.ui.tableManagers.setItem(rowPosition , 5, QtWidgets.QTableWidgetItem(data[5]))
+        self.ui.tableManagers.setItem(rowPosition , 6, QtWidgets.QTableWidgetItem(data[6]))        
         
         
     def anadir(self):
@@ -76,13 +80,18 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
         campos_managers = (id_manager,nom,apell, self.ui.inputDni.text().upper(),\
                     self.ui.inputTelefono.text(),self.ui.inputEmail.text().lower(),\
                     self.ui.inputNotas.toPlainText())
-        bd = BdStd()
-        bd.runsql("INSERT INTO managers (id_manager, nombre, apellidos, dni, \
-                  telefono, email, notas) VALUES (?,?,?,?,?,?,?);",campos_managers)
+        if len(id_manager) > 5:
+            bd = BdStd()
+            bd.runsql("INSERT INTO managers (id_manager, nombre, apellidos, dni, \
+                      telefono, email, notas) VALUES (?,?,?,?,?,?,?);",campos_managers)
+            self.load_one(campos_managers)
+        else:
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.warning(self, "Aleph", "Introduzca Nombre, apellidos y dni")
         
         #----------------Carga los datos en la tabla---------------------------
             
-        self.load_one(campos_managers)
+        
         
         #---------------Resetea los inputs-------------------------------------
         
@@ -97,7 +106,7 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
         # mere añadido el contenido de la función
     
         # lista de campos tal como figura en el grid
-        campos = ["id_manager", "nombre", "apellidos", "telefono", "email", "dni", "notas"]
+        campos = ["id_manager", "nombre", "apellidos", "dni", "telefono", "email", "notas"]
         bd = BdStd()
         #
         # se barre todo el grid de pantalla , busca el registro en la bbdd y compara todos
@@ -108,6 +117,7 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
             print(clave)            
             #---- busca el registro y compara los campos cambiados 
             bd.runsql("SELECT * FROM managers WHERE id_manager = '" + clave + "'")      
+            
             for row in bd.rows :
                 sql = ""
                 for i in range(1, len(campos)) :

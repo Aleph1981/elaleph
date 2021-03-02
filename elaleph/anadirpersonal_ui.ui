@@ -20,7 +20,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(210, 210, 210);</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizeIncrement">
@@ -101,9 +101,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
          <property name="text">
           <string/>
          </property>
@@ -141,9 +138,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
         </widget>
        </item>
       </layout>
@@ -177,9 +171,6 @@
            <width>200</width>
            <height>0</height>
           </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
@@ -215,9 +206,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
         </widget>
        </item>
       </layout>
@@ -252,9 +240,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
         </widget>
        </item>
       </layout>
@@ -288,9 +273,6 @@
            <width>200</width>
            <height>0</height>
           </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string/>
@@ -329,9 +311,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
          <property name="text">
           <string/>
          </property>
@@ -369,9 +348,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
-         </property>
          <property name="text">
           <string/>
          </property>
@@ -408,9 +384,6 @@
            <width>200</width>
            <height>0</height>
           </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 255);</string>
          </property>
         </widget>
        </item>
@@ -513,7 +486,7 @@
      <item>
       <widget class="QTextEdit" name="textNOTAS">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
+        <string notr="true"/>
        </property>
       </widget>
      </item>

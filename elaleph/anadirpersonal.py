@@ -96,55 +96,61 @@ class AnadirPersonal(QtWidgets.QWidget, AnadirPersonal_Ui):
 
 
 #------------crea la tupla de campos y la inserta en la bbdd-------------------
-        try:
-            campos_personal=(id_personal,nom,apell,\
-                    self.entryDNI.text().upper(),self.entryTFN.text(),self.entryEMAIL.text().lower(),\
-                    autonomo,self.entryDIRECCION.text().capitalize(),self.entryCP.text(),\
-                    self.entryCIUDAD.text().capitalize(),self.entryIBAN.text().upper(),self.textNOTAS.toPlainText())
-            
-            bd=BdStd()
-            
+        if len(id_personal)>4:
+
+            try:
+                campos_personal=(id_personal,nom,apell,\
+                        self.entryDNI.text().upper(),self.entryTFN.text(),self.entryEMAIL.text().lower(),\
+                        autonomo,self.entryDIRECCION.text().capitalize(),self.entryCP.text(),\
+                        self.entryCIUDAD.text().capitalize(),self.entryIBAN.text().upper(),self.textNOTAS.toPlainText())
                 
-            bd.runsql("INSERT INTO personal (id_personal,nombre,apellidos,dni,\
-                           telefono,email,autonomo,direccion,cp,ciudad,iban,notas)\
-                           VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",campos_personal)
-    
-    #-----------------Chequeo de los checkboxes-----------------------------------        
-    
-            
-            i = 0
-            for checkobj in self.widget.findChildren(QCheckBox):
+                bd=BdStd()
                 
-                if checkobj.checkState():
-                    self.map_cargos[i]['checked'] = "1"
                     
-                else: 
-                    self.map_cargos[i]['checked'] = "0"
-                    
-                i+=1
-            
-            i = 0
-            for caja in self.widget.findChildren(QLineEdit):
+                bd.runsql("INSERT INTO personal (id_personal,nombre,apellidos,dni,\
+                               telefono,email,autonomo,direccion,cp,ciudad,iban,notas)\
+                               VALUES (?,?,?,?,?,?,?,?,?,?,?,?);",campos_personal)
+        
+        #-----------------Chequeo de los checkboxes-----------------------------------        
+        
                 
-                if caja.text() != "":
-                    self.map_cargos[i]['tarifa'] = int(caja.text())
-                i+=1   
-            
-            guardaTarifas(self.id_personal, self.map_cargos)
+                i = 0
+                for checkobj in self.widget.findChildren(QCheckBox):
+                    
+                    if checkobj.checkState():
+                        self.map_cargos[i]['checked'] = "1"
                         
-#------Crea una carpeta con su id como nombre para guardar su documentación----
-        
-            os.mkdir(f"{id_personal}")        
-
-#---------------------------Tras chequearlos todos graba y cierra-------------                  
-
+                    else: 
+                        self.map_cargos[i]['checked'] = "0"
+                        
+                    i+=1
+                
+                i = 0
+                for caja in self.widget.findChildren(QLineEdit):
+                    
+                    if caja.text() != "":
+                        self.map_cargos[i]['tarifa'] = int(caja.text())
+                    i+=1   
+                
+                guardaTarifas(self.id_personal, self.map_cargos)
+                            
+    #------Crea una carpeta con su id como nombre para guardar su documentación----
             
-            self.setupUi(self)
-            self.close()
-        
-        except Exception as error:
-            self.window=Error(str(error))
-            self.window.show()
+                os.mkdir(f"{id_personal}")        
+    
+    #---------------------------Tras chequearlos todos graba y cierra-------------                  
+    
+                
+                self.setupUi(self)
+                self.close()
+            
+            except Exception as e:
+                msgBox = QtWidgets.QMessageBox()
+                msgBox.warning(self, "Aleph", f"{e}")
+        else:
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.warning(self, "Aleph", "Introduzca Nombre, apellidos y dni")
+            
             
             
           
