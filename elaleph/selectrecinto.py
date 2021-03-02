@@ -27,6 +27,7 @@ class SelectRecinto(QtWidgets.QWidget, SelectRecinto_Ui):
         self.ui.lineEdit.textChanged.connect(self.loadData)
         self.ui.buttonSelect.clicked.connect(self.devuelveRecinto)
         self.ui.buttonAdd.clicked.connect(self.addRecinto)
+        self.self_id = "selectrecinto"
     
     def loadData(self):
         self.ui.tableRecintos.setRowCount(0)

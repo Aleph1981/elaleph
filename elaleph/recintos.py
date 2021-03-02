@@ -50,6 +50,8 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         self.pais = self.ui.comboPais.currentText()
         if self.pais=="España":
             self.load_comboProvincias()
+        else:
+            self.ui.comboProvincia.clear()
     
     def load_comboProvincias(self):
         bdprovi = BdStd()
@@ -141,9 +143,16 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         self.ui.inputNotas.setPlainText("")
         
         if self.padre != None:
+            print(self.padre)
             
-            self.padre.loadData()
+            if self.padre.self_id == "crearevento":
+                self.padre.load_comboRecintos()
+               
+            elif self.padre.self_id == "selectrecinto":
+                self.padre.loadData()
+                
             self.close()
+            
         
 
     def guardar_cambios(self):
@@ -179,8 +188,14 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         msgBox.information(self, "Aleph", "Cambios guardados correctamente")
         
         if self.padre != None:
+            print(self.padre)
             
-            self.padre.loadData()
+            if self.padre == "crearevento":
+                self.padre.load_comboRecintos()
+               
+            elif self.padre == "selectrecinto":
+                self.padre.loadData()
+                
             self.close()
         
             
@@ -202,6 +217,14 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
                 self.ui.tableRecintos.removeRow(row)
         else:
             print("No borro ", clave)
+        if self.padre != None:
+            
+            
+            if self.padre == "crearevento":
+                self.padre.load_comboRecintos()
+               
+            elif self.padre == "selectrecinto":
+                self.padre.loadData()
         
                   
         

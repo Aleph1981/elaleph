@@ -53,14 +53,15 @@ class BdStd():
         fecha = "-".join(fecha)
         return fecha
     
-    def itemFecha(self,fecha):
-        fecha=fecha.split("-")
-        for i in range (len(fecha)):
-            fecha[i]=int(fecha[i])
-        print(fecha)
-        fechaitem= QDate(fecha[0],fecha[1],fecha[2])
-        print(str(fechaitem))
-        return fechaitem
+class SortDate(QtWidgets.QTableWidgetItem):
+    def __init__(self, text, sortKey):
+        #call custom constructor with UserType item type
+        QtWidgets.QTableWidgetItem.__init__(self, text, QtWidgets.QTableWidgetItem.UserType)
+        self.sortKey = sortKey
+
+    #Qt uses a simple < check for sorting items, override this to use the sortKey
+    def __lt__(self, other):
+        return self.sortKey < other.sortKey
         
 if __name__ == "__main__":
 	bd = BdStd()

@@ -10,12 +10,12 @@ from bdstd import *
 
 class AnadirProveedor(QtWidgets.QWidget, AnadirProveedor_Ui):
     
-    def __init__(self, id_proveedor = None, *args, **kwargs):
+    def __init__(self, id_proveedor = None, padre=None, *args, **kwargs):
         QtWidgets.QWidget.__init__(self, *args, **kwargs)
         self.setupUi(self)
         self.opcion = "A"  # Alta
         self.id_proveedor = id_proveedor
-        
+        self.padre = padre
         
         self.buttonAceptar.clicked.connect(self.aceptar)
         
@@ -160,27 +160,13 @@ class AnadirProveedor(QtWidgets.QWidget, AnadirProveedor_Ui):
                 self.entry_email_contacto.text().lower(),self.textNOTAS.toPlainText())
             bd.runsql(txtsql)
             
+        if self.padre != None:
+            self.padre.load_comboEmpresa()
+            
         
         self.close()
         
-    # def borra_tabla_servicios(self) :
-    #     bd1=BdStd()
-    #     try:               
-    #         bd1.runsql(f"""DELETE FROM proveedor_servicio WHERE id_proveedor = '{self.id_proveedor}';""")
-        
-    #     except Exception as e:
-    #         print(e)           
-        
-    # def add_servicio(self,item):
-    #     bd1=BdStd()
-    #     #------------------Alejandro 28-1
-    #     if item != "":
-    #         try:               
-    #             bd1.runsql(f"INSERT INTO servicios (servicio) VALUES ('{item}');")
-            
-    #         except Exception as e:
-    #             print(e)     
-                
+    
                 
     
     

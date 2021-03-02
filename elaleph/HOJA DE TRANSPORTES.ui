@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>872</width>
+    <height>528</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QComboBox" name="comboAnyo">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>100</y>
+     <width>91</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelAnyo">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>70</y>
+     <width>180</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Año:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboMes">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>180</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Enero</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Febrero</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Marzo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Abril</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Mayo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Junio</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Julio</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Agosto</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Septiembre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Octubre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Noviembre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Diciembre</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="labelMes">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>150</y>
+     <width>180</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Mes:</string>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableEventos">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>100</y>
+     <width>640</width>
+     <height>381</height>
+    </rect>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelEventos">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>180</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Eventos:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelTitle">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>20</y>
+     <width>180</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Hoja de transportes</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="buttonCrear">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>440</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Crear</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelCrear">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>410</y>
+     <width>180</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Crear todos los transportes:</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboMes_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>300</y>
+     <width>141</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Enero</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Febrero</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Marzo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Abril</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Mayo</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Junio</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Julio</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Agosto</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Septiembre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Octubre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Noviembre</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Diciembre</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QPushButton" name="buttonCrear_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>350</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Crear</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelCrear_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>270</y>
+     <width>180</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Crear para:</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -7,10 +7,13 @@ Created on Wed Jan 20 17:05:18 2021
 
 from PyQt5 import QtSql, QtCore, QtGui, QtWidgets
 from consultaeventos_ui import *
-from bdstd import BdStd
+from bdstd import *
 from fichaevento import *
 import datetime
 from hojadeestilos import *
+
+
+
 
 class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
     
@@ -36,7 +39,7 @@ class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
         
         if filtroYear == "Año" :
             bd = BdStd()
-            bd.runsql(f"""SELECT strftime('%d-%m-%Y', di.fecha),di.id_evento,ev.nombre,di.tarea, ev.cliente,
+            bd.runsql(f"""SELECT di.fecha,di.id_evento,ev.nombre,di.tarea, ev.cliente,
                       re.nombre,ma.nombre||''||ma.apellidos  FROM 
                       dias_evento as di, evento as ev, recintos as re, 
                       managers as ma WHERE ev.id_evento=di.id_evento AND 
@@ -49,7 +52,7 @@ class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
             
         else :
             bd = BdStd()
-            bd.runsql(f"""SELECT strftime('%d-%m-%Y', di.fecha),di.id_evento,ev.nombre,di.tarea,ev.cliente,
+            bd.runsql(f"""SELECT di.fecha,di.id_evento,ev.nombre,di.tarea,ev.cliente,
                       re.nombre,ma.nombre||''||ma.apellidos  FROM
                       dias_evento as di, evento as ev, recintos as re, 
                       managers as ma WHERE ev.id_evento=di.id_evento AND 
@@ -60,9 +63,10 @@ class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
                     self.loadEventos(row)
                     
     def loadEventos(self, data):
+         bd=BdStd()
          rowPosition = self.ui.tableWidget.rowCount()
          self.ui.tableWidget.insertRow(rowPosition)
-         self.ui.tableWidget.setItem(rowPosition , 0, QtWidgets.QTableWidgetItem(data[0]))
+         self.ui.tableWidget.setItem(rowPosition , 0, SortDate(bd.gira_fecha(data[0]),data[0]))
          self.ui.tableWidget.setItem(rowPosition , 1, QtWidgets.QTableWidgetItem(data[1]))
          self.ui.tableWidget.setItem(rowPosition , 2, QtWidgets.QTableWidgetItem(data[2]))
          self.ui.tableWidget.setItem(rowPosition , 3, QtWidgets.QTableWidgetItem(data[3]))

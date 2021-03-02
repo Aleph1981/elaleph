@@ -17,9 +17,10 @@ class ConsultaProveedor(QtWidgets.QWidget, ConsultaProveedor_Ui):
         QtWidgets.QWidget.__init__(self)
         self.ui = ConsultaProveedor_Ui()
         self.ui.setupUi(self)     
-        self.ui.tableProveedor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.ui.tableProveedor.verticalHeader().setDefaultSectionSize(100)
         self.ui.tableProveedor.verticalHeader().hide()
+        self.ui.tableProveedor.setColumnCount(14)
+        self.ui.tableProveedor.horizontalHeader().setStretchLastSection(True)
         self.ui.tableProveedor.setHorizontalHeaderLabels(["ID","Empresa","Provincia",\
             "Localidad","Dirección","Servicio/s","CIF","Teléfono","Email","Web",\
             "Contacto","Teléfono Contacto","Email Contacto","Notas"])
@@ -80,7 +81,8 @@ class ConsultaProveedor(QtWidgets.QWidget, ConsultaProveedor_Ui):
         self.ui.tableProveedor.setItem(rowPosition , 9, QtWidgets.QTableWidgetItem(data[9]))    
         self.ui.tableProveedor.setItem(rowPosition , 10, QtWidgets.QTableWidgetItem(data[10]))    
         self.ui.tableProveedor.setItem(rowPosition , 11, QtWidgets.QTableWidgetItem(data[11]))    
-        
+        self.ui.tableProveedor.setItem(rowPosition , 12, QtWidgets.QTableWidgetItem(data[12]))
+        self.ui.tableProveedor.setItem(rowPosition , 13, QtWidgets.QTableWidgetItem(data[13]))
             
             
     

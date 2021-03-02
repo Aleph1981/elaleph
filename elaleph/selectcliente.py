@@ -6,18 +6,18 @@ Created on Wed Jan 20 17:05:18 2021
 """
 
 from PyQt5 import QtSql, QtCore, QtGui, QtWidgets
-from selectrecinto_ui import *
+from selectcliente_ui import *
 
 
 from bdstd import BdStd
 
 
 
-class SelectRecinto(QtWidgets.QWidget, SelectRecinto_Ui):
+class SelectCliente(QtWidgets.QWidget, SelectCliente_Ui):
     
     def __init__(self,self_padre=None):
         QtWidgets.QWidget.__init__(self)
-        self.ui = SelectRecinto_Ui()
+        self.ui = SelectCliente_Ui()
         self.ui.setupUi(self)
         self.loadData()
         self.padre = self_padre
