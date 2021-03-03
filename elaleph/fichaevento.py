@@ -80,13 +80,17 @@ class FichaEvento(QtWidgets.QWidget, FichaEvento_Ui):
         self.ui.inputContacto.setText(data[3])
         self.ui.inputTelefono.setText(data[4])
         self.ui.inputEmail.setText(data[5])
+        
         bd=BdStd()
         bd.runsql(f"SELECT nombre, ciudad FROM recintos WHERE id_recinto = '{data[6]}';")
-        print(bd.rows)
-        self.ui.inputRecinto.setText(f"{bd.rows[0][0]}- {bd.rows[0][1]}")
+        if len(bd.rows) > 0:
+            self.ui.inputRecinto.setText(f"{bd.rows[0][0]}- {bd.rows[0][1]}")
+        
         bd.runsql(f"SELECT nombre, apellidos FROM managers WHERE id_manager = '{data[7]}';")
-        self.ui.inputManager.setText(f"{bd.rows[0][0]}{bd.rows[0][1]}")
-        self.ui.inputNotas.setPlainText(data[8])
+        
+        if len(bd.rows) > 0:
+            self.ui.inputManager.setText(f"{bd.rows[0][0]} {bd.rows[0][1]}")
+            self.ui.inputNotas.setPlainText(data[8])
 
 #-----------Carga los datos para la tabla de fechas---------------------------
         

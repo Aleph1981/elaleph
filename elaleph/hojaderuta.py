@@ -93,7 +93,7 @@ class HojaDeRuta(QtWidgets.QDialog, HojaDeRuta_Ui):
             ws1.title = "Hoja de ruta"
             
             bd.runsql(f"""SELECT ev.id_evento,ev.nombre,re.nombre,re.direccion||' '|| re.ciudad,cliente,
-                      contacto_onsite,telefono_onsite,email_onsite, ev.notas, ma.nombre||''||ma.apellidos
+                      contacto_onsite,telefono_onsite,email_onsite, ev.notas, ma.nombre||' '||ma.apellidos
                       FROM evento as ev,recintos as re, managers as ma 
                       WHERE ev.id_evento = '{self.id_evento}' AND re.id_recinto = ev.id_recinto AND
                       ma.id_manager = ev.id_manager;""")
@@ -826,9 +826,9 @@ class HojaDeRuta(QtWidgets.QDialog, HojaDeRuta_Ui):
                         ws1[f"G{xlrow}"].font= Font(name='Arial',size=8)
                         ws1[f"G{xlrow}"].border = thin_border
                         
-                        xlrow+=2
-   
-            
+                        xlrow+=1
+                xlrow+=1
+                
     #-------------------------------Informa de la creción o del error----------
     
             fichero = self.carpeta + f"hojaderuta-{self.id_evento}.xlsx"

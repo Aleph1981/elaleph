@@ -50,7 +50,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         bd.runsql(f"SELECT nombre, apellidos FROM managers;")
         if bd.rows != None :
               for nombre in bd.rows :
-                 self.ui.combo_manager.addItem(f"{nombre[0]}{nombre[1]}")
+                 self.ui.combo_manager.addItem(f"{nombre[0]} {nombre[1]}")
                  
                  
         if self.id_evento == None :       # es un alta cambia el título del formulario
@@ -145,7 +145,6 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
 
         self.load_comboEmpresa()
         self.load_comboPaises()
-        self.load_fechasTrans()
         self.paisR = ""
         self.paisE = ""
         self.provinciaR = ""
@@ -242,6 +241,8 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             self.loadcombo_cargos()
             self.filtro_checks("ALL")
             self.loadcombo_dias()
+        if index == 3 :
+            self.load_fechasTrans()
         if index == 4 :
             # refresca grids proveedores
             self.loadcombo_servicios()
@@ -286,7 +287,7 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         if len(ciudades) > 0:
             for ciudad in ciudades:
                   self.ui.comboBox_2.addItem(ciudad[0])
-        
+        self.updateCombo()
         bd.runsql(f"SELECT nombre FROM recintos WHERE ciudad = '{self.ui.comboBox_2.currentText()}';")
         if bd.rows != None :
               for recinto in bd.rows :
@@ -366,12 +367,14 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
             manager = self.ui.combo_manager.currentText().split(" ")
             nombre_manager = manager[0]
             apellidos_manager = manager[1]
-            bdaux.runsql(f"""SELECT id_manager FROM managers WHERE nombre='{nombre_manager} '
-                      AND apellidos = '{apellidos_manager} '""")
+            print(nombre_manager+apellidos_manager)
+            bdaux.runsql(f"""SELECT id_manager FROM managers WHERE nombre = '{nombre_manager}'
+                      AND apellidos = '{apellidos_manager}'""")
             if bdaux.rows != None and len(bdaux.rows) > 0 :
                 id_manager = bdaux.rows[0][0]
         except:
             print("error extraer_manager:", sys.exc_info())
+        print(f"El manager de este evento es {id_manager}")
         return (id_manager)
     
     def posiciona_manager(self, id_manager):

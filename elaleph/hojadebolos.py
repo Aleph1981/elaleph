@@ -80,11 +80,30 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
             
             ws1.title = "Hoja de bolos"
             
-            bd.runsql(f"""SELECT pe.id_personal, per.nombre, per.apellidos, pe.fecha, pe.id_evento, ev.nombre, ma.nombre, ma.apellidos, pe.id_cargo, ca.nombre, ta.tarifa, suplemento  
-            FROM personal_evento as pe JOIN evento as ev JOIN tarifas as ta JOIN personal as per JOIN managers as ma JOIN cargos as ca
-            WHERE pe.id_evento=ev.id_evento AND pe.id_cargo=ta.id_cargo AND pe.id_personal='{self.id_personal}' AND ta.id_personal=pe.id_personal 
-            AND ca.id_cargo=ta.id_cargo and ta.id_personal=pe.id_personal AND ma.id_manager=ev.id_manager AND per.id_personal=pe.id_personal
-            AND pe.fecha LIKE '{self.fecha}%';""")
+            # bd.runsql(f"""SELECT pe.id_personal, per.nombre, per.apellidos, pe.fecha, pe.id_evento, ev.nombre, ma.nombre, ma.apellidos, pe.id_cargo, ca.nombre, ta.tarifa, suplemento  
+            # FROM personal_evento as pe JOIN evento as ev JOIN tarifas as ta JOIN personal as per JOIN managers as ma JOIN cargos as ca
+            # WHERE pe.id_evento=ev.id_evento AND pe.id_cargo=ta.id_cargo AND pe.id_personal='{self.id_personal}' AND ta.id_personal=pe.id_personal 
+            # AND ca.id_cargo=ta.id_cargo and ta.id_personal=pe.id_personal AND ma.id_manager=ev.id_manager AND per.id_personal=pe.id_personal
+            # AND pe.fecha LIKE '{self.fecha}%';""")
+            bd.runsql(f"""SELECT pe.id_personal, per.nombre, per.apellidos, strftime('%d-%m-%Y',pe.fecha), pe.id_evento, ev.nombre, 
+
+           ma.nombre, ma.apellidos, pe.id_cargo, ca.nombre AS CARGO, ta.tarifa, suplemento 
+
+           FROM personal_evento as pe 
+
+            LEFT JOIN evento   as ev  ON pe.id_evento=ev.id_evento
+
+            LEFT JOIN personal as per ON per.id_personal=pe.id_personal
+
+            LEFT JOIN cargos   as ca  ON pe.id_cargo=ca.id_cargo 
+
+            LEFT JOIN tarifas  as ta  ON ta.id_personal=pe.id_personal and ta.id_cargo = ca.id_cargo
+
+            LEFT JOIN managers as ma  ON ma.id_manager=ev.id_manager
+
+            WHERE  pe.id_personal='{self.id_personal}'  AND pe.fecha LIKE '{self.fecha}%'                          
+
+            GROUP BY pe.id_personal, pe.fecha""")
             
             nombreapell=bd.rows[0][1]+bd.rows[0][2]
             ws1["C5"]=nombreapell

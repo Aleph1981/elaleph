@@ -76,6 +76,8 @@ class ProjectManagers(QtWidgets.QWidget, ProjectManagers_Ui):
         for palabra in apellidos:
             palabra=palabra.capitalize()
             apell+=palabra+" "
+        nom= nom[:-1]
+        apell=apell[:-1]
         
         campos_managers = (id_manager,nom,apell, self.ui.inputDni.text().upper(),\
                     self.ui.inputTelefono.text(),self.ui.inputEmail.text().lower(),\
