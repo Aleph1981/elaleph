@@ -159,8 +159,8 @@ class Recintos(QtWidgets.QWidget, Recintos_Ui):
         # mere añadido el contenido de la función
     
         # lista de campos tal como figura en el grid
-        campos = ["id_recintos", "nombre", "direccion", "ciudad", "contacto",\
-                  "telefono","email","web", "notas"]
+        campos = ["id_recintos", "nombre","pais","provincia","ciudad","direccion",\
+                  "indicaciones","coordenadas", "contacto", "telefono","email","web", "notas"]
         bd = BdStd()
         #
         # se barre todo el grid de pantalla , busca el registro en la bbdd y compara todos

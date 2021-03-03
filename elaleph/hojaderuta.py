@@ -793,10 +793,10 @@ class HojaDeRuta(QtWidgets.QDialog, HojaDeRuta_Ui):
                 
                 bdprov=BdStd()
                 bdprov.runsql(fr"""SELECT pe.servicio, contacto_onsite, telefono_onsite, pro.empresa, pe.notas,
-                      dtrftime(%d-%m%Y,fecha)||" "||hora FROM proveedores_evento as pe, proveedores as pro 
+                      strftime('%d-%m-%Y',fecha)||" "||hora FROM proveedores_evento as pe, proveedores as pro 
                       WHERE pe.id_evento='{self.id_evento}'AND pe.id_proveedor=pro.id_proveedor AND pe.servicio='{servicio[0]}';""")
                 print(servicio[0])
-                if bdprov.rows != None:
+                if bdprov.rows != None :
                     for prov in bdprov.rows:
                         ws1.merge_cells(f"A{xlrow}:B{xlrow}")
                         ws1.merge_cells(f"E{xlrow}:F{xlrow}")

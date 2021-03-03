@@ -38,7 +38,7 @@ class HojaBolos(QtWidgets.QDialog, HojaBolos_Ui):
         self.ui.buttoCrearMulti.clicked.connect(self.crear_multi)
         
         ctx = ConfigCtx()
-        self.carpeta = ctx.readvar("RUTAS", "hojas_de_bolo")
+        self.carpeta = ctx.readvar("RUTAS", "hojas_de_bolos")
         
     def load_tabla(self):
         self.ui.tablePersonal.setRowCount(0)

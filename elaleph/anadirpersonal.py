@@ -6,7 +6,6 @@ Created on Wed Oct 28 20:14:57 2020
 """
 
 from anadirpersonal_ui import *
-from error import *
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 from bdstd import *

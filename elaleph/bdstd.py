@@ -9,10 +9,12 @@ import sqlite3
 from sqlite3 import Error
 import sys
 
-class BdStd():
+
+        
+class BdStd(object):
 
     def __init__(self):
-    		#self.nombrebd = r"C:\sqlite\db\pythonsqlite.db"
+    		
     		self.nombrebd = r"elaleph.db"
     		self.conecta()
     
@@ -45,7 +47,10 @@ class BdStd():
             self.conex.commit()
             self.cierra()
         except Exception as e:
-            print(str(e))
+            qm = QtWidgets.QMessageBox()
+            qm.information(qm,'Aleph', f"{e}")
+            
+                
         
     def gira_fecha(self,fecha):
         fecha=fecha.split("-")
