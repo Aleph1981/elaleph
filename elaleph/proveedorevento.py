@@ -6,6 +6,7 @@ Created on Tue Dec 29 12:50:51 2020
 """
 
 from PyQt5 import QtSql, QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QTime
 #import easygui
 from proveedorevento_ui import *
 from bdstd import BdStd
@@ -59,17 +60,26 @@ class ProveedorEvento(QtWidgets.QDialog, ProveedorEvento_Ui):
         # en la parrilla de crear evento el orden es : fecha, cargo, id_proveedor
         for i, item in enumerate(self.padre.ui.prov_added.selectedItems()) :
             if i== 0: 
-                self.fecha = item.text()
+                self.fecha_hora = item.text()
+                tmp=self.fecha_hora.split(" ")
+                self.fecha=tmp[0]
+                tmp2=tmp[1].split(":")
+                print(f"la hora es {tmp2}")
+                time=QTime(int(tmp2[0]),int(tmp2[1]))
+                
             if i== 1: 
                 self.nom_servicio = item.text()
             if i== 2: 
-                self.id_proveedor = item.text()
-            
+                self.empresa = item.text()
+        bdid=BdStd()
+        bdid.runsql(f"""SELECT id_proveedor FROM proveedores WHERE empresa='{self.empresa}'""")
+        self.id_proveedor = bdid.rows[0][0]
+        
         bd1=BdStd() 
-        txtsql = f"""SELECT orden, contacto_onsite, telefono_onsite,email_onsite, notas 
-        FROM proveedores_evento 
+        txtsql = f"""SELECT orden, contacto_onsite, telefono_onsite,email_onsite, pe.notas 
+        FROM proveedores_evento as pe JOIN proveedores as pro
         WHERE id_evento = '{self.padre.id_evento}' 
-        AND strftime('%d-%m-%Y',fecha) = '{self.fecha}' AND id_proveedor = '{self.id_proveedor}'"""
+        AND strftime('%d-%m-%Y',fecha) = '{self.fecha}' AND pro.empresa='{self.empresa}' AND pro.id_proveedor=pe.id_proveedor"""
         bd1.runsql(txtsql) 
         print("servicio", self.nom_servicio, txtsql)
         if bd1.rows != None :
@@ -79,6 +89,8 @@ class ProveedorEvento(QtWidgets.QDialog, ProveedorEvento_Ui):
                 self.ui.inputTelefono.setText(row_data[2])
                 self.ui.inputEmail.setText(row_data[3])
                 self.ui.inputNotas.setPlainText(row_data[4])
+                self.ui.hora.setTime(time)
+                print(row_data)
 
 
                 
@@ -99,7 +111,7 @@ class ProveedorEvento(QtWidgets.QDialog, ProveedorEvento_Ui):
         self.list_servicios = []   
         bd1=BdStd()        
         bd1.runsql(f"SELECT servicio FROM proveedores WHERE id_proveedor='{self.id_proveedor}'") 
-        if bd1.rows != None :
+        if bd1.rows != None and len(bd1.rows)>0 :
             print(bd1.rows)
             servicios = bd1.rows[0][0].split()
             #print("servicios ",servicios)
