@@ -40,7 +40,7 @@ class ConsultaEventos(QtWidgets.QWidget, ConsultaEventos_Ui):
         if filtroYear == "Año" :
             bd = BdStd()
             bd.runsql(f"""SELECT di.fecha,di.id_evento,ev.nombre,di.tarea, ev.cliente,
-                      re.nombre,ma.nombre||''||ma.apellidos  FROM 
+                      re.nombre,ma.nombre||' '||ma.apellidos  FROM 
                       dias_evento as di, evento as ev, recintos as re, 
                       managers as ma WHERE ev.id_evento=di.id_evento AND 
                       re.id_recinto=ev.id_recinto AND ma.id_manager=ev.id_manager""")

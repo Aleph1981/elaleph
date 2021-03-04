@@ -1253,20 +1253,30 @@ class CrearEvento(QtWidgets.QWidget, CrearEvento_Ui):
         #-------------- Borrar el proveedor del evento  
         for i, item in enumerate(self.ui.prov_added.selectedItems()):
             if i == 0 : 
-               date = item.text()
+               fecha_hora = item.text()
+               tmp=fecha_hora.split(" ")
+               date = tmp[0]
+               hora = tmp[1]
+               print(f"la hora es {hora}")
             elif i == 1  : 
                 nom_servicio = item.text()
             elif i == 2  : 
-                id_proveedor = item.text()
+                self.empresa = item.text()
+                
+        bdid=BdStd()
+        bdid.runsql(f"""SELECT id_proveedor FROM proveedores WHERE empresa='{self.empresa}'""")
+        self.id_proveedor = bdid.rows[0][0]
         
         
         #id_dias_evento = f"{id_evento}{date}{tarea}"
         #----------Guarda la fecha en la bbdd----------------------------------
         
         bd = BdStd()
-        bd.runsql(f"""DELETE FROM proveedores_evento WHERE id_evento = '{self.id_evento}' 
-                  AND strftime('%d-%m-%Y',fecha) = '{date}' 
-                  AND id_proveedor = '{id_proveedor}' AND servicio = '{nom_servicio}'""")
+        txtsqldel=f"""DELETE FROM proveedores_evento WHERE id_evento = '{self.id_evento}' 
+                  AND strftime('%d-%m-%Y',fecha) = '{date}' AND hora = '{hora}'
+                  AND id_proveedor = '{self.id_proveedor}' AND servicio = '{nom_servicio}'"""
+        bd.runsql(txtsqldel)
+        print(txtsqldel)
     
         
         #----------Refresca Grid------------------------------
