@@ -301,11 +301,15 @@ class Acalendar() :
                 dia = int0( newcalendar[k])
                 evento=QtWidgets.QTableWidgetItem(newcalendar[k]+texto)
                 if self.dias_event[dia-1] != "" :
+                      bd=BdStd()
+                      bd.runsql(f"""SELECT nombre FROM evento WHERE id_evento = '{self.dias_event[dia-1]}' """)
+                      nombre_evento=bd.rows[0][0]
                     #colorear la celda AQUI
-                      texto = "->" + self.dias_event[dia-1]
+                      texto = " " + self.dias_event[dia-1]
                       evento=QtWidgets.QTableWidgetItem(newcalendar[k]+texto)
                       evento.setBackground(QtGui.QColor(170,0,255))
-                
+                      evento.setToolTip(nombre_evento)
+                      
                 elif self.dias_ocupado[dia-1] != "":
                       evento.setBackground(QtGui.QColor(255,0,0))
                 
