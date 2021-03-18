@@ -1,0 +1,113 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'hojaderuta_ui.ui'
+#
+# Created by: PyQt5 UI code generator 5.9.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class HojaDeRuta_Ui(object):
+    def setupUi(self, Dialog):
+        Dialog.setObjectName("Dialog")
+        Dialog.resize(872, 528)
+        self.comboAnyo = QtWidgets.QComboBox(Dialog)
+        self.comboAnyo.setGeometry(QtCore.QRect(30, 100, 91, 22))
+        self.comboAnyo.setObjectName("comboAnyo")
+        self.labelAnyo = QtWidgets.QLabel(Dialog)
+        self.labelAnyo.setGeometry(QtCore.QRect(30, 70, 180, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.labelAnyo.sizePolicy().hasHeightForWidth())
+        self.labelAnyo.setSizePolicy(sizePolicy)
+        self.labelAnyo.setObjectName("labelAnyo")
+        self.comboMes = QtWidgets.QComboBox(Dialog)
+        self.comboMes.setGeometry(QtCore.QRect(30, 180, 141, 22))
+        self.comboMes.setObjectName("comboMes")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.comboMes.addItem("")
+        self.labelMes = QtWidgets.QLabel(Dialog)
+        self.labelMes.setGeometry(QtCore.QRect(30, 150, 180, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.labelMes.sizePolicy().hasHeightForWidth())
+        self.labelMes.setSizePolicy(sizePolicy)
+        self.labelMes.setObjectName("labelMes")
+        self.tableEventos = QtWidgets.QTableWidget(Dialog)
+        self.tableEventos.setGeometry(QtCore.QRect(210, 100, 640, 381))
+        self.tableEventos.setObjectName("tableEventos")
+        self.tableEventos.setColumnCount(0)
+        self.tableEventos.setRowCount(0)
+        self.labelEventos = QtWidgets.QLabel(Dialog)
+        self.labelEventos.setGeometry(QtCore.QRect(210, 70, 180, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.labelEventos.sizePolicy().hasHeightForWidth())
+        self.labelEventos.setSizePolicy(sizePolicy)
+        self.labelEventos.setObjectName("labelEventos")
+        self.labelTitle = QtWidgets.QLabel(Dialog)
+        self.labelTitle.setGeometry(QtCore.QRect(30, 20, 180, 35))
+        self.labelTitle.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";")
+        self.labelTitle.setObjectName("labelTitle")
+        self.buttonCrear = QtWidgets.QPushButton(Dialog)
+        self.buttonCrear.setGeometry(QtCore.QRect(30, 440, 121, 41))
+        self.buttonCrear.setObjectName("buttonCrear")
+        self.labelCrear = QtWidgets.QLabel(Dialog)
+        self.labelCrear.setGeometry(QtCore.QRect(30, 410, 180, 30))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.labelCrear.sizePolicy().hasHeightForWidth())
+        self.labelCrear.setSizePolicy(sizePolicy)
+        self.labelCrear.setObjectName("labelCrear")
+
+        self.retranslateUi(Dialog)
+        QtCore.QMetaObject.connectSlotsByName(Dialog)
+
+    def retranslateUi(self, Dialog):
+        _translate = QtCore.QCoreApplication.translate
+        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.labelAnyo.setText(_translate("Dialog", "Año:"))
+        self.comboMes.setItemText(0, _translate("Dialog", "Enero"))
+        self.comboMes.setItemText(1, _translate("Dialog", "Febrero"))
+        self.comboMes.setItemText(2, _translate("Dialog", "Marzo"))
+        self.comboMes.setItemText(3, _translate("Dialog", "Abril"))
+        self.comboMes.setItemText(4, _translate("Dialog", "Mayo"))
+        self.comboMes.setItemText(5, _translate("Dialog", "Junio"))
+        self.comboMes.setItemText(6, _translate("Dialog", "Julio"))
+        self.comboMes.setItemText(7, _translate("Dialog", "Agosto"))
+        self.comboMes.setItemText(8, _translate("Dialog", "Septiembre"))
+        self.comboMes.setItemText(9, _translate("Dialog", "Octubre"))
+        self.comboMes.setItemText(10, _translate("Dialog", "Noviembre"))
+        self.comboMes.setItemText(11, _translate("Dialog", "Diciembre"))
+        self.labelMes.setText(_translate("Dialog", "Mes:"))
+        self.tableEventos.setSortingEnabled(True)
+        self.labelEventos.setText(_translate("Dialog", "Eventos:"))
+        self.labelTitle.setText(_translate("Dialog", "Hoja de ruta"))
+        self.buttonCrear.setText(_translate("Dialog", "Crear"))
+        self.labelCrear.setText(_translate("Dialog", "Crear hoja de ruta:"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Dialog = QtWidgets.QDialog()
+    ui = HojaDeRuta_Ui()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    sys.exit(app.exec_())
+
